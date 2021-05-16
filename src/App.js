@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  createMuiTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@material-ui/core";
+import COLORS from "./constants/colors";
+import FeedPage from "./pages/Feed";
+import ProfilePage from "./pages/Profile";
 
 function App() {
+  let theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: COLORS.DarkGreen,
+      },
+      secondary: {
+        main: COLORS.WildWaterMelon,
+      },
+    },
+  });
+  theme = responsiveFontSizes(theme);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <ThemeProvider theme={theme}>
+        <div
+          style={{
+            // padding: 15,
+            backgroundColor: COLORS.WhiteSmoke,
+            height: "100vh",
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {/* <FeedPage /> */}
+          <ProfilePage />
+        </div>
+      </ThemeProvider>
+    </>
   );
 }
 
