@@ -16,7 +16,7 @@ const SimpleCard = ({ id, title, imageSrc, handleSelectCard, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card onClick={handleSelectCard(id)} {...rest}>
+    <Card onClick={handleSelectCard(id)} raised {...rest}>
       <img src={imageSrc} alt={`card of ${title}`} className={classes.image} />
       <Typography className={typoClasses.lead} gutterBottom>
         {title || "Title"}

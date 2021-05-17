@@ -38,7 +38,7 @@ export default function RecipeCard({ className, ...rest }) {
 
   return (
     <Paper
-      elevation={4}
+      elevation={1}
       className={classNames(classes.root, className)}
       {...rest}
     >

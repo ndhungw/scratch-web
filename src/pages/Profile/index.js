@@ -20,6 +20,9 @@ import { useState } from "react";
 import CardRecipe from "../../components/Card/RecipeCard";
 import { BACKGROUND_IMAGE_SOURCE } from "../../constants/defaultValues";
 import SimpleCard from "../../components/Card/SimpleCard";
+import SettingsIcon from "../../assets/icons/settings";
+import EditIcon from "../../assets/icons/edit";
+import LogOutIcon from "../../assets/icons/logout";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -83,6 +86,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     backgroundBlendMode: "soft-light",
   },
+  // button text with icon
+  icon: {
+    marginRight: "1rem",
+  },
 }));
 
 export default function ProfilePage() {
@@ -96,17 +103,6 @@ export default function ProfilePage() {
     console.log(id);
     setSelectedIndex(id);
   };
-
-  // const SimpleCard = ({ id, title, imageSrc, ...rest }) => {
-  //   return (
-  //     <Paper elevation={0} {...rest} onClick={handleSelectCard(id)}>
-  //       <img src={imageSrc} alt="" className={classes.simpleCardImage} />
-  //       <Typography className={typoClasses.lead} gutterBottom>
-  //         {title}
-  //       </Typography>
-  //     </Paper>
-  //   );
-  // };
 
   return (
     <div>
@@ -132,16 +128,22 @@ export default function ProfilePage() {
               <Hidden smDown>
                 <Paper elevation={0} className={classes.panelAction}>
                   <ButtonBase style={{ padding: "0.5rem" }}>
-                    <SearchIcon />
-                    <Typography>{"Edit button"}</Typography>
+                    <EditIcon className={classes.icon} />
+                    <Typography className={typoClasses.lead}>
+                      {"Edit profile"}
+                    </Typography>
                   </ButtonBase>
                   <ButtonBase style={{ padding: "0.5rem" }}>
-                    <SearchIcon />
-                    <Typography>{"Settings"}</Typography>
+                    <SettingsIcon className={classes.icon} />
+                    <Typography className={typoClasses.lead}>
+                      {"Settings"}
+                    </Typography>
                   </ButtonBase>
                   <ButtonBase style={{ padding: "0.5rem" }}>
-                    <SearchIcon />
-                    <Typography>{"Log out"}</Typography>
+                    <LogOutIcon className={classes.icon} />
+                    <Typography className={typoClasses.lead}>
+                      {"Log out"}
+                    </Typography>
                   </ButtonBase>
                 </Paper>
               </Hidden>
