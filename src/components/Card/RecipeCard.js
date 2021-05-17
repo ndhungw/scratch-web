@@ -32,7 +32,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeCard({ className, ...rest }) {
+export default function RecipeCard({
+  title,
+  imageSrc,
+  servingTime,
+  ingredients,
+  className,
+  ...rest
+}) {
   const typoClasses = useTypographyStyles();
   const classes = useStyles();
 
@@ -42,17 +49,23 @@ export default function RecipeCard({ className, ...rest }) {
       className={classNames(classes.root, className)}
       {...rest}
     >
-      <img src={RECIPE_SAMPLE.imageSrc} alt="" className={classes.image} />
+      <img
+        src={imageSrc || RECIPE_SAMPLE.imageSrc}
+        alt={title || "no alt"}
+        className={classes.image}
+      />
       <div className={classes.content}>
         <Typography className={typoClasses.cardItem}>
-          {"Cooked Coconut Mussels"}
+          {title || "Cooked Coconut Mussels"}
         </Typography>
         <div className={classes.bottom}>
           <div className={classes.bottomLeft}>
-            <Typography className={typoClasses.textGray}>{"5 mins"}</Typography>
+            <Typography className={typoClasses.textGray}>{`${
+              servingTime || 5
+            } mins`}</Typography>
             <DotIcon />
             <Typography className={typoClasses.textGray}>
-              {"4 ingredients"}
+              {`${ingredients?.length || 4} ingredients`}
             </Typography>
           </div>
           <div>

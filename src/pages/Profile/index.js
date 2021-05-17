@@ -7,22 +7,22 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import SearchIcon from "../../assets/icons/search";
 import NavigationDesktop from "../../components/Navigation/NavigationDesktop";
 import ProfileStats from "../../components/User/ProfileStats/ProfileStats";
 import { makeStyles } from "@material-ui/core";
 import useTypographyStyles from "../../assets/styles/useTypographyStyles";
 import PlusIcon from "../../assets/icons/plus";
 import COLORS from "../../constants/colors";
-import { RECIPE_SAMPLE } from "../../constants/data";
 import classNames from "classnames";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CardRecipe from "../../components/Card/RecipeCard";
 import { BACKGROUND_IMAGE_SOURCE } from "../../constants/defaultValues";
 import SimpleCard from "../../components/Card/SimpleCard";
 import SettingsIcon from "../../assets/icons/settings";
 import EditIcon from "../../assets/icons/edit";
 import LogOutIcon from "../../assets/icons/logout";
+
+import { AuthContext } from "../../store/index";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -81,9 +81,11 @@ const useStyles = makeStyles((theme) => ({
   },
   mainContainer: {
     flexGrow: 1,
-    backgroundColor: COLORS.WhiteSmoke,
+    // backgroundColor: COLORS.WhiteSmoke,
     backgroundImage: `url(${BACKGROUND_IMAGE_SOURCE}), linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, ${COLORS.WhiteSmoke} 100%)`,
-    backgroundSize: "cover",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "top",
     backgroundBlendMode: "soft-light",
   },
   // button text with icon
@@ -93,15 +95,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfilePage() {
-  const classes = useStyles();
-  const typoClasses = useTypographyStyles();
-  const [selectedIndex, setSelectedIndex] = useState("cookBook_01");
+  const { user } = useContext(AuthContext);
+  console.log("ProfilePage- user: ", user);
+  //
   const theme = useTheme();
   const mdDownMatches = useMediaQuery(theme.breakpoints.down("md"));
+  //
+  const classes = useStyles();
+  const typoClasses = useTypographyStyles();
+  //
+  const [selectedBookId, setSelectedBookId] = useState("western_cookbook");
 
   const handleSelectCard = (id) => (event) => {
     console.log(id);
-    setSelectedIndex(id);
+    setSelectedBookId(id);
   };
 
   return (
@@ -117,14 +124,10 @@ export default function ProfilePage() {
         </Grid>
 
         <Grid item xs={11}>
-          <Grid
-            container
-            spacing={2}
-            // className={classes.mainContainer}
-          >
+          <Grid container spacing={2}>
             {/* Left */}
             <Grid item xs={12} md={3}>
-              <ProfileStats />
+              <ProfileStats user={user} />
               <Hidden smDown>
                 <Paper elevation={0} className={classes.panelAction}>
                   <ButtonBase style={{ padding: "0.5rem" }}>
@@ -154,7 +157,7 @@ export default function ProfilePage() {
               <Grid container>
                 {/* Right */}
                 <Grid item xs={12}>
-                  {/* categories */}
+                  {/* cook books */}
                   <div className={classes.titleRow}>
                     <Typography className={typoClasses.h2}>
                       {"My Recipes"}
@@ -168,17 +171,17 @@ export default function ProfilePage() {
                   </div>
 
                   <div className={classes.cookBooksWrapper}>
-                    {cookBooks.map((item, index) => (
+                    {user.recipes.cookBooks.map((item, index) => (
                       <SimpleCard
                         key={`${item.title}_${index}`}
                         id={item.id}
-                        title={item.title}
+                        title={`${item.title} (${item.recipesCount})`}
                         imageSrc={item.imageSrc}
                         handleSelectCard={handleSelectCard}
                         className={classNames(classes.simpleCard, {
                           // [classes.simpleCard]: true,
-                          [classes.unSelectedCard]: selectedIndex !== item.id,
-                          [classes.selectedCard]: selectedIndex === item.id,
+                          [classes.unSelectedCard]: selectedBookId !== item.id,
+                          [classes.selectedCard]: selectedBookId === item.id,
                           [classes.resetMarginLeft]: index === 0,
                         })}
                       />
@@ -189,6 +192,7 @@ export default function ProfilePage() {
                 {/* list recipe cards */}
                 <Grid item xs={12}>
                   <Paper
+                    elevation={0}
                     style={{
                       padding: "0px 2rem",
                     }}
@@ -197,15 +201,26 @@ export default function ProfilePage() {
                       container
                       justify={mdDownMatches ? "center" : "space-between"}
                     >
+                      {user.recipes.cookBooks
+                        .find((book) => book.id === selectedBookId)
+                        .recipesList.map((recipe, index) => (
+                          <CardRecipe
+                            key={`${recipe.id}_${index}`}
+                            title={recipe.recipeName}
+                            imageSrc={recipe.imageSrc}
+                            ingredients={recipe.ingredients}
+                            servingTime={recipe.servingTime}
+                            className={classes.cardRecipe}
+                          />
+                        ))}
+                      {/* <CardRecipe className={classes.cardRecipe} />
                       <CardRecipe className={classes.cardRecipe} />
                       <CardRecipe className={classes.cardRecipe} />
                       <CardRecipe className={classes.cardRecipe} />
                       <CardRecipe className={classes.cardRecipe} />
                       <CardRecipe className={classes.cardRecipe} />
                       <CardRecipe className={classes.cardRecipe} />
-                      <CardRecipe className={classes.cardRecipe} />
-                      <CardRecipe className={classes.cardRecipe} />
-                      <CardRecipe className={classes.cardRecipe} />
+                      <CardRecipe className={classes.cardRecipe} /> */}
                     </Grid>
                   </Paper>
                 </Grid>
@@ -218,20 +233,20 @@ export default function ProfilePage() {
   );
 }
 
-const cookBooks = [
-  {
-    id: "cookBook_01",
-    title: "Western",
-    imageSrc: RECIPE_SAMPLE.imageSrc,
-  },
-  {
-    id: "cookBook_02",
-    title: "Vietnamese",
-    imageSrc: RECIPE_SAMPLE.imageSrc,
-  },
-  {
-    id: "cookBook_03",
-    title: "Soups",
-    imageSrc: RECIPE_SAMPLE.imageSrc,
-  },
-];
+// const cookBooks = [
+//   {
+//     id: "cookBook_01",
+//     title: "Western",
+//     imageSrc: RECIPE_SAMPLE.imageSrc,
+//   },
+//   {
+//     id: "cookBook_02",
+//     title: "Vietnamese",
+//     imageSrc: RECIPE_SAMPLE.imageSrc,
+//   },
+//   {
+//     id: "cookBook_03",
+//     title: "Soups",
+//     imageSrc: RECIPE_SAMPLE.imageSrc,
+//   },
+// ];

@@ -4,8 +4,8 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import COLORS from "./constants/colors";
-import FeedPage from "./pages/Feed";
 import ProfilePage from "./pages/Profile";
+import AuthProvider from "./store";
 
 function App() {
   let theme = createMuiTheme({
@@ -22,18 +22,18 @@ function App() {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <div
-          style={{
-            // padding: 15,
-            backgroundColor: COLORS.WhiteSmoke,
-            height: "100vh",
-          }}
-        >
-          {/* <FeedPage /> */}
-          <ProfilePage />
-        </div>
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <div
+            style={{
+              backgroundColor: COLORS.WhiteSmoke,
+              height: "100vh",
+            }}
+          >
+            <ProfilePage />
+          </div>
+        </ThemeProvider>
+      </AuthProvider>
     </>
   );
 }
