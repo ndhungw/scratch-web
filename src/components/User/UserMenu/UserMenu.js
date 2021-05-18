@@ -1,4 +1,6 @@
+import { useState, useEffect, useRef } from "react";
 import {
+  makeStyles,
   Avatar,
   ButtonBase,
   ClickAwayListener,
@@ -7,25 +9,29 @@ import {
   Paper,
   Popper,
 } from "@material-ui/core";
-import { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
+import { NavLink } from "react-router-dom";
 
-import { makeStyles } from "@material-ui/core";
 import { USER_SAMPLE } from "../../../constants/data";
+import { useAuth } from "../../../store/contexts/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
   avatarBtn: {
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: 50,
+    padding: 4,
   },
   avatarBtnActive: {
-    // border: "3px solid grey",
-    // borderRadius: "8px",
-    // padding: 0,
+    border: "4px solid grey",
+    borderRadius: 50,
+    padding: 0,
   },
 }));
-export default function UserMenu({ className, ...rest }) {
+export default function UserMenu({ user, className, ...rest }) {
   const classes = useStyles();
+  //
+  const { logout } = useAuth();
+
   //-- start User avatar
   const [userAvatarOpen, setUserAvatarOpen] = useState(false);
   const anchorRef = useRef(null);
@@ -60,6 +66,11 @@ export default function UserMenu({ className, ...rest }) {
     prevOpen.current = userAvatarOpen;
   }, [userAvatarOpen]);
   //-- end user avatar
+
+  const handleLogout = (event) => {
+    handleCloseUserAvatar(event);
+    logout();
+  };
   return (
     <div className={classNames(classes.root, className)}>
       <ButtonBase
@@ -72,9 +83,8 @@ export default function UserMenu({ className, ...rest }) {
           [classes.avatarBtnActive]: userAvatarOpen,
         })}
       >
-        {/* <Card raised> */}
         <Avatar alt="" src={USER_SAMPLE.avatarSrc} />
-        {/* </Card> */}
+
         <Popper
           open={userAvatarOpen}
           anchorEl={anchorRef.current}
@@ -82,6 +92,7 @@ export default function UserMenu({ className, ...rest }) {
           transition
           disablePortal
           placement="bottom-end"
+          style={{ zIndex: 5 }}
         >
           <Paper>
             <ClickAwayListener onClickAway={handleCloseUserAvatar}>
@@ -92,15 +103,15 @@ export default function UserMenu({ className, ...rest }) {
               >
                 <MenuItem
                   onClick={handleCloseUserAvatar}
-                  //   component={NavLink}
+                  component={NavLink}
                   to="/profile"
                 >
                   Profile
                 </MenuItem>
                 <MenuItem
-                  onClick={handleCloseUserAvatar}
-                  //   component={NavLink}
-                  to="/logout"
+                  onClick={handleLogout}
+                  // component={NavLink}
+                  // to="/logout"
                 >
                   Logout
                 </MenuItem>

@@ -3,9 +3,24 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@material-ui/core";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
+
+// constants
 import COLORS from "./constants/colors";
-import ProfilePage from "./pages/Profile";
-import AuthProvider from "./store";
+
+// store
+// import AuthProvider from "./store";
+import AuthProvider from "./store/contexts/AuthContext";
+
+// components
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+
+// pages
+import ProfilePage from "./pages/main/Profile";
+import FeedPage from "./pages/main/Feed";
+import LogInPage from "./pages/auth/Login";
+import SignUpPage from "./pages/auth/SignUp";
 
 function App() {
   let theme = createMuiTheme({
@@ -23,16 +38,31 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <ThemeProvider theme={theme}>
-          <div
-            style={{
-              backgroundColor: COLORS.WhiteSmoke,
-              height: "100vh",
-            }}
-          >
-            <ProfilePage />
-          </div>
-        </ThemeProvider>
+        <Router>
+          <ThemeProvider theme={theme}>
+            <SnackbarProvider>
+              <Switch>
+                <Route path={"/signup"}>
+                  <SignUpPage />
+                </Route>
+                <Route path={"/login"}>
+                  <LogInPage />
+                </Route>
+
+                {/* Private Routes */}
+                <PrivateRoute path={"/"} exact>
+                  <FeedPage />
+                </PrivateRoute>
+                <PrivateRoute path={"/feed"}>
+                  <FeedPage />
+                </PrivateRoute>
+                <PrivateRoute path={"/profile"}>
+                  <ProfilePage />
+                </PrivateRoute>
+              </Switch>
+            </SnackbarProvider>
+          </ThemeProvider>
+        </Router>
       </AuthProvider>
     </>
   );

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   ButtonBase,
@@ -8,14 +9,20 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
+import classNames from "classnames";
+import { NavLink } from "react-router-dom";
+
+// icons
 import Logo from "../../assets/icons/logo";
 import NotificationsIcon from "../../assets/icons/notifications";
 import MessageIcon from "../../assets/icons/message";
+
+// components
 import SearchBar from "../Search/SearchBar";
-import COLORS from "../../constants/colors";
-import classNames from "classnames";
-import { useState } from "react";
 import UserMenu from "../User/UserMenu/UserMenu";
+
+// constants
+import COLORS from "../../constants/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavigationDesktop() {
+export default function NavigationDesktop({ ...rest }) {
   const classes = useStyles();
   const [isSearching, setIsSearching] = useState(false);
   const theme = useTheme();
@@ -92,12 +99,14 @@ export default function NavigationDesktop() {
   };
 
   return (
-    <Box className={classes.root}>
+    <Box className={classes.root} {...rest}>
       <Grid container justify="space-between" alignItems="center">
         <Hidden xsDown>
           {!(isSearching && mdDownMatches) && (
             <Grid item lg md={2} sm={3} className={classes.left}>
-              <Logo />
+              <NavLink to={"/"}>
+                <Logo />
+              </NavLink>
             </Grid>
           )}
         </Hidden>

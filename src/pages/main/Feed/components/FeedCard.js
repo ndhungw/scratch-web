@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { Button, ButtonBase } from "@material-ui/core";
+import {
+  makeStyles,
+  Button,
+  ButtonBase,
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Avatar,
+  IconButton,
+  Typography,
+} from "@material-ui/core";
 
 // icons
-import DotIcon from "../../../assets/icons/dot";
-import LikeIcon from "../../../assets/icons/like";
-import PlusIcon from "../../../assets/icons/plus";
+import DotIcon from "../../../../assets/icons/dot";
+import LikeIcon from "../../../../assets/icons/like";
+import PlusIcon from "../../../../assets/icons/plus";
 
 // constants
 import {
@@ -24,12 +27,14 @@ import {
   RECIPE_CREATED_AT,
   USER_AVATAR_SOURCE,
   RECIPE_COMMENTS_COUNT,
-} from "../../../constants/defaultValues";
-import COLORS from "../../../constants/colors";
+} from "../../../../constants/defaultValues";
+import COLORS from "../../../../constants/colors";
 import classNames from "classnames";
-import { simplify } from "../../../utils";
+import { simplify } from "../../../../utils";
+import SimpleDialog from "./SimpleDialog";
 
-export default function RecipeReviewCard({
+export default function CardFeed({
+  id,
   title,
   description,
   imageSrc,
@@ -38,19 +43,57 @@ export default function RecipeReviewCard({
   createdAt,
   likesCount,
   commentsCount,
+  recipeData,
+  handleSave,
+  savedCookbooks,
   className,
   ...rest
 }) {
   const classes = useStyles();
   const styles = classNames(classes.root, className);
   const [isLiked, setIsLiked] = useState(false);
+  const [isChoosingCookbook, setIsChoosingCookbook] = useState(false);
 
-  const _toggleLike = () => {
+  const handleToggleLike = () => {
     setIsLiked(!isLiked);
   };
 
+  const handleChooseItemFromDialog = (idCookbook) => {
+    // console.log("Choose item with id=", id);
+    handleSave(id, idCookbook);
+  };
+  const handleCloseDialog = () => {
+    setIsChoosingCookbook(false);
+  };
+
+  const handleClickButtonSave = () => {
+    setIsChoosingCookbook(true);
+  };
+
   return (
-    <Card className={styles}>
+    <Card
+      className={styles}
+      {...rest}
+      style={{
+        position: "relative",
+      }}
+    >
+      {/* overlay dialog */}
+      <div
+        className={classNames({
+          [classes.overlay]: true,
+          [classes.isVisible]: isChoosingCookbook,
+        })}
+      >
+        <SimpleDialog
+          title={"Save to"}
+          list={savedCookbooks}
+          handleChooseItem={handleChooseItemFromDialog}
+          handleClose={handleCloseDialog}
+        />
+      </div>
+
+      {/* main  */}
       <CardHeader
         avatar={
           <Avatar
@@ -59,23 +102,24 @@ export default function RecipeReviewCard({
             aria-label="recipe"
             className={classes.avatar}
           >
-            R
+            {author}
           </Avatar>
         }
         title={author || RECIPE_AUTHOR_NAME}
         subheader={`${createdAt || RECIPE_CREATED_AT} ago`}
       />
+
       <CardMedia
         className={classes.media}
         image={imageSrc || RECIPE_IMAGE_SOURCE}
-        title="Paella dish"
       />
+
       <CardContent className={classes.contentWrapper}>
         <div className={classes.titleWrapper}>
           <Typography variant="h5" component="h2">
             {title || RECIPE_TITLE}
           </Typography>
-          <IconButton aria-label="delete" onClick={_toggleLike}>
+          <IconButton aria-label="delete" onClick={handleToggleLike}>
             <LikeIcon isLiked={isLiked} />
           </IconButton>
         </div>
@@ -83,6 +127,7 @@ export default function RecipeReviewCard({
           {description || RECIPE_DESCRIPTION}
         </Typography>
       </CardContent>
+
       <CardActions className={classes.actionWrapper}>
         <div className={classes.actionLeft}>
           <ButtonBase>{`${simplify(
@@ -96,6 +141,7 @@ export default function RecipeReviewCard({
 
         <div className={classes.actionLeft}>
           <Button
+            onClick={handleClickButtonSave}
             variant="outlined"
             startIcon={<PlusIcon />}
             className={classes.buttonSave}
@@ -110,7 +156,8 @@ export default function RecipeReviewCard({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // maxWidth: 700,
+    maxWidth: 580,
+    borderRadius: 8,
   },
   media: {
     height: 0,
@@ -130,7 +177,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "1rem",
     paddingRight: "1rem",
     paddingBottom: "1rem",
-    // backgroundColor: "green",
   },
   actionLeft: {
     display: "flex",
@@ -140,5 +186,22 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     fontSize: "0.875rem",
     borderColor: COLORS.DarkGreen,
+  },
+  //
+  overlay: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgb(40,40,40,0.5)",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1,
+    visibility: "hidden",
+  },
+  isVisible: {
+    visibility: "visible",
   },
 }));

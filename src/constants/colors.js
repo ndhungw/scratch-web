@@ -10,6 +10,8 @@ const COLORS = {
   Whisper: "#E6E6E6",
   AliceBlue: "#F7F8FA",
   White: "#FFFFFF",
+  // selected
+  DarkGreenSelected: "rgb(48,190,118,0.2)",
   // other
   MojoRed: "#C44343",
   WhiteSmoke: "#f2f2f2",

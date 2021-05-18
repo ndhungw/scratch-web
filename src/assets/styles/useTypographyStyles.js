@@ -34,7 +34,7 @@ const useTypographyStyles = makeStyles((theme) => ({
   button: {
     color: COLORS.DarkGreen,
     fontWeight: 700,
-    fontSize: "1rem",
+    fontSize: "1rem", // 16
   },
   cardItem: {
     color: COLORS.VampireBlack,

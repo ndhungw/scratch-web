@@ -32,6 +32,7 @@ export default function CardBase({
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    flexGrow: 1,
     padding: "1.25rem",
     borderRadius: 8,
   },

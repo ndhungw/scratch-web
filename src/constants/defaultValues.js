@@ -3,9 +3,11 @@ import Avatar from "../assets/images/user/Face.png";
 import Video from "../assets/images/Video.png";
 import BackgroundImage from "../assets/images/bg-profile.png";
 import CookBook from "../assets/images/CookBookImg.png";
+import RecipeImage from "../assets/images/RecipeImage.png";
 
 const BACKGROUND_IMAGE_SOURCE = BackgroundImage;
 const COOKBOOK_IMAGE_SOURCE = CookBook;
+const RECIPE_ITEM_IMAGE_SOURCE = RecipeImage;
 
 const RECIPE_TITLE = "Tofu Salad Ginger Garlic";
 const RECIPE_DESCRIPTION =
@@ -55,4 +57,5 @@ export {
   // PROFILE PAGE
   BACKGROUND_IMAGE_SOURCE,
   COOKBOOK_IMAGE_SOURCE,
+  RECIPE_ITEM_IMAGE_SOURCE,
 };
