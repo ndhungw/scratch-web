@@ -3,7 +3,7 @@ import useTypographyStyles from "../../assets/styles/useTypographyStyles";
 
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {},
   image: {
     width: 155,

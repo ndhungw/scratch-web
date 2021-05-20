@@ -28,7 +28,7 @@ import BACKGROUND_AUTHEN_IMAGE_SOURCE from "../../../assets/images/BG-Authen.png
 import BIG_LOGO_IMAGE_SOURCE from "../../../assets/images/BigLogoImage.png";
 import { useAuth } from "../../../store/contexts/AuthContext";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: "100vh",
     backgroundImage: `url(${BACKGROUND_AUTHEN_IMAGE_SOURCE}), linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, ${COLORS.WhiteSmoke} 100%)`,

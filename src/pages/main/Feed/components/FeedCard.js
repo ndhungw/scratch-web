@@ -43,6 +43,7 @@ export default function CardFeed({
   createdAt,
   likesCount,
   commentsCount,
+  // eslint-disable-next-line no-unused-vars
   recipeData,
   handleSave,
   savedCookbooks,
@@ -154,7 +155,7 @@ export default function CardFeed({
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 580,
     borderRadius: 8,

@@ -30,7 +30,7 @@ import COLORS from "../../../constants/colors";
 import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
 import { useAuth } from "../../../store/contexts/AuthContext";
 
-import { useSnackbar, withSnackbar } from "notistack";
+import { withSnackbar } from "notistack";
 
 function FeedPage({ enqueueSnackbar }) {
   const typoClasses = useTypographyStyles();
@@ -97,7 +97,7 @@ function FeedPage({ enqueueSnackbar }) {
     setCurrentUser(currentUserToUpdate);
 
     localStorage.setItem("user", JSON.stringify(currentUserToUpdate));
-    enqueueSnackbar(`Saved successfully!`, { variant: "success" });
+    enqueueSnackbar("Saved successfully!", { variant: "success" });
   };
 
   return (

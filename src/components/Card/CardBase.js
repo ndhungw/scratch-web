@@ -30,7 +30,7 @@ export default function CardBase({
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     padding: "1.25rem",

@@ -8,7 +8,7 @@ function SeparatorLine({ className }) {
   return <div className={classNames(classes.root, className)} />;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     borderBlockWidth: 0,
     borderInlineWidth: 0,

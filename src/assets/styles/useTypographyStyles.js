@@ -1,7 +1,7 @@
 import COLORS from "../../constants/colors";
 import { makeStyles } from "@material-ui/core";
 
-const useTypographyStyles = makeStyles((theme) => ({
+const useTypographyStyles = makeStyles(() => ({
   heading: {
     color: COLORS.VampireBlack,
     fontWeight: 700,

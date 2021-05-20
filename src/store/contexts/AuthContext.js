@@ -1,35 +1,3 @@
-// import { createContext, useEffect, useReducer } from "react";
-// import { USER_SAMPLE } from "../../constants/data";
-
-// import authReducer from "../reducers/authReducer";
-
-// export const AuthContext = createContext();
-
-// const initialState = {
-//   userId: null,
-//   user: null,
-// };
-
-// export default function AuthProvider({ children }) {
-//   const [state, dispatch] = useReducer(authReducer, initialState);
-
-//   useEffect(() => {
-//     const userId = localStorage.getItem("userId");
-//     console.log("useEffect - localStorage.getItem('userId')", userId);
-//     if (userId) {
-//       const user = USER_SAMPLE;
-//       console.log("useEffect - userId - user: ", user);
-//       dispatch({ type: "setUser", user: user });
-//     }
-//   }, [state.userId]);
-
-//   return (
-//     <AuthContext.Provider value={[state, dispatch]}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// }
-
 import { createContext, useContext, useEffect, useState } from "react";
 import { USER_SAMPLE } from "../../constants/data";
 
@@ -44,6 +12,7 @@ export default function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const login = (email, password) => {
+    console.log(`${email} - ${password}`);
     const userToLogin = USER_SAMPLE;
     setCurrentUser(userToLogin);
     localStorage.setItem("user", JSON.stringify(userToLogin));
@@ -55,7 +24,9 @@ export default function AuthProvider({ children }) {
     localStorage.removeItem("user");
   };
 
-  const signup = (email, password) => {};
+  const signup = (email, password) => {
+    console.log(`${email} - ${password}`);
+  };
 
   useEffect(() => {
     const currentUserStringified = localStorage.getItem("user");

@@ -15,7 +15,7 @@ import { NavLink } from "react-router-dom";
 import { USER_SAMPLE } from "../../../constants/data";
 import { useAuth } from "../../../store/contexts/AuthContext";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {},
   avatarBtn: {
     borderRadius: 50,
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
 }));
-export default function UserMenu({ user, className, ...rest }) {
+export default function UserMenu({ className, ...rest }) {
   const classes = useStyles();
   //
   const { logout } = useAuth();
@@ -72,7 +72,7 @@ export default function UserMenu({ user, className, ...rest }) {
     logout();
   };
   return (
-    <div className={classNames(classes.root, className)}>
+    <div className={classNames(classes.root, className)} {...rest}>
       <ButtonBase
         ref={anchorRef}
         aria-controls={userAvatarOpen ? "user-avatar-menu-grow" : undefined}

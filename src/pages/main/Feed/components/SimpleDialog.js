@@ -2,14 +2,13 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   makeStyles,
   Paper,
   Typography,
 } from "@material-ui/core";
 import classNames from "classnames";
-import React, { useState } from "react";
+import React from "react";
 
 import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
 
@@ -29,10 +28,8 @@ const SimpleDialog = ({
   const classes = useStyles();
   const typoClasses = useTypographyStyles();
   const styles = classNames(classes.root, className);
-  const [selected, setSelected] = useState(list[0].id);
 
   const handleListItemClick = (idItem) => {
-    setSelected(idItem);
     handleChooseItem(idItem);
     handleClose();
   };
@@ -86,7 +83,7 @@ const SimpleDialog = ({
   );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     padding: "1rem 1rem 0rem 1rem",
     borderRadius: 8,

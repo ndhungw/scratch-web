@@ -33,7 +33,7 @@ import { useAuth } from "../../../store/contexts/AuthContext";
 import { capitalizeFirstLetter } from "../../../utils";
 import { SECTOR_NAMES } from "../../../constants/data";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: { backgroundColor: COLORS.WhiteSmoke },
   panelAction: {
     marginTop: "1rem",
@@ -119,11 +119,13 @@ export default function ProfilePage() {
     user[selectedSector].cookBooks[0].id
   );
 
+  // eslint-disable-next-line no-unused-vars
   const handleSelectCookbook = (id) => (event) => {
     console.log(id);
     setSelectedBookId(id);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleSelectSector = (sectorName) => (e) => {
     console.log("Click ", sectorName);
     console.log(

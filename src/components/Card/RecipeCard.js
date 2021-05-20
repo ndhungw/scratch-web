@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core";
 import DotIcon from "../../assets/icons/dot";
 import classNames from "classnames";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 440,
     borderRadius: 8,
