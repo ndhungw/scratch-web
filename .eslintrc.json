@@ -25,12 +25,11 @@
     "react/prop-types": "off",
     "no-unused-vars": "warn",
     "react/react-in-jsx-scope": "off",
-    // "arrow-body-style": "off",
-    // "prefer-arrow-callback": "off",
     "prettier/prettier": [
       "error",
       {
-        "usePrettierrc": false
+        "usePrettierrc": false,
+        "endOfLine": "crlf"
       }
     ]
   }
