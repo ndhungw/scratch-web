@@ -1,12 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
-import userKitchenReducer from "./slices/userSlice";
+
+// new
+import { getDefaultMiddleware } from "@reduxjs/toolkit";
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    userKitchen: userKitchenReducer,
   },
+  middleware: getDefaultMiddleware({
+    // this way you don't remove the middlewares
+    serializableCheck: false,
+  }),
 });
 
 export default store;

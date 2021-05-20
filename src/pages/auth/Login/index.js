@@ -26,7 +26,6 @@ import classNames from "classnames";
 import Logo from "../../../assets/icons/logo";
 import BACKGROUND_AUTHEN_IMAGE_SOURCE from "../../../assets/images/BG-Authen.png";
 import BIG_LOGO_IMAGE_SOURCE from "../../../assets/images/BigLogoImage.png";
-// import { useAuth } from "../../../store/contexts/AuthContext";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../store/slices/authSlice";
 
@@ -87,7 +86,6 @@ export default function LogInPage() {
 
   //
   const history = useHistory();
-  // const { login } = useAuth();
   const dispatch = useDispatch();
 
   const handleChangeUsername = (event) => {
@@ -104,9 +102,6 @@ export default function LogInPage() {
   };
 
   const handleLogin = () => {
-    console.log("click login button");
-    // login(username, password);
-    // action.payload = {username: username, password:password}
     dispatch(
       authActions.login({
         username: username,
@@ -116,6 +111,7 @@ export default function LogInPage() {
     history.push("/");
     dispatch(authActions.setIsLoading(false));
   };
+
   return (
     <Grid
       container

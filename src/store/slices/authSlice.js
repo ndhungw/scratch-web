@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { USER_SAMPLE } from "../../constants/data";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
   isLoading: true,
   currentUser: null,
 };
+
 const authSlice = createSlice({
   name: "authentication",
   initialState: initialState,
@@ -23,22 +26,13 @@ const authSlice = createSlice({
     login(state, action) {
       console.log("authSlice- action.payload", action.payload);
       state.isAuthenticated = true;
-      // state.currentUser = action.payload;
-
-      const currentUserStringified = localStorage.getItem("user");
-      if (currentUserStringified) {
-        state.currentUser = JSON.parse(currentUserStringified);
-      } else {
-        const userToLogin = USER_SAMPLE;
-        localStorage.setItem("user", JSON.stringify(userToLogin));
-        state.currentUser = userToLogin;
+      if (!state.currentUser) {
+        state.currentUser = USER_SAMPLE;
       }
     },
-    logout(state, action) {
-      console.log(`${action.payload}`);
+    logout(state) {
       state.isAuthenticated = false;
       state.currentUser = null;
-      localStorage.removeItem("user");
     },
   },
 });
@@ -49,4 +43,11 @@ export const getCurrentUser = (state) => state.auth.currentUser;
 
 export const authActions = authSlice.actions;
 
-export default authSlice.reducer;
+// redux-persist set up
+const persistConfig = {
+  key: "user",
+  storage,
+};
+
+const authPersistedReducer = persistReducer(persistConfig, authSlice.reducer);
+export default authPersistedReducer;
