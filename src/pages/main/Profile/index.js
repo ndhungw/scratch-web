@@ -29,9 +29,12 @@ import ProfileStats from "../../../components/User/ProfileStats/ProfileStats";
 // constants
 import COLORS from "../../../constants/colors";
 import { BACKGROUND_IMAGE_SOURCE } from "../../../constants/defaultValues";
-import { useAuth } from "../../../store/contexts/AuthContext";
+// import { useAuth } from "../../../store/contexts/AuthContext";
+import { useSelector } from "react-redux";
+
 import { capitalizeFirstLetter } from "../../../utils";
 import { SECTOR_NAMES } from "../../../constants/data";
+import { getCurrentUser } from "../../../store/slices/authSlice";
 
 const useStyles = makeStyles(() => ({
   root: { backgroundColor: COLORS.WhiteSmoke },
@@ -103,7 +106,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function ProfilePage() {
-  const { currentUser } = useAuth();
+  // const { currentUser } = useAuth();
+  const currentUser = useSelector(getCurrentUser);
   const user = currentUser;
   console.log("ProfilePage- user: ", user);
   //
@@ -252,21 +256,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-
-// const cookBooks = [
-//   {
-//     id: "cookBook_01",
-//     title: "Western",
-//     imageSrc: RECIPE_SAMPLE.imageSrc,
-//   },
-//   {
-//     id: "cookBook_02",
-//     title: "Vietnamese",
-//     imageSrc: RECIPE_SAMPLE.imageSrc,
-//   },
-//   {
-//     id: "cookBook_03",
-//     title: "Soups",
-//     imageSrc: RECIPE_SAMPLE.imageSrc,
-//   },
-// ];

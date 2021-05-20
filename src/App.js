@@ -10,8 +10,9 @@ import { SnackbarProvider } from "notistack";
 import COLORS from "./constants/colors";
 
 // store
-// import AuthProvider from "./store";
-import AuthProvider from "./store/contexts/AuthContext";
+// import AuthProvider from "./store/contexts/AuthContext";
+import store from "./store";
+import { Provider } from "react-redux";
 
 // components
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -37,7 +38,8 @@ function App() {
 
   return (
     <>
-      <AuthProvider>
+      {/* <AuthProvider> */}
+      <Provider store={store}>
         <Router>
           <ThemeProvider theme={theme}>
             <SnackbarProvider>
@@ -63,7 +65,8 @@ function App() {
             </SnackbarProvider>
           </ThemeProvider>
         </Router>
-      </AuthProvider>
+        {/* </AuthProvider> */}
+      </Provider>
     </>
   );
 }

@@ -13,7 +13,9 @@ import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 
 import { USER_SAMPLE } from "../../../constants/data";
-import { useAuth } from "../../../store/contexts/AuthContext";
+import { authActions } from "../../../store/slices/authSlice";
+// import { useAuth } from "../../../store/contexts/AuthContext";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -30,7 +32,8 @@ const useStyles = makeStyles(() => ({
 export default function UserMenu({ className, ...rest }) {
   const classes = useStyles();
   //
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
+  const dispatch = useDispatch();
 
   //-- start User avatar
   const [userAvatarOpen, setUserAvatarOpen] = useState(false);
@@ -69,7 +72,8 @@ export default function UserMenu({ className, ...rest }) {
 
   const handleLogout = (event) => {
     handleCloseUserAvatar(event);
-    logout();
+    // logout();
+    dispatch(authActions.logout());
   };
   return (
     <div className={classNames(classes.root, className)} {...rest}>

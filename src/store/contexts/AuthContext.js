@@ -14,8 +14,8 @@ export default function AuthProvider({ children }) {
   const login = (email, password) => {
     console.log(`${email} - ${password}`);
     const userToLogin = USER_SAMPLE;
-    setCurrentUser(userToLogin);
     localStorage.setItem("user", JSON.stringify(userToLogin));
+    setCurrentUser(userToLogin);
   };
 
   const logout = () => {

@@ -28,16 +28,20 @@ import COLORS from "../../../constants/colors";
 
 // hooks
 import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
-import { useAuth } from "../../../store/contexts/AuthContext";
+// import { useAuth } from "../../../store/contexts/AuthContext";
+import { useSelector, useDispatch } from "react-redux";
 
 import { withSnackbar } from "notistack";
+import { authActions, getCurrentUser } from "../../../store/slices/authSlice";
 
 function FeedPage({ enqueueSnackbar }) {
   const typoClasses = useTypographyStyles();
   const classes = useStyles();
   // const { enqueueSnackbar } = useSnackbar();
   //
-  const { currentUser, setCurrentUser } = useAuth();
+  // const { currentUser, setCurrentUser } = useAuth();
+  const dispatch = useDispatch();
+  const currentUser = useSelector(getCurrentUser);
   console.log("currentUser from FeedPage: ", currentUser);
 
   // feeds
@@ -94,7 +98,8 @@ function FeedPage({ enqueueSnackbar }) {
     };
     console.log("currentUserToUpdate: ", currentUserToUpdate);
 
-    setCurrentUser(currentUserToUpdate);
+    // setCurrentUser(currentUserToUpdate);
+    dispatch(authActions.setCurrentUser(currentUserToUpdate));
 
     localStorage.setItem("user", JSON.stringify(currentUserToUpdate));
     enqueueSnackbar("Saved successfully!", { variant: "success" });
