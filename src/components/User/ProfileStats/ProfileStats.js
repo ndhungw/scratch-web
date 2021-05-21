@@ -30,7 +30,7 @@ export default function ProfileStats({
             <Box className={classes.infoLeft}>
               <Avatar
                 alt={""}
-                src={USER_SAMPLE.avatarSrc}
+                src={user.avatarSrc || USER_SAMPLE.avatarSrc}
                 className={classes.avatar}
               />
             </Box>
@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 300,
     borderRadius: 8,
-    padding: "1.5rem",
+    padding: "0.5rem",
     [theme.breakpoints.down("lg")]: {
       padding: "0.75rem",
     },

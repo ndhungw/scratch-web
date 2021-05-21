@@ -19,6 +19,10 @@ const authSlice = createSlice({
       );
       state.currentUser = action.payload;
     },
+    setAvatarSrc(state, action) {
+      console.log("authSlice - setAvatarSrc - action.payload=", action.payload);
+      state.currentUser.avatarSrc = action.payload;
+    },
     setIsLoading(state, action) {
       console.log("setIsLoading: ", action.payload);
       state.isLoading = action.payload;
@@ -27,6 +31,10 @@ const authSlice = createSlice({
       console.log("authSlice- action.payload", action.payload);
       state.isAuthenticated = true;
       if (!state.currentUser) {
+        console.log(
+          "authSlice - login action - currentUser = ",
+          state.currentUser
+        );
         state.currentUser = USER_SAMPLE;
       }
     },

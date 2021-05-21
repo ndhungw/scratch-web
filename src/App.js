@@ -26,6 +26,7 @@ import SignUpPage from "./pages/auth/SignUp";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import TestPage from "./pages/TestPage";
+import EditProfilePage from "./pages/main/EditProfile/EditProfile";
 
 function App() {
   let theme = createMuiTheme({
@@ -35,6 +36,23 @@ function App() {
       },
       secondary: {
         main: COLORS.WildWaterMelon,
+      },
+    },
+    overrides: {
+      // Style sheet name ⚛️
+      MuiButton: {
+        // Name of the rule
+        text: {
+          // Some CSS
+          backgroundColor: COLORS.DarkGreen,
+          borderRadius: 8,
+          border: 0,
+          color: COLORS.White,
+          height: 48,
+          padding: "0 30px",
+          fontWeight: 700,
+          fontSize: "1rem",
+        },
       },
     },
   });
@@ -54,6 +72,7 @@ function App() {
                   <Route path={"/test"}>
                     <TestPage />
                   </Route>
+
                   <Route path={"/signup"}>
                     <SignUpPage />
                   </Route>
@@ -68,8 +87,11 @@ function App() {
                   <PrivateRoute path={"/feed"}>
                     <FeedPage />
                   </PrivateRoute>
-                  <PrivateRoute path={"/profile"}>
+                  <PrivateRoute path={"/profile"} exact>
                     <ProfilePage />
+                  </PrivateRoute>
+                  <PrivateRoute path={"/profile/edit"}>
+                    <EditProfilePage />
                   </PrivateRoute>
                 </Switch>
               </SnackbarProvider>

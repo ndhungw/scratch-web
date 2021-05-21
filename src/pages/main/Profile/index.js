@@ -35,6 +35,7 @@ import { useSelector } from "react-redux";
 import { capitalizeFirstLetter } from "../../../utils";
 import { SECTOR_NAMES } from "../../../constants/data";
 import { getCurrentUser } from "../../../store/slices/authSlice";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   root: { backgroundColor: COLORS.WhiteSmoke },
@@ -164,7 +165,11 @@ export default function ProfilePage() {
 
               <Hidden smDown>
                 <Paper elevation={0} className={classes.panelAction}>
-                  <ButtonBase style={{ padding: "0.5rem" }}>
+                  <ButtonBase
+                    component={NavLink}
+                    to="/profile/edit"
+                    style={{ padding: "0.5rem" }}
+                  >
                     <EditIcon className={classes.icon} />
                     <Typography className={typoClasses.lead}>
                       {"Edit profile"}

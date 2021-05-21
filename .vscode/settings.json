@@ -1,7 +1,9 @@
 {
     "cSpell.words": [
+        "filereader",
         "notistack",
         "persistor",
-        "reduxjs"
+        "reduxjs",
+        "testid"
     ]
 }

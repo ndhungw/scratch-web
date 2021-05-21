@@ -13,9 +13,9 @@ import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 
 import { USER_SAMPLE } from "../../../constants/data";
-import { authActions } from "../../../store/slices/authSlice";
+import { authActions, getCurrentUser } from "../../../store/slices/authSlice";
 // import { useAuth } from "../../../store/contexts/AuthContext";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -34,6 +34,7 @@ export default function UserMenu({ className, ...rest }) {
   //
   // const { logout } = useAuth();
   const dispatch = useDispatch();
+  const currentUser = useSelector(getCurrentUser);
 
   //-- start User avatar
   const [userAvatarOpen, setUserAvatarOpen] = useState(false);
@@ -87,7 +88,7 @@ export default function UserMenu({ className, ...rest }) {
           [classes.avatarBtnActive]: userAvatarOpen,
         })}
       >
-        <Avatar alt="" src={USER_SAMPLE.avatarSrc} />
+        <Avatar alt="" src={currentUser.avatarSrc || USER_SAMPLE.avatarSrc} />
 
         <Popper
           open={userAvatarOpen}
