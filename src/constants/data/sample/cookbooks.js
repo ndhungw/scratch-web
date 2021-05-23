@@ -6,16 +6,16 @@ const cookbook_01 = {
   idUser: user_01.id, // FK
   name: "Western",
   imageSrc: COOKBOOK_IMAGE_SOURCE,
-  recipesCount: 0,
+  recipesCount: 3,
   isInSaved: false, // created
 };
 
 const cookbook_02 = {
-  id: "cook_book02",
+  id: "cookbook_02",
   idUser: user_01.id, // FK
   name: "Italian",
   imageSrc: COOKBOOK_IMAGE_SOURCE,
-  recipesCount: 0,
+  recipesCount: 2,
   isInSaved: false, // created
 };
 
@@ -24,7 +24,7 @@ const cookbook_03 = {
   idUser: user_01.id, // FK
   name: "Vietnamese",
   imageSrc: COOKBOOK_IMAGE_SOURCE,
-  recipesCount: 0,
+  recipesCount: 1,
   isInSaved: true, // saved
 };
 
@@ -33,7 +33,7 @@ const cookbook_04 = {
   idUser: user_01.id, // FK
   name: "Soups",
   imageSrc: COOKBOOK_IMAGE_SOURCE,
-  recipesCount: 0,
+  recipesCount: 2,
   isInSaved: true, // saved
 };
 
@@ -44,7 +44,7 @@ const cookbook_05 = {
   idUser: user_02.id, // FK
   name: "Chinese",
   imageSrc: COOKBOOK_IMAGE_SOURCE,
-  recipesCount: 0,
+  recipesCount: 2,
   isInSaved: false, // created
 };
 
@@ -53,7 +53,7 @@ const cookbook_06 = {
   idUser: user_02.id, // FK
   name: "Spicy",
   imageSrc: COOKBOOK_IMAGE_SOURCE,
-  recipesCount: 0,
+  recipesCount: 2,
   isInSaved: false, // created
 };
 

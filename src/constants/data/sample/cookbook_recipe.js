@@ -7,7 +7,6 @@ import {
   cookbook_06,
 } from "./cookbooks";
 import { recipe_01, recipe_02, recipe_03 } from "./recipes";
-import {} from "./sample/cookbooks";
 
 // recipe_cookbook
 const cookbook_recipe = [

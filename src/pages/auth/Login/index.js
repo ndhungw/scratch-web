@@ -26,8 +26,8 @@ import classNames from "classnames";
 import Logo from "../../../assets/icons/logo";
 import BACKGROUND_AUTHEN_IMAGE_SOURCE from "../../../assets/images/BG-Authen.png";
 import BIG_LOGO_IMAGE_SOURCE from "../../../assets/images/BigLogoImage.png";
-import { useDispatch } from "react-redux";
-import { authActions } from "../../../store/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectError, userActions } from "../../../app/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -83,6 +83,7 @@ export default function LogInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const error = useSelector(selectError);
 
   //
   const history = useHistory();
@@ -103,13 +104,13 @@ export default function LogInPage() {
 
   const handleLogin = () => {
     dispatch(
-      authActions.login({
+      userActions.login({
         username: username,
         password: password,
       })
     );
     history.push("/");
-    dispatch(authActions.setIsLoading(false));
+    dispatch(userActions.setIsLoading(false));
   };
 
   return (
@@ -154,6 +155,7 @@ export default function LogInPage() {
             >
               Welcome Back!
             </Typography>
+
             <Typography
               className={classNames(
                 typoClasses.textGray,
@@ -163,6 +165,8 @@ export default function LogInPage() {
             >
               {"Please login to continue"}
             </Typography>
+
+            {error && <div>{error}</div>}
 
             <TextField
               label="Username"

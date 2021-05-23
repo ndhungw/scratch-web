@@ -1,6 +1,7 @@
 import { Avatar, Box, ButtonBase, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
 
 import { SECTOR_NAMES, USER_SAMPLE } from "../../../constants/data";
 
@@ -10,6 +11,7 @@ import DotIcon from "../../../assets/icons/dot";
 import { simplify, capitalizeFirstLetter } from "../../../utils";
 import COLORS from "../../../constants/colors";
 import SeparatorLine from "../../SeparatorLine/SeparatorLine";
+import { kitchenActions } from "../../../app/kitchenSlice";
 
 export default function ProfileStats({
   user,
@@ -22,6 +24,9 @@ export default function ProfileStats({
   const styles = classNames(classes.root, className);
   const typoClasses = useTypographyStyles();
 
+  // self catch sectors' info
+  // const recipesSector = useSelector()
+
   return (
     <>
       {user && (
@@ -30,24 +35,22 @@ export default function ProfileStats({
             <Box className={classes.infoLeft}>
               <Avatar
                 alt={""}
-                src={user.avatarSrc || USER_SAMPLE.avatarSrc}
+                src={user.avatarSrc}
                 className={classes.avatar}
               />
             </Box>
             <Box className={classes.infoRight}>
               <Box className={classes.infoPrimary}>
                 <Typography className={typoClasses.h5}>
-                  {user?.fullName || USER_SAMPLE.fullName}
+                  {user?.fullName}
                 </Typography>
                 <Typography className={typoClasses.textGray}>
-                  {user?.bio || USER_SAMPLE.bio}
+                  {user?.bio}
                 </Typography>
               </Box>
               <Box className={classes.interactionWrapper}>
                 <Typography className={typoClasses.textGray}>
-                  {`${simplify(
-                    user?.followersCount || USER_SAMPLE.followersCount
-                  )} followers`}
+                  {`${simplify(user?.followersCount)} followers`}
                 </Typography>
                 <DotIcon />
                 <Typography className={typoClasses.textGray}>
@@ -66,23 +69,24 @@ export default function ProfileStats({
               return (
                 <ButtonBase
                   key={`${sector}_${index}`}
-                  disabled={user[sector].totalCount === 0}
+                  // disabled={user[sector].totalCount === 0}
                   onClick={handleSelectSector && handleSelectSector(sector)}
                   className={classNames({
                     [classes.buttonSector]: true,
                     [classes.buttonSectorSelected]: selectedSector === sector,
                   })}
                 >
-                  <Typography className={typoClasses.h4}>
+                  {/* <Typography className={typoClasses.h4}>
                     {user[sector].totalCount}
-                  </Typography>
+                  </Typography> */}
                   <Typography
                     className={classNames({
                       [typoClasses.lead]: true,
                       [classes.unSelected]: true,
                     })}
                   >
-                    {`${capitalizeFirstLetter(user[sector].title)}`}
+                    {/* {`${capitalizeFirstLetter(user[sector].title)}`} */}
+                    Title
                   </Typography>
                 </ButtonBase>
               );

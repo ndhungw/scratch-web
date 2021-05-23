@@ -13,9 +13,9 @@ import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 
 import { USER_SAMPLE } from "../../../constants/data";
-import { authActions, getCurrentUser } from "../../../store/slices/authSlice";
 // import { useAuth } from "../../../store/contexts/AuthContext";
 import { useSelector, useDispatch } from "react-redux";
+import { selectCurrentUser, userActions } from "../../../app/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -34,7 +34,7 @@ export default function UserMenu({ className, ...rest }) {
   //
   // const { logout } = useAuth();
   const dispatch = useDispatch();
-  const currentUser = useSelector(getCurrentUser);
+  const currentUser = useSelector(selectCurrentUser);
 
   //-- start User avatar
   const [userAvatarOpen, setUserAvatarOpen] = useState(false);
@@ -74,7 +74,7 @@ export default function UserMenu({ className, ...rest }) {
   const handleLogout = (event) => {
     handleCloseUserAvatar(event);
     // logout();
-    dispatch(authActions.logout());
+    dispatch(userActions.logout());
   };
   return (
     <div className={classNames(classes.root, className)} {...rest}>

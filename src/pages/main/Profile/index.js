@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   makeStyles,
   ButtonBase,
@@ -33,9 +33,9 @@ import { BACKGROUND_IMAGE_SOURCE } from "../../../constants/defaultValues";
 import { useSelector } from "react-redux";
 
 import { capitalizeFirstLetter } from "../../../utils";
-import { SECTOR_NAMES } from "../../../constants/data";
-import { getCurrentUser } from "../../../store/slices/authSlice";
 import { NavLink } from "react-router-dom";
+import { getCookbooks, getRecipesOfCookbook } from "../../../api";
+import { selectCurrentUser } from "../../../app/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: { backgroundColor: COLORS.WhiteSmoke },
@@ -106,11 +106,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const SECTORS = ["recipes", "saved", "following"];
+
 export default function ProfilePage() {
-  // const { currentUser } = useAuth();
-  const currentUser = useSelector(getCurrentUser);
-  const user = currentUser;
-  console.log("ProfilePage- user: ", user);
+  const currentUser = useSelector(selectCurrentUser);
+  // console.log("ProfilePage- currentUser: ", currentUser);
   //
   const theme = useTheme();
   const mdDownMatches = useMediaQuery(theme.breakpoints.down("md"));
@@ -118,11 +118,33 @@ export default function ProfilePage() {
   const classes = useStyles();
   const typoClasses = useTypographyStyles();
   //
-  const [selectedSector, setSelectedSector] = useState(SECTOR_NAMES[0]);
-  // const [selectedBookId, setSelectedBookId] = useState("western_cookbook");
-  const [selectedBookId, setSelectedBookId] = useState(
-    user[selectedSector].cookBooks[0].id
-  );
+  const [selectedSector, setSelectedSector] = useState(SECTORS[0]);
+  const [cookbooks, setCookbooks] = useState([]);
+  // const [selectedBookId, setSelectedBookId] = useState("cookbook_01");
+  const [selectedBookId, setSelectedBookId] = useState();
+  const [recipesByCookbook, setRecipesByCookbook] = useState([]);
+
+  useEffect(() => {
+    const isSavedSelected = selectedSector === "saved";
+    // get cookbooks that are saved or just owned
+    const cookbooks = getCookbooks(currentUser.id, isSavedSelected);
+    console.log({ cookbooks });
+    setCookbooks(cookbooks);
+
+    setSelectedBookId(cookbooks[0].id);
+
+    // get all recipes belong to these cookbooks
+  }, [selectedSector]);
+
+  // reload recipes list
+  useEffect(() => {
+    // just componentDidUpdate
+    if (selectedBookId) {
+      const recipesMatch = getRecipesOfCookbook(selectedBookId);
+      setRecipesByCookbook(recipesMatch);
+      console.log({ recipesMatch });
+    }
+  }, [selectedBookId]);
 
   // eslint-disable-next-line no-unused-vars
   const handleSelectCookbook = (id) => (event) => {
@@ -130,16 +152,22 @@ export default function ProfilePage() {
     setSelectedBookId(id);
   };
 
-  // eslint-disable-next-line no-unused-vars
   const handleSelectSector = (sectorName) => (e) => {
-    console.log("Click ", sectorName);
-    console.log(
-      "user[sectorName].cookBooks[0].id=",
-      user[sectorName].cookBooks[0].id
-    );
+    console.log(`Click ${sectorName} sector`);
+
     setSelectedSector(sectorName);
-    setSelectedBookId(user[sectorName].cookBooks[0].id);
   };
+
+  // eslint-disable-next-line no-unused-vars
+  // const handleSelectSector = (sectorName) => (e) => {
+  //   console.log("Click ", sectorName);
+  //   console.log(
+  //     "currentUser[sectorName].cookBooks[0].id=",
+  //     currentUser[sectorName].cookBooks[0].id
+  //   );
+  //   setSelectedSector(sectorName);
+  //   setSelectedBookId(currentUser[sectorName].cookBooks[0].id);
+  // };
 
   return (
     <div>
@@ -158,7 +186,7 @@ export default function ProfilePage() {
             {/* Left */}
             <Grid item xs={12} md={3}>
               <ProfileStats
-                user={user}
+                user={currentUser}
                 selectedSector={selectedSector}
                 handleSelectSector={handleSelectSector}
               />
@@ -194,7 +222,6 @@ export default function ProfilePage() {
             {/* Main content (dynamic) */}
             <Grid item md container>
               <Grid item xs={12}>
-                {/* cook books of sector (default: Recipes) */}
                 <div className={classes.titleRow}>
                   <Typography className={typoClasses.h2}>
                     {`My ${capitalizeFirstLetter(selectedSector)}`}
@@ -208,11 +235,11 @@ export default function ProfilePage() {
                 </div>
 
                 <div className={classes.cookBooksWrapper}>
-                  {user[selectedSector].cookBooks.map((item, index) => (
+                  {cookbooks.map((item, index) => (
                     <SimpleCard
                       key={`${item.title}_${index}`}
                       id={item.id}
-                      title={`${item.title} (${item.recipesCount})`}
+                      title={`${item.name} (${item.recipesCount})`}
                       imageSrc={item.imageSrc}
                       handleSelectCard={handleSelectCookbook}
                       className={classNames(classes.simpleCard, {
@@ -238,19 +265,17 @@ export default function ProfilePage() {
                     container
                     justify={mdDownMatches ? "center" : "space-between"}
                   >
-                    {console.log(user[selectedSector].cookBooks)}
-                    {user[selectedSector].cookBooks
-                      .find((book) => book.id === selectedBookId)
-                      .recipesList.map((recipe, index) => (
-                        <CardRecipe
-                          key={`${recipe.id}_${index}`}
-                          title={recipe.recipeName}
-                          imageSrc={recipe.imageSrc}
-                          ingredients={recipe.ingredients}
-                          servingTime={recipe.servingTime}
-                          className={classes.cardRecipe}
-                        />
-                      ))}
+                    {/* {console.log({ recipesByCookbook })} */}
+                    {recipesByCookbook.map((recipe, index) => (
+                      <CardRecipe
+                        key={`${recipe.id}_${index}`}
+                        title={recipe.name}
+                        imageSrc={recipe.imageSrcList[0]}
+                        ingredients={recipe.ingredients}
+                        servingTime={recipe.servingTime}
+                        className={classes.cardRecipe}
+                      />
+                    ))}
                   </Grid>
                 </Paper>
               </Grid>

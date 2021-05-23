@@ -13,8 +13,8 @@ import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 import COLORS from "../../../constants/colors";
 import { useDispatch, useSelector } from "react-redux";
-import { authActions, getCurrentUser } from "../../../store/slices/authSlice";
 import NavigationDesktop from "../../../components/Navigation/NavigationDesktop";
+import { selectCurrentUser, userActions } from "../../../app/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -46,7 +46,7 @@ export default function EditProfilePage() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const currentUser = useSelector(getCurrentUser);
+  const currentUser = useSelector(selectCurrentUser);
   const [fullName, setFullName] = useState(currentUser.fullName || "");
   const [bio, setBio] = useState(currentUser.bio || "");
   const [email, setEmail] = useState(currentUser.email || "");
@@ -74,7 +74,7 @@ export default function EditProfilePage() {
       phone,
       avatarSrc: avatarSrc || currentUser.avatarSrc,
     };
-    dispatch(authActions.setCurrentUser(updateUser));
+    dispatch(userActions.setCurrentUser(updateUser));
   };
 
   // avatar

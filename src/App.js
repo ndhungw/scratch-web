@@ -10,7 +10,7 @@ import { SnackbarProvider } from "notistack";
 import COLORS from "./constants/colors";
 
 // store
-import store from "./store";
+import store from "./app/store";
 import { Provider } from "react-redux";
 
 // components
@@ -25,7 +25,6 @@ import SignUpPage from "./pages/auth/SignUp";
 // redux-persist things
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
-import TestPage from "./pages/TestPage";
 import EditProfilePage from "./pages/main/EditProfile/EditProfile";
 
 function App() {
@@ -58,6 +57,20 @@ function App() {
   // redux-persist
   let persistor = persistStore(store);
 
+  // const currentUser = useSelector(getCurrentUser);
+  // console.log("App.js - currentUser: ", currentUser);
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   console.log("App useEffect run");
+  //   if (currentUser) {
+  //     console.log("App useEffect - setup initial kitchen");
+  //     dispatch(kitchenActions.setRecipesSector);
+  //     dispatch(kitchenActions.setSavedSector);
+  //     // dispatch(kitchenActions.setFollowingSector);
+  //   }
+  // }, []);
+
   return (
     <>
       <Provider store={store}>
@@ -66,10 +79,6 @@ function App() {
             <ThemeProvider theme={theme}>
               <SnackbarProvider>
                 <Switch>
-                  <Route path={"/test"}>
-                    <TestPage />
-                  </Route>
-
                   <Route path={"/signup"}>
                     <SignUpPage />
                   </Route>
@@ -79,9 +88,6 @@ function App() {
 
                   {/* Private Routes */}
                   <PrivateRoute path={"/"} exact>
-                    <FeedPage />
-                  </PrivateRoute>
-                  <PrivateRoute path={"/feed"}>
                     <FeedPage />
                   </PrivateRoute>
                   <PrivateRoute path={"/profile"} exact>

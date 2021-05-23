@@ -55,10 +55,11 @@ const SimpleDialog = ({
               onClick={() => handleListItemClick(item.id)}
             >
               <ListItemText className={typoClasses.body}>
-                {item.title}
+                {item.name}
               </ListItemText>
             </ListItem>
           ))}
+
           <ListItem
             autoFocus
             button

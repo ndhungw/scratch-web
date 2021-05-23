@@ -86,12 +86,14 @@ export default function CardFeed({
           [classes.isVisible]: isChoosingCookbook,
         })}
       >
-        <SimpleDialog
-          title={"Save to"}
-          list={savedCookbooks}
-          handleChooseItem={handleChooseItemFromDialog}
-          handleClose={handleCloseDialog}
-        />
+        {savedCookbooks && (
+          <SimpleDialog
+            title={"Save to"}
+            list={savedCookbooks}
+            handleChooseItem={handleChooseItemFromDialog}
+            handleClose={handleCloseDialog}
+          />
+        )}
       </div>
 
       {/* main  */}

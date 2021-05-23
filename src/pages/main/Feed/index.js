@@ -18,11 +18,7 @@ import ProfileStats from "../../../components/User/ProfileStats/ProfileStats";
 import FeedCard from "./components/FeedCard";
 
 // constants
-import {
-  FEED_SAMPLE_LIST,
-  TOP_5_RECIPES,
-  USER_SAMPLE,
-} from "../../../constants/data";
+import { TOP_5_RECIPES, USER_SAMPLE } from "../../../constants/data";
 import { VIDEO_IMAGE_SOURCE } from "../../../constants/defaultValues";
 import COLORS from "../../../constants/colors";
 
@@ -31,70 +27,77 @@ import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
 import { useSelector, useDispatch } from "react-redux";
 
 import { withSnackbar } from "notistack";
-import { authActions, getCurrentUser } from "../../../store/slices/authSlice";
+import { selectFeeds } from "./feedsSlice";
+import { getCookbooks } from "../../../api";
+import { selectCurrentUser } from "../../../app/userSlice";
 
 function FeedPage({ enqueueSnackbar }) {
   const typoClasses = useTypographyStyles();
   const classes = useStyles();
   //
   const dispatch = useDispatch();
-  const currentUser = useSelector(getCurrentUser);
+  const currentUser = useSelector(selectCurrentUser);
   console.log("currentUser from FeedPage: ", currentUser);
 
   // feeds
-  const FEED_LIST = FEED_SAMPLE_LIST;
+  // const FEED_LIST = FEED_SAMPLE_LIST;
+  const allFeeds = useSelector(selectFeeds);
+  console.log("allFeeds:", allFeeds);
+
   // saved cook books of user
-  const savedCookbooks = currentUser.saved.cookBooks;
+  // const savedCookbooks = currentUser.saved.cookBooks;
+  const savedCookbooks = getCookbooks(currentUser.id, true);
+  console.log({ savedCookbooks });
 
   const handleSave = (idFeed, idCookbook) => {
     console.log(
       `FeedPage - handleSave idFeed = ${idFeed}, idCookbook = ${idCookbook}`
     );
 
-    const feedToAdd = FEED_LIST.filter((feed) => feed.id === idFeed)[0];
+    // const feedToAdd = FEED_LIST.filter((feed) => feed.id === idFeed)[0];
 
-    const cookbookToAddFeed = currentUser.saved.cookBooks.filter(
-      (book) => book.id === idCookbook
-    )[0];
+    // const cookbookToAddFeed = currentUser.saved.cookBooks.filter(
+    //   (book) => book.id === idCookbook
+    // )[0];
 
     // check if recipe of feed is existed in the chosen cookbook
-    const isExisted = cookbookToAddFeed.recipesList.find(
-      (recipe) => recipe.id === feedToAdd.recipeData.id
-    );
+    // const isExisted = cookbookToAddFeed.recipesList.find(
+    //   (recipe) => recipe.id === feedToAdd.recipeData.id
+    // );
 
-    if (isExisted) {
-      enqueueSnackbar(
-        `This feed was already saved in the cook book "${cookbookToAddFeed.title}" !`,
-        { variant: "warning" }
-      );
-      return;
-    }
+    // if (isExisted) {
+    //   enqueueSnackbar(
+    //     `This feed was already saved in the cook book "${cookbookToAddFeed.title}" !`,
+    //     { variant: "warning" }
+    //   );
+    //   return;
+    // }
 
-    const newSavedCookbooks = savedCookbooks.map((book) => {
-      if (book.id === idCookbook) {
-        console.log(`update cookbook has id=${book.id}`);
-        return {
-          ...book,
-          recipesCount: book.recipesCount + 1,
-          recipesList: [...book.recipesList, feedToAdd.recipeData],
-        };
-      }
-      return book;
-    });
+    // const newSavedCookbooks = savedCookbooks.map((book) => {
+    //   if (book.id === idCookbook) {
+    //     console.log(`update cookbook has id=${book.id}`);
+    //     return {
+    //       ...book,
+    //       recipesCount: book.recipesCount + 1,
+    //       recipesList: [...book.recipesList, feedToAdd.recipeData],
+    //     };
+    //   }
+    //   return book;
+    // });
 
-    const newSaved = {
-      ...currentUser.saved,
-      totalCount: currentUser.saved.totalCount + 1,
-      cookBooks: newSavedCookbooks,
-    };
+    // const newSaved = {
+    //   ...currentUser.saved,
+    //   totalCount: currentUser.saved.totalCount + 1,
+    //   cookBooks: newSavedCookbooks,
+    // };
 
-    const currentUserToUpdate = {
-      ...currentUser,
-      saved: newSaved,
-    };
-    console.log("currentUserToUpdate: ", currentUserToUpdate);
+    // const currentUserToUpdate = {
+    //   ...currentUser,
+    //   saved: newSaved,
+    // };
+    // console.log("currentUserToUpdate: ", currentUserToUpdate);
 
-    dispatch(authActions.setCurrentUser(currentUserToUpdate));
+    // dispatch(authActions.setCurrentUser(currentUserToUpdate));
 
     enqueueSnackbar("Saved successfully!", { variant: "success" });
   };
@@ -129,10 +132,10 @@ function FeedPage({ enqueueSnackbar }) {
           <Hidden smDown>
             <Grid item lg md container justify="flex-end">
               <div>
-                <ProfileStats
+                {/* <ProfileStats
                   user={currentUser}
                   className={classes.profileStats}
-                />
+                /> */}
                 <CardBase
                   title={"Top 5 Recipe today"}
                   className={classes.cardBase}
@@ -173,24 +176,26 @@ function FeedPage({ enqueueSnackbar }) {
                 </CardBase>
               </Hidden>
 
-              {FEED_LIST.map((feed, index) => (
-                <FeedCard
-                  className={classes.feedCard}
-                  key={`${feed.id}_${index}`}
-                  id={feed.id}
-                  title={feed.title}
-                  description={feed.description}
-                  imageSrc={feed.imageSrc}
-                  author={feed.authorName}
-                  authorAvatarSrc={feed.authorAvatarSrc}
-                  createdAt={feed.createdAt}
-                  likesCount={feed.likesCount}
-                  commentsCount={feed.commentsCount}
-                  recipeData={feed.recipeData}
-                  handleSave={handleSave}
-                  savedCookbooks={savedCookbooks}
-                />
-              ))}
+              {allFeeds.map((feed, index) => {
+                return (
+                  <FeedCard
+                    className={classes.feedCard}
+                    key={`${feed.id}_${index}`}
+                    id={feed.id}
+                    title={feed.title}
+                    description={feed.description}
+                    imageSrc={feed.imageSrc}
+                    author={feed.authorName}
+                    authorAvatarSrc={feed.authorAvatarSrc}
+                    createdAt={feed.createdAt}
+                    likesCount={feed.likesCount}
+                    commentsCount={feed.commentsCount}
+                    recipeData={feed.recipeData}
+                    handleSave={handleSave}
+                    savedCookbooks={savedCookbooks}
+                  />
+                );
+              })}
             </div>
           </Grid>
           {/* Right column */}

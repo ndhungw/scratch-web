@@ -17,7 +17,7 @@ import {
 const recipe_01 = {
   id: "recipe_01",
   name: "Recipe item 01", // title of feed
-  imageSrc: [RECIPE_ITEM_IMAGE_SOURCE], // imageSrc of feed
+  imageSrcList: [RECIPE_ITEM_IMAGE_SOURCE], // imageSrcList of feed
   ingredients: [
     ingredient_sample_01,
     ingredient_sample_02,
@@ -33,7 +33,7 @@ const recipe_01 = {
 const recipe_02 = {
   id: "recipe_02",
   name: "Recipe item 02", // title of feed
-  imageSrcList: [RECIPE_ITEM_IMAGE_SOURCE], // imageSrc of feed
+  imageSrcList: [RECIPE_ITEM_IMAGE_SOURCE], // imageSrcList of feed
   ingredients: [
     ingredient_sample_02,
     ingredient_sample_03,
@@ -49,8 +49,8 @@ const recipe_02 = {
 
 const recipe_03 = {
   id: "recipe_03",
-  name: "Recipe item 01", // title of feed
-  imageSrc: [RECIPE_ITEM_IMAGE_SOURCE], // imageSrc of feed
+  name: "Recipe item 03", // title of feed
+  imageSrcList: [RECIPE_ITEM_IMAGE_SOURCE], // imageSrcList of feed
   ingredients: [ingredient_sample_05, ingredient_sample_06],
   directions: DIRECTIONS_SAMPLE,
   videoSrc: "",
