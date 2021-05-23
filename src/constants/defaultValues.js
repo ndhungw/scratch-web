@@ -14,7 +14,7 @@ const RECIPE_DESCRIPTION =
   "I thought this salad was exceptionally delicious and healthy. I recommend pressing the entire tofu block for at least 20 minutes before to remove excess water in the ...";
 const RECIPE_AUTHOR_NAME = "Nick Evans";
 const RECIPE_IMAGE_SOURCE = RecipeImg;
-const RECIPE_CREATED_AT = "2h";
+const RECIPE_CREATED_AT = 15; // minutes
 const RECIPE_LIKES_COUNT = 38;
 const RECIPE_COMMENTS_COUNT = 8;
 
@@ -32,6 +32,28 @@ const USER_FOLLOWERS_COUNT = 142;
 
 //
 const VIDEO_IMAGE_SOURCE = Video;
+
+// recipe
+const NUTRITION_FACTS_SAMPLE = [
+  "222 calories",
+  "6.2 g flat",
+  "7.2 g carbohydrates",
+];
+
+const SERVING_TIME_SAMPLE = 12;
+
+const DIRECTIONS_SAMPLE = [
+  "Heat a Belgian waffle iron",
+  "Mix the flour, sugar, ...",
+  "Lightly grease or spray the waffle iron with ...",
+];
+
+const TAGS_SAMPLE = ["Sweet", "Coconut", "Quick", "Easy"];
+
+const FEED_CREATED_AT = "2h";
+const FEED_LIKES_COUNT = 323;
+const FEED_COMMENTS_COUNT = 68;
+const FEED_DESCRIPTION = "Feed description very long paragraph";
 
 export {
   RECIPE_TITLE,
@@ -58,4 +80,15 @@ export {
   BACKGROUND_IMAGE_SOURCE,
   COOKBOOK_IMAGE_SOURCE,
   RECIPE_ITEM_IMAGE_SOURCE,
+  // ----
+  // recipe
+  NUTRITION_FACTS_SAMPLE,
+  DIRECTIONS_SAMPLE,
+  SERVING_TIME_SAMPLE,
+  TAGS_SAMPLE,
+  //
+  FEED_CREATED_AT,
+  FEED_DESCRIPTION,
+  FEED_LIKES_COUNT,
+  FEED_COMMENTS_COUNT,
 };

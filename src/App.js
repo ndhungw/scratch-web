@@ -39,11 +39,8 @@ function App() {
       },
     },
     overrides: {
-      // Style sheet name ⚛️
       MuiButton: {
-        // Name of the rule
         text: {
-          // Some CSS
           backgroundColor: COLORS.DarkGreen,
           borderRadius: 8,
           border: 0,
@@ -58,7 +55,7 @@ function App() {
   });
   theme = responsiveFontSizes(theme);
 
-  // redux-persist things
+  // redux-persist
   let persistor = persistStore(store);
 
   return (
