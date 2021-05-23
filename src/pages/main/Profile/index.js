@@ -35,7 +35,12 @@ import { useSelector } from "react-redux";
 import { capitalizeFirstLetter } from "../../../utils";
 import { NavLink } from "react-router-dom";
 import { getCookbooks, getRecipesOfCookbook } from "../../../api";
-import { selectCurrentUser } from "../../../app/userSlice";
+import {
+  selectCurrentUser,
+  selectFollowingSector,
+  selectRecipesSector,
+  selectSavedSector,
+} from "../../../app/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: { backgroundColor: COLORS.WhiteSmoke },
@@ -118,6 +123,10 @@ export default function ProfilePage() {
   const classes = useStyles();
   const typoClasses = useTypographyStyles();
   //
+  const recipesSector = useSelector(selectRecipesSector);
+  const savedSector = useSelector(selectSavedSector);
+  const followingSector = useSelector(selectFollowingSector);
+  //
   const [selectedSector, setSelectedSector] = useState(SECTORS[0]);
   const [cookbooks, setCookbooks] = useState([]);
   // const [selectedBookId, setSelectedBookId] = useState("cookbook_01");
@@ -131,7 +140,9 @@ export default function ProfilePage() {
     console.log({ cookbooks });
     setCookbooks(cookbooks);
 
-    setSelectedBookId(cookbooks[0].id);
+    if (cookbooks.length > 0) {
+      setSelectedBookId(cookbooks[0].id);
+    }
 
     // get all recipes belong to these cookbooks
   }, [selectedSector]);
@@ -158,17 +169,6 @@ export default function ProfilePage() {
     setSelectedSector(sectorName);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  // const handleSelectSector = (sectorName) => (e) => {
-  //   console.log("Click ", sectorName);
-  //   console.log(
-  //     "currentUser[sectorName].cookBooks[0].id=",
-  //     currentUser[sectorName].cookBooks[0].id
-  //   );
-  //   setSelectedSector(sectorName);
-  //   setSelectedBookId(currentUser[sectorName].cookBooks[0].id);
-  // };
-
   return (
     <div>
       <Grid
@@ -187,6 +187,9 @@ export default function ProfilePage() {
             <Grid item xs={12} md={3}>
               <ProfileStats
                 user={currentUser}
+                recipesSector={recipesSector}
+                savedSector={savedSector}
+                followingSector={followingSector}
                 selectedSector={selectedSector}
                 handleSelectSector={handleSelectSector}
               />
@@ -265,7 +268,6 @@ export default function ProfilePage() {
                     container
                     justify={mdDownMatches ? "center" : "space-between"}
                   >
-                    {/* {console.log({ recipesByCookbook })} */}
                     {recipesByCookbook.map((recipe, index) => (
                       <CardRecipe
                         key={`${recipe.id}_${index}`}

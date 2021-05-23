@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 import { useSelector } from "react-redux";
 
-import { SECTOR_NAMES, USER_SAMPLE } from "../../../constants/data";
-
 import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
 import DotIcon from "../../../assets/icons/dot";
 
@@ -12,9 +10,13 @@ import { simplify, capitalizeFirstLetter } from "../../../utils";
 import COLORS from "../../../constants/colors";
 import SeparatorLine from "../../SeparatorLine/SeparatorLine";
 import { kitchenActions } from "../../../app/kitchenSlice";
+import { selectRecipesSector, selectSavedSector } from "../../../app/userSlice";
 
 export default function ProfileStats({
   user,
+  recipesSector,
+  savedSector,
+  followingSector,
   selectedSector,
   handleSelectSector,
   className,
@@ -24,8 +26,9 @@ export default function ProfileStats({
   const styles = classNames(classes.root, className);
   const typoClasses = useTypographyStyles();
 
-  // self catch sectors' info
-  // const recipesSector = useSelector()
+  // // self catch sectors' info
+  // const recipesSector = useSelector(selectRecipesSector);
+  // const savedSector = useSelector(selectSavedSector);
 
   return (
     <>
@@ -54,9 +57,7 @@ export default function ProfileStats({
                 </Typography>
                 <DotIcon />
                 <Typography className={typoClasses.textGray}>
-                  {`${simplify(
-                    user?.likesCount || USER_SAMPLE.likesCount
-                  )} likes`}
+                  {`${simplify(user?.likesCount)} likes`}
                 </Typography>
               </Box>
             </Box>
@@ -65,32 +66,79 @@ export default function ProfileStats({
           <SeparatorLine className={classes.separatorLine} />
 
           <Box className={classes.sectorsWrapper}>
-            {SECTOR_NAMES.map((sector, index) => {
-              return (
-                <ButtonBase
-                  key={`${sector}_${index}`}
-                  // disabled={user[sector].totalCount === 0}
-                  onClick={handleSelectSector && handleSelectSector(sector)}
-                  className={classNames({
-                    [classes.buttonSector]: true,
-                    [classes.buttonSectorSelected]: selectedSector === sector,
-                  })}
-                >
-                  {/* <Typography className={typoClasses.h4}>
-                    {user[sector].totalCount}
-                  </Typography> */}
-                  <Typography
-                    className={classNames({
-                      [typoClasses.lead]: true,
-                      [classes.unSelected]: true,
-                    })}
-                  >
-                    {/* {`${capitalizeFirstLetter(user[sector].title)}`} */}
-                    Title
-                  </Typography>
-                </ButtonBase>
-              );
-            })}
+            {/*  recipes sector */}
+            <ButtonBase
+              disabled={recipesSector.totalCount === 0 || !handleSelectSector}
+              onClick={
+                handleSelectSector && handleSelectSector(recipesSector.name)
+              }
+              className={classNames({
+                [classes.buttonSector]: true,
+                [classes.buttonSectorSelected]:
+                  selectedSector === recipesSector.name,
+              })}
+            >
+              <Typography className={typoClasses.h4}>
+                {recipesSector.totalCount}
+              </Typography>
+              <Typography
+                className={classNames({
+                  [typoClasses.lead]: true,
+                  [classes.unSelected]: true,
+                })}
+              >
+                {`${capitalizeFirstLetter(recipesSector.name)}`}
+              </Typography>
+            </ButtonBase>
+            {/* saved sector */}
+            <ButtonBase
+              disabled={savedSector.totalCount === 0 || !handleSelectSector}
+              onClick={
+                handleSelectSector && handleSelectSector(savedSector.name)
+              }
+              className={classNames({
+                [classes.buttonSector]: true,
+                [classes.buttonSectorSelected]:
+                  selectedSector === savedSector.name,
+              })}
+            >
+              <Typography className={typoClasses.h4}>
+                {savedSector.totalCount}
+              </Typography>
+              <Typography
+                className={classNames({
+                  [typoClasses.lead]: true,
+                  [classes.unSelected]: true,
+                })}
+              >
+                {`${capitalizeFirstLetter(savedSector.name)}`}
+              </Typography>
+            </ButtonBase>
+
+            {/* following sector */}
+            <ButtonBase
+              disabled={followingSector.totalCount === 0 || !handleSelectSector}
+              onClick={
+                handleSelectSector && handleSelectSector(followingSector.name)
+              }
+              className={classNames({
+                [classes.buttonSector]: true,
+                [classes.buttonSectorSelected]:
+                  selectedSector === followingSector.name,
+              })}
+            >
+              <Typography className={typoClasses.h4}>
+                {followingSector.totalCount}
+              </Typography>
+              <Typography
+                className={classNames({
+                  [typoClasses.lead]: true,
+                  [classes.unSelected]: true,
+                })}
+              >
+                {`${capitalizeFirstLetter(followingSector.name)}`}
+              </Typography>
+            </ButtonBase>
           </Box>
         </Paper>
       )}

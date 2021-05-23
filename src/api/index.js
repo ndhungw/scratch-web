@@ -122,10 +122,18 @@ export const getKitchenSector = (idUser, isInSaved) => {
   );
 
   const sector = {
-    title: isInSaved ? "Saved" : "Recipes",
+    name: isInSaved ? "saved" : "recipes",
     totalCount: total,
     cookbooks: cookbooks,
   };
 
   return sector;
+};
+
+export const getFollowingSector = (idUser) => {
+  // fake temp
+  return {
+    name: "following",
+    totalCount: 0,
+  };
 };

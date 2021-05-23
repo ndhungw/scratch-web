@@ -1,7 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
-import { getCookbooks, getKitchenSector, getUser } from "../api";
+import {
+  getCookbooks,
+  getFollowingSector,
+  getKitchenSector,
+  getUser,
+} from "../api";
 import { users_table } from "../constants/data/index";
 import { PERSISTED_USER_KEY } from "../constants/key";
 
@@ -69,12 +74,11 @@ const userSlice = createSlice({
       // get user kitchen sectors
       const recipesSector = getKitchenSector(user.id, "recipes" === "saved");
       const savedSector = getKitchenSector(user.id, "saved" === "saved");
+      const followingSector = getFollowingSector(user.id);
 
       state.recipes = recipesSector;
       state.saved = savedSector;
-
-      // get user following sector
-      // ... implement later
+      state.following = followingSector;
 
       // authenticate
       state.error = "";
@@ -113,6 +117,7 @@ export const selectIsAuthenticated = (state) => state.user.isAuthenticated;
 export const selectCurrentUser = (state) => state.user.currentUser;
 export const selectRecipesSector = (state) => state.user.recipes;
 export const selectSavedSector = (state) => state.user.saved;
+export const selectFollowingSector = (state) => state.user.following;
 
 export const userActions = userSlice.actions;
 

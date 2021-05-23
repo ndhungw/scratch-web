@@ -29,16 +29,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { withSnackbar } from "notistack";
 import { selectFeeds } from "./feedsSlice";
 import { getCookbooks } from "../../../api";
-import { selectCurrentUser } from "../../../app/userSlice";
+import {
+  selectCurrentUser,
+  selectRecipesSector,
+  selectSavedSector,
+  selectFollowingSector,
+} from "../../../app/userSlice";
 
 function FeedPage({ enqueueSnackbar }) {
   const typoClasses = useTypographyStyles();
   const classes = useStyles();
   //
-  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   console.log("currentUser from FeedPage: ", currentUser);
 
+  const recipesSector = useSelector(selectRecipesSector);
+  const savedSector = useSelector(selectSavedSector);
+  const followingSector = useSelector(selectFollowingSector);
   // feeds
   // const FEED_LIST = FEED_SAMPLE_LIST;
   const allFeeds = useSelector(selectFeeds);
@@ -132,10 +139,13 @@ function FeedPage({ enqueueSnackbar }) {
           <Hidden smDown>
             <Grid item lg md container justify="flex-end">
               <div>
-                {/* <ProfileStats
+                <ProfileStats
                   user={currentUser}
+                  recipesSector={recipesSector}
+                  savedSector={savedSector}
+                  followingSector={followingSector}
                   className={classes.profileStats}
-                /> */}
+                />
                 <CardBase
                   title={"Top 5 Recipe today"}
                   className={classes.cardBase}
