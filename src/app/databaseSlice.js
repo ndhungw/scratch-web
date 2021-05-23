@@ -26,6 +26,14 @@ const databaseSlice = createSlice({
     // setRecipes: (state, payload) => {},
     // setCookbookRecipe: (state, payload) => {},
     // setFeeds: (state, payload) => {},
+    setCookbookRecipe: (state, action) => {
+      const pair = action.payload;
+
+      state.cookbook_recipe = {
+        ...state.cookbook_recipe,
+        pair,
+      };
+    },
   },
 });
 

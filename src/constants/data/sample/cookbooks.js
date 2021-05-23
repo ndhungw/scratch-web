@@ -1,4 +1,5 @@
 import { COOKBOOK_IMAGE_SOURCE } from "../../defaultValues";
+import { recipe_01, recipe_02, recipe_03 } from "./recipes";
 import { user_01, user_02, user_03 } from "./users";
 
 const cookbook_01 = {
@@ -8,6 +9,7 @@ const cookbook_01 = {
   imageSrc: COOKBOOK_IMAGE_SOURCE,
   recipesCount: 3,
   isInSaved: false, // created
+  recipesList: [recipe_01, recipe_02, recipe_03],
 };
 
 const cookbook_02 = {
@@ -17,6 +19,7 @@ const cookbook_02 = {
   imageSrc: COOKBOOK_IMAGE_SOURCE,
   recipesCount: 2,
   isInSaved: false, // created
+  recipesList: [recipe_01, recipe_02],
 };
 
 const cookbook_03 = {
@@ -26,6 +29,7 @@ const cookbook_03 = {
   imageSrc: COOKBOOK_IMAGE_SOURCE,
   recipesCount: 1,
   isInSaved: true, // saved
+  recipesList: [recipe_01],
 };
 
 const cookbook_04 = {
@@ -35,6 +39,7 @@ const cookbook_04 = {
   imageSrc: COOKBOOK_IMAGE_SOURCE,
   recipesCount: 2,
   isInSaved: true, // saved
+  recipesList: [recipe_01, recipe_03],
 };
 
 // user_02
@@ -46,6 +51,7 @@ const cookbook_05 = {
   imageSrc: COOKBOOK_IMAGE_SOURCE,
   recipesCount: 2,
   isInSaved: false, // created
+  recipesList: [recipe_01, recipe_02],
 };
 
 const cookbook_06 = {
@@ -55,6 +61,7 @@ const cookbook_06 = {
   imageSrc: COOKBOOK_IMAGE_SOURCE,
   recipesCount: 2,
   isInSaved: false, // created
+  recipesList: [recipe_02, recipe_03],
 };
 
 const cookbook_07 = {

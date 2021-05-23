@@ -57,20 +57,6 @@ function App() {
   // redux-persist
   let persistor = persistStore(store);
 
-  // const currentUser = useSelector(getCurrentUser);
-  // console.log("App.js - currentUser: ", currentUser);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   console.log("App useEffect run");
-  //   if (currentUser) {
-  //     console.log("App useEffect - setup initial kitchen");
-  //     dispatch(kitchenActions.setRecipesSector);
-  //     dispatch(kitchenActions.setSavedSector);
-  //     // dispatch(kitchenActions.setFollowingSector);
-  //   }
-  // }, []);
-
   return (
     <>
       <Provider store={store}>

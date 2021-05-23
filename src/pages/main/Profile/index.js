@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import {
   makeStyles,
   ButtonBase,
@@ -29,12 +31,10 @@ import ProfileStats from "../../../components/User/ProfileStats/ProfileStats";
 // constants
 import COLORS from "../../../constants/colors";
 import { BACKGROUND_IMAGE_SOURCE } from "../../../constants/defaultValues";
-// import { useAuth } from "../../../store/contexts/AuthContext";
-import { useSelector } from "react-redux";
 
 import { capitalizeFirstLetter } from "../../../utils";
-import { NavLink } from "react-router-dom";
-import { getCookbooks, getRecipesOfCookbook } from "../../../api";
+
+// selectors
 import {
   selectCurrentUser,
   selectFollowingSector,
@@ -115,7 +115,6 @@ const SECTORS = ["recipes", "saved", "following"];
 
 export default function ProfilePage() {
   const currentUser = useSelector(selectCurrentUser);
-  // console.log("ProfilePage- currentUser: ", currentUser);
   //
   const theme = useTheme();
   const mdDownMatches = useMediaQuery(theme.breakpoints.down("md"));
@@ -129,43 +128,46 @@ export default function ProfilePage() {
   //
   const [selectedSector, setSelectedSector] = useState(SECTORS[0]);
   const [cookbooks, setCookbooks] = useState([]);
-  // const [selectedBookId, setSelectedBookId] = useState("cookbook_01");
   const [selectedBookId, setSelectedBookId] = useState();
   const [recipesByCookbook, setRecipesByCookbook] = useState([]);
 
   useEffect(() => {
     const isSavedSelected = selectedSector === "saved";
-    // get cookbooks that are saved or just owned
-    const cookbooks = getCookbooks(currentUser.id, isSavedSelected);
-    console.log({ cookbooks });
+
+    let cookbooks = [];
+
+    if (isSavedSelected) {
+      cookbooks = savedSector.cookbooks;
+    } else {
+      cookbooks = recipesSector.cookbooks;
+    }
+
     setCookbooks(cookbooks);
 
     if (cookbooks.length > 0) {
       setSelectedBookId(cookbooks[0].id);
     }
+  }, [selectedSector, recipesSector, savedSector]);
 
-    // get all recipes belong to these cookbooks
-  }, [selectedSector]);
-
-  // reload recipes list
+  // // reload recipes list
   useEffect(() => {
     // just componentDidUpdate
     if (selectedBookId) {
-      const recipesMatch = getRecipesOfCookbook(selectedBookId);
+      const specifiedBook = cookbooks.filter(
+        (book) => book.id === selectedBookId
+      )[0];
+      const recipesMatch = specifiedBook.recipesList;
       setRecipesByCookbook(recipesMatch);
-      console.log({ recipesMatch });
     }
   }, [selectedBookId]);
 
   // eslint-disable-next-line no-unused-vars
   const handleSelectCookbook = (id) => (event) => {
-    console.log(id);
     setSelectedBookId(id);
   };
 
-  const handleSelectSector = (sectorName) => (e) => {
-    console.log(`Click ${sectorName} sector`);
-
+  // eslint-disable-next-line no-unused-vars
+  const handleSelectSector = (sectorName) => (event) => {
     setSelectedSector(sectorName);
   };
 
@@ -224,63 +226,67 @@ export default function ProfilePage() {
 
             {/* Main content (dynamic) */}
             <Grid item md container>
-              <Grid item xs={12}>
-                <div className={classes.titleRow}>
-                  <Typography className={typoClasses.h2}>
-                    {`My ${capitalizeFirstLetter(selectedSector)}`}
-                  </Typography>
-                  <ButtonBase className={classes.buttonAddRecipe}>
-                    <PlusIcon />
-                    <Typography className={typoClasses.button}>
-                      {"Add New"}
-                    </Typography>
-                  </ButtonBase>
-                </div>
+              {cookbooks.length > 0 && (
+                <>
+                  <Grid item xs={12}>
+                    <div className={classes.titleRow}>
+                      <Typography className={typoClasses.h2}>
+                        {`My ${capitalizeFirstLetter(selectedSector)}`}
+                      </Typography>
+                      <ButtonBase className={classes.buttonAddRecipe}>
+                        <PlusIcon />
+                        <Typography className={typoClasses.button}>
+                          {"Add New"}
+                        </Typography>
+                      </ButtonBase>
+                    </div>
 
-                <div className={classes.cookBooksWrapper}>
-                  {cookbooks.map((item, index) => (
-                    <SimpleCard
-                      key={`${item.title}_${index}`}
-                      id={item.id}
-                      title={`${item.name} (${item.recipesCount})`}
-                      imageSrc={item.imageSrc}
-                      handleSelectCard={handleSelectCookbook}
-                      className={classNames(classes.simpleCard, {
-                        // [classes.simpleCard]: true,
-                        [classes.unSelectedCard]: selectedBookId !== item.id,
-                        [classes.selectedCard]: selectedBookId === item.id,
-                        [classes.resetMarginLeft]: index === 0,
-                      })}
-                    />
-                  ))}
-                </div>
-              </Grid>
-
-              {/* list recipe cards of specific cook book */}
-              <Grid item xs={12}>
-                <Paper
-                  elevation={0}
-                  style={{
-                    padding: "0px 2rem",
-                  }}
-                >
-                  <Grid
-                    container
-                    justify={mdDownMatches ? "center" : "space-between"}
-                  >
-                    {recipesByCookbook.map((recipe, index) => (
-                      <CardRecipe
-                        key={`${recipe.id}_${index}`}
-                        title={recipe.name}
-                        imageSrc={recipe.imageSrcList[0]}
-                        ingredients={recipe.ingredients}
-                        servingTime={recipe.servingTime}
-                        className={classes.cardRecipe}
-                      />
-                    ))}
+                    <div className={classes.cookBooksWrapper}>
+                      {cookbooks.map((item, index) => (
+                        <SimpleCard
+                          key={`${item.title}_${index}`}
+                          id={item.id}
+                          title={`${item.name} (${item.recipesCount})`}
+                          imageSrc={item.imageSrc}
+                          handleSelectCard={handleSelectCookbook}
+                          className={classNames(classes.simpleCard, {
+                            // [classes.simpleCard]: true,
+                            [classes.unSelectedCard]:
+                              selectedBookId !== item.id,
+                            [classes.selectedCard]: selectedBookId === item.id,
+                            [classes.resetMarginLeft]: index === 0,
+                          })}
+                        />
+                      ))}
+                    </div>
                   </Grid>
-                </Paper>
-              </Grid>
+                  {/* list recipe cards of specific cook book */}
+                  <Grid item xs={12}>
+                    <Paper
+                      elevation={0}
+                      style={{
+                        padding: "0px 2rem",
+                      }}
+                    >
+                      <Grid
+                        container
+                        justify={mdDownMatches ? "center" : "space-between"}
+                      >
+                        {recipesByCookbook.map((recipe) => (
+                          <CardRecipe
+                            key={`${recipe.id}`}
+                            title={recipe.name}
+                            imageSrc={recipe.imageSrcList[0]}
+                            ingredients={recipe.ingredients}
+                            servingTime={recipe.servingTime}
+                            className={classes.cardRecipe}
+                          />
+                        ))}
+                      </Grid>
+                    </Paper>
+                  </Grid>
+                </>
+              )}
             </Grid>
           </Grid>
         </Grid>

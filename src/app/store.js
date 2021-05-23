@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 // new
 import { getDefaultMiddleware } from "@reduxjs/toolkit";
 import feedsReducer from "../pages/main/Feed/feedsSlice";

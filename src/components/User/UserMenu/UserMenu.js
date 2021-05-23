@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import {
   makeStyles,
   Avatar,
@@ -10,11 +12,8 @@ import {
   Popper,
 } from "@material-ui/core";
 import classNames from "classnames";
-import { NavLink } from "react-router-dom";
 
-import { USER_SAMPLE } from "../../../constants/data";
-// import { useAuth } from "../../../store/contexts/AuthContext";
-import { useSelector, useDispatch } from "react-redux";
+// selectors
 import { selectCurrentUser, userActions } from "../../../app/userSlice";
 
 const useStyles = makeStyles(() => ({
@@ -32,7 +31,6 @@ const useStyles = makeStyles(() => ({
 export default function UserMenu({ className, ...rest }) {
   const classes = useStyles();
   //
-  // const { logout } = useAuth();
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
 
@@ -41,7 +39,6 @@ export default function UserMenu({ className, ...rest }) {
   const anchorRef = useRef(null);
 
   const handleToggle = () => {
-    console.log("click user avatar");
     setUserAvatarOpen((prevOpen) => !prevOpen);
   };
 
@@ -88,7 +85,7 @@ export default function UserMenu({ className, ...rest }) {
           [classes.avatarBtnActive]: userAvatarOpen,
         })}
       >
-        <Avatar alt="" src={currentUser.avatarSrc || USER_SAMPLE.avatarSrc} />
+        <Avatar alt="" src={currentUser.avatarSrc} />
 
         <Popper
           open={userAvatarOpen}
@@ -113,13 +110,7 @@ export default function UserMenu({ className, ...rest }) {
                 >
                   Profile
                 </MenuItem>
-                <MenuItem
-                  onClick={handleLogout}
-                  // component={NavLink}
-                  // to="/logout"
-                >
-                  Logout
-                </MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </MenuList>
             </ClickAwayListener>
           </Paper>

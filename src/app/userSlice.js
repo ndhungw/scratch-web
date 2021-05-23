@@ -1,23 +1,18 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
-import {
-  getCookbooks,
-  getFollowingSector,
-  getKitchenSector,
-  getUser,
-} from "../api";
+import { getFollowingSector, getKitchenSector } from "../api";
 import { users_table } from "../constants/data/index";
 import { PERSISTED_USER_KEY } from "../constants/key";
 
-export const getMe = createAsyncThunk(
-  "user/getMe",
-  async (params, thunkAPI) => {
-    // thunkAPI.dispatch(...)
-    // const currentUser = await api.getCurrentUser();
-    // return currentUser;
-  }
-);
+// export const getMe = createAsyncThunk(
+//   "user/getMe",
+//   async (params, thunkAPI) => {
+//     // thunkAPI.dispatch(...)
+//     // const currentUser = await api.getCurrentUser();
+//     // return currentUser;
+//   }
+// );
 
 const initialState = {
   isAuthenticated: false,
@@ -34,29 +29,19 @@ const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     setCurrentUser(state, action) {
-      console.log(
-        "userSlice - setCurrentUser - action.payload=",
-        action.payload
-      );
       state.currentUser = action.payload;
     },
     setAvatarSrc(state, action) {
-      console.log("userSlice - setAvatarSrc - action.payload=", action.payload);
       state.currentUser.avatarSrc = action.payload;
     },
     setIsLoading(state, action) {
-      console.log("setIsLoading: ", action.payload);
       state.isLoading = action.payload;
     },
     login(state, action) {
-      console.log("userSlice- action.payload", action.payload);
       const loginInfo = action.payload;
-      console.log("loginInfo: ", loginInfo);
 
       // check username & password
       const user = users_table.find((user) => {
-        console.log("username: ", user.username);
-        console.log("password: ", user.password);
         if (
           user.username === loginInfo.username &&
           user.password === loginInfo.password
@@ -64,7 +49,6 @@ const userSlice = createSlice({
           return user;
         }
       });
-      console.log({ user });
 
       if (!user) {
         state.error = "Wrong username or password";
@@ -93,6 +77,12 @@ const userSlice = createSlice({
       state.saved = null;
       state.following = null;
       state.error = null;
+    },
+    setRecipesSector(state, action) {
+      state.recipes = action.payload;
+    },
+    setSavedSector(state, action) {
+      state.saved = action.payload;
     },
   },
   // example using thunk in redux-toolkit

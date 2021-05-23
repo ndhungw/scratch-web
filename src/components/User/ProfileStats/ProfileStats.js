@@ -1,7 +1,6 @@
 import { Avatar, Box, ButtonBase, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
-import { useSelector } from "react-redux";
 
 import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
 import DotIcon from "../../../assets/icons/dot";
@@ -9,8 +8,6 @@ import DotIcon from "../../../assets/icons/dot";
 import { simplify, capitalizeFirstLetter } from "../../../utils";
 import COLORS from "../../../constants/colors";
 import SeparatorLine from "../../SeparatorLine/SeparatorLine";
-import { kitchenActions } from "../../../app/kitchenSlice";
-import { selectRecipesSector, selectSavedSector } from "../../../app/userSlice";
 
 export default function ProfileStats({
   user,
@@ -25,10 +22,6 @@ export default function ProfileStats({
   const classes = useStyles();
   const styles = classNames(classes.root, className);
   const typoClasses = useTypographyStyles();
-
-  // // self catch sectors' info
-  // const recipesSector = useSelector(selectRecipesSector);
-  // const savedSector = useSelector(selectSavedSector);
 
   return (
     <>
@@ -75,7 +68,8 @@ export default function ProfileStats({
               className={classNames({
                 [classes.buttonSector]: true,
                 [classes.buttonSectorSelected]:
-                  selectedSector === recipesSector.name,
+                  selectedSector === recipesSector.name &&
+                  recipesSector.totalCount > 0,
               })}
             >
               <Typography className={typoClasses.h4}>
@@ -99,7 +93,8 @@ export default function ProfileStats({
               className={classNames({
                 [classes.buttonSector]: true,
                 [classes.buttonSectorSelected]:
-                  selectedSector === savedSector.name,
+                  selectedSector === savedSector.name &&
+                  savedSector.totalCount > 0,
               })}
             >
               <Typography className={typoClasses.h4}>
@@ -124,7 +119,8 @@ export default function ProfileStats({
               className={classNames({
                 [classes.buttonSector]: true,
                 [classes.buttonSectorSelected]:
-                  selectedSector === followingSector.name,
+                  selectedSector === followingSector.name &&
+                  followingSector.totalCount > 0,
               })}
             >
               <Typography className={typoClasses.h4}>

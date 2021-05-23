@@ -65,7 +65,6 @@ export default function EditProfilePage() {
     setPhone(e.target.value);
   };
   const handleSaveProfile = () => {
-    console.log("Save clicked");
     const updateUser = {
       ...currentUser,
       fullName,
@@ -86,11 +85,10 @@ export default function EditProfilePage() {
     fileInputRef.current.click();
   };
 
-  // lam trung gian nhu the nay nham
+  // lam trung gian nhu the nay de
   // tao ra mot state de dung useEffect theo doi va preview:)
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
-    console.log(file);
     if (file) {
       setFile(file);
     } else {

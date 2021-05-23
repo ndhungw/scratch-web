@@ -28,20 +28,24 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { withSnackbar } from "notistack";
 import { selectFeeds } from "./feedsSlice";
-import { getCookbooks } from "../../../api";
+import { getRecipe } from "../../../api";
 import {
   selectCurrentUser,
   selectRecipesSector,
   selectSavedSector,
   selectFollowingSector,
+  userActions,
 } from "../../../app/userSlice";
+
+import { databaseActions } from "../../../app/databaseSlice";
 
 function FeedPage({ enqueueSnackbar }) {
   const typoClasses = useTypographyStyles();
   const classes = useStyles();
   //
+  const dispatch = useDispatch();
+  //
   const currentUser = useSelector(selectCurrentUser);
-  console.log("currentUser from FeedPage: ", currentUser);
 
   const recipesSector = useSelector(selectRecipesSector);
   const savedSector = useSelector(selectSavedSector);
@@ -49,62 +53,58 @@ function FeedPage({ enqueueSnackbar }) {
   // feeds
   // const FEED_LIST = FEED_SAMPLE_LIST;
   const allFeeds = useSelector(selectFeeds);
-  console.log("allFeeds:", allFeeds);
 
   // saved cook books of user
-  // const savedCookbooks = currentUser.saved.cookBooks;
-  const savedCookbooks = getCookbooks(currentUser.id, true);
-  console.log({ savedCookbooks });
+  // const savedCookbooks = savedSector.cookbooks;
 
   const handleSave = (idFeed, idCookbook) => {
-    console.log(
-      `FeedPage - handleSave idFeed = ${idFeed}, idCookbook = ${idCookbook}`
+    const feedToSave = allFeeds.filter((feed) => feed.id === idFeed)[0];
+
+    const recipeData = getRecipe(feedToSave.idRecipe);
+
+    const cookbookToChange = savedSector.cookbooks.filter(
+      (book) => book.id === idCookbook
+    )[0];
+
+    const existedRecipe = cookbookToChange.recipesList.find(
+      (recipe) => recipe.id === feedToSave.idRecipe
     );
 
-    // const feedToAdd = FEED_LIST.filter((feed) => feed.id === idFeed)[0];
+    if (existedRecipe) {
+      enqueueSnackbar("This recipe was already saved in that cook book !", {
+        variant: "warning",
+      });
+      return;
+    }
 
-    // const cookbookToAddFeed = currentUser.saved.cookBooks.filter(
-    //   (book) => book.id === idCookbook
-    // )[0];
+    // prepare newCookbooks
+    const newCookbooks = savedSector.cookbooks.map((book) => {
+      if (book.id === idCookbook) {
+        // book.recipesList = [...book.recipesList, recipeData];
+        const newBook = {
+          ...book,
+          recipesCount: book.recipesCount + 1,
+          recipesList: [...book.recipesList, recipeData],
+        };
+        return newBook;
+      }
+      return book;
+    });
 
-    // check if recipe of feed is existed in the chosen cookbook
-    // const isExisted = cookbookToAddFeed.recipesList.find(
-    //   (recipe) => recipe.id === feedToAdd.recipeData.id
-    // );
+    dispatch(
+      databaseActions.setCookbookRecipe({
+        idCookbook: idCookbook,
+        idRecipe: feedToSave.idRecipe,
+      })
+    );
 
-    // if (isExisted) {
-    //   enqueueSnackbar(
-    //     `This feed was already saved in the cook book "${cookbookToAddFeed.title}" !`,
-    //     { variant: "warning" }
-    //   );
-    //   return;
-    // }
+    const newSavedSector = {
+      ...savedSector,
+      totalCount: savedSector.totalCount + 1,
+      cookbooks: newCookbooks,
+    };
 
-    // const newSavedCookbooks = savedCookbooks.map((book) => {
-    //   if (book.id === idCookbook) {
-    //     console.log(`update cookbook has id=${book.id}`);
-    //     return {
-    //       ...book,
-    //       recipesCount: book.recipesCount + 1,
-    //       recipesList: [...book.recipesList, feedToAdd.recipeData],
-    //     };
-    //   }
-    //   return book;
-    // });
-
-    // const newSaved = {
-    //   ...currentUser.saved,
-    //   totalCount: currentUser.saved.totalCount + 1,
-    //   cookBooks: newSavedCookbooks,
-    // };
-
-    // const currentUserToUpdate = {
-    //   ...currentUser,
-    //   saved: newSaved,
-    // };
-    // console.log("currentUserToUpdate: ", currentUserToUpdate);
-
-    // dispatch(authActions.setCurrentUser(currentUserToUpdate));
+    dispatch(userActions.setSavedSector(newSavedSector));
 
     enqueueSnackbar("Saved successfully!", { variant: "success" });
   };
@@ -202,7 +202,7 @@ function FeedPage({ enqueueSnackbar }) {
                     commentsCount={feed.commentsCount}
                     recipeData={feed.recipeData}
                     handleSave={handleSave}
-                    savedCookbooks={savedCookbooks}
+                    savedCookbooks={savedSector.cookbooks}
                   />
                 );
               })}

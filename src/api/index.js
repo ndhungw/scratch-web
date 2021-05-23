@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   cookbooks_table,
   cookbook_recipe_table,
@@ -95,7 +96,6 @@ export const getCookbooks = (idUser, isInSaved) => {
 
 export const getRecipesOfCookbook = (idCookbook) => {
   const matchedPair = cookbook_recipe_table.filter((pair) => {
-    // console.log("pair", pair);
     if (pair.idCookbook === idCookbook) {
       return pair.idRecipe;
     }
@@ -130,10 +130,28 @@ export const getKitchenSector = (idUser, isInSaved) => {
   return sector;
 };
 
+// eslint-disable-next-line no-unused-vars
 export const getFollowingSector = (idUser) => {
   // fake temp
   return {
     name: "following",
     totalCount: 0,
   };
+};
+
+export const getRecipe = (idRecipe) => {
+  const found = recipes_table.filter((recipe) => recipe.id === idRecipe)[0];
+  return found;
+};
+
+export const isExistRecipe = (idRecipe, idCookbook) => {
+  // check if the recipe exists in that cookbook
+  const existedPair = cookbook_recipe.find(
+    (pair) => pair.idRecipe === idRecipe && pair.idCookbook === idCookbook
+  );
+
+  if (existedPair) {
+    return true;
+  }
+  return false;
 };

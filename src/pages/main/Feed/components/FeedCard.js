@@ -60,7 +60,6 @@ export default function CardFeed({
   };
 
   const handleChooseItemFromDialog = (idCookbook) => {
-    // console.log("Choose item with id=", id);
     handleSave(id, idCookbook);
   };
   const handleCloseDialog = () => {
