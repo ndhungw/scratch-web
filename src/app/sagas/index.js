@@ -1,28 +1,25 @@
-import { fork, takeEvery } from "redux-saga/effects";
+import { all, fork, take, takeEvery } from "redux-saga/effects";
+import { feedsActions } from "../../pages/main/Feed/feedsSlice";
 import { userActions } from "../userSlice";
 import { handleLoginRequest } from "./auth/login";
+import { handleSaveRecipeFromFeedRequest } from "./main/feed";
 
 function* watchAuthActions() {
-  // console.log("watchAuthActions:", action);
-  yield console.log(
-    "watching auth actions-loginRequest:",
-    userActions.loginRequest
-  );
   yield takeEvery(userActions.loginRequest, handleLoginRequest);
-  yield console.log(
-    "watchAuthActions- after take(userActions.loginRequest.type, handleLoginRequest)"
-  );
 }
 
-function* watchCreateTaskAction() {
-  yield console.log("watching create task");
+function* watchFeedActions() {
+  yield console.log("watching feed actions");
+
+  yield takeEvery(
+    feedsActions.saveRecipePending,
+    handleSaveRecipeFromFeedRequest
+  );
 }
 
 function* rootSaga() {
-  yield console.log("this is root saga");
   yield fork(watchAuthActions);
-  yield fork(watchCreateTaskAction);
-  yield console.log("end the root saga");
+  yield fork(watchFeedActions);
 }
 
 export default rootSaga;

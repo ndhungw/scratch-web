@@ -27,7 +27,13 @@ import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
 import { useSelector, useDispatch } from "react-redux";
 
 import { withSnackbar } from "notistack";
-import { selectFeeds } from "./feedsSlice";
+import {
+  feedsActions,
+  selectFeeds,
+  selectMessage,
+  selectError,
+  selectIsLoading,
+} from "./feedsSlice";
 import { getRecipe } from "../../../api";
 import {
   selectCurrentUser,
@@ -38,17 +44,22 @@ import {
 } from "../../../app/userSlice";
 
 import { databaseActions } from "../../../app/databaseSlice";
+import { useEffect } from "react";
 
 function FeedPage({ enqueueSnackbar }) {
   const typoClasses = useTypographyStyles();
   const classes = useStyles();
   //
   const dispatch = useDispatch();
-  //
+  // selectors
   const currentUser = useSelector(selectCurrentUser);
+  const message = useSelector(selectMessage);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   const recipesSector = useSelector(selectRecipesSector);
   const savedSector = useSelector(selectSavedSector);
+  console.log("savedSector.cookbooks", savedSector.cookbooks);
   const followingSector = useSelector(selectFollowingSector);
   // feeds
   // const FEED_LIST = FEED_SAMPLE_LIST;
@@ -57,7 +68,19 @@ function FeedPage({ enqueueSnackbar }) {
   // saved cook books of user
   // const savedCookbooks = savedSector.cookbooks;
 
-  const handleSave = (idFeed, idCookbook) => {
+  useEffect(() => {
+    console.log("effect!!!");
+    if (error) {
+      console.log("error in effect");
+      enqueueSnackbar(error, { variant: "warning" });
+    }
+    if (message) {
+      console.log("message in effect:", message);
+      enqueueSnackbar(message, { variant: "success" });
+    }
+  }, [error, message]);
+
+  const handleSave = async (idFeed, idCookbook) => {
     const feedToSave = allFeeds.filter((feed) => feed.id === idFeed)[0];
 
     const recipeData = getRecipe(feedToSave.idRecipe);
@@ -80,7 +103,6 @@ function FeedPage({ enqueueSnackbar }) {
     // prepare newCookbooks
     const newCookbooks = savedSector.cookbooks.map((book) => {
       if (book.id === idCookbook) {
-        // book.recipesList = [...book.recipesList, recipeData];
         const newBook = {
           ...book,
           recipesCount: book.recipesCount + 1,
@@ -109,6 +131,10 @@ function FeedPage({ enqueueSnackbar }) {
     dispatch(userActions.setSavedSector(newSavedSector));
 
     enqueueSnackbar("Saved successfully!", { variant: "success" });
+
+    // ---
+    // the way use saga: but cannot mutate the static database file
+    // dispatch(feedsActions.saveRecipePending({ idFeed, idCookbook }));
   };
 
   return (

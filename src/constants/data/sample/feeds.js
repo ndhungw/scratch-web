@@ -7,7 +7,7 @@ import {
 import { recipe_01, recipe_02, recipe_03 } from "./recipes";
 import { user_01, user_02 } from "./users";
 
-const FEED_01 = {
+let FEED_01 = {
   id: "feed_01",
   idUser: user_01.id,
   idRecipe: recipe_01.id,
@@ -19,7 +19,7 @@ const FEED_01 = {
   commentsCount: FEED_COMMENTS_COUNT,
 };
 
-const FEED_02 = {
+let FEED_02 = {
   id: "feed_02",
   idUser: user_01.id,
   idRecipe: recipe_02.id,
@@ -31,7 +31,7 @@ const FEED_02 = {
   commentsCount: FEED_COMMENTS_COUNT,
 };
 
-const FEED_03 = {
+let FEED_03 = {
   id: "feed_03",
   idUser: user_02.id,
   idRecipe: recipe_03.id,

@@ -131,10 +131,8 @@ function LogInPage() {
   };
 
   if (isAuthenticated && currentUser.id) {
-    console.log("check currentUser.id");
     return <Redirect to="/" />;
   }
-  console.log(3);
 
   return (
     <Grid

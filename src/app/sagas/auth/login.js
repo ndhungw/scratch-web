@@ -1,35 +1,22 @@
-import { getFollowingSector, getKitchenSector, getUser } from "../../../api";
 import { call, put } from "redux-saga/effects";
 import { userActions } from "../../userSlice";
+import { getKitchenData, getUser } from "../../../api";
 
 export function* handleLoginRequest(action) {
   const { username, password } = action.payload;
-  console.log(`username: ${username} - password: ${password}`);
 
   try {
     // call fake API, return user if found
     const user = yield call(getUser, username, password);
-    console.log("handleLoginRequest-user: ", user);
 
     if (!user) {
       yield put(userActions.loginError("Wrong username or password"));
-      console.log("handleLoginRequest: wrong username or password");
       return;
     }
-    yield console.log("saga-auth-handleLogin-user: ", user);
 
-    // get kitchen data
-    const recipesSector = yield call(
-      getKitchenSector,
-      user.id,
-      "recipes" === "saved"
-    );
-    const savedSector = yield call(
-      getKitchenSector,
-      user.id,
-      "saved" === "saved"
-    );
-    const followingSector = yield call(getFollowingSector, user.id);
+    // get kitchen data (call fake API)
+    const kitchenData = yield call(getKitchenData, user.id);
+    console.log({ kitchenData });
 
     yield put(
       userActions.loginSuccess({
@@ -37,13 +24,12 @@ export function* handleLoginRequest(action) {
         isLoading: false,
         error: "",
         currentUser: user,
-        recipes: recipesSector,
-        saved: savedSector,
-        following: followingSector,
+        recipes: kitchenData.recipes,
+        saved: kitchenData.saved,
+        following: kitchenData.following,
       })
     );
   } catch (err) {
-    yield console.log(err);
     yield put(userActions.loginError(err.message));
   }
 }

@@ -9,7 +9,7 @@ import {
 import { recipe_01, recipe_02, recipe_03 } from "./recipes";
 
 // recipe_cookbook
-const cookbook_recipe = [
+let cookbook_recipe = [
   //cookbook_01
   {
     idCookbook: cookbook_01.id,

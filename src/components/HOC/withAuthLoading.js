@@ -6,9 +6,7 @@ import { selectIsLoading } from "../../app/userSlice";
 
 function withAuthLoading(Component) {
   return React.memo((props) => {
-    // const { isLoading } = props;
     const isLoading = useSelector(selectIsLoading);
-    console.log("withLoading - isLoading: ", isLoading);
 
     if (!isLoading) {
       return <Component {...props} />;

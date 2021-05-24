@@ -41,14 +41,32 @@ const userSlice = createSlice({
     setFollowingSector(state, action) {
       state.following = action.payload;
     },
+    saveRecipeFromFeedRequest(state) {
+      state.isLoading = true;
+    },
+    saveRecipeFromFeedSuccess(state, action) {
+      const { idCookbook, recipeToAdd } = action.payload;
+      console.log({ action });
+
+      const newCookbooks = state.saved.cookbooks.map((book) => {
+        if (book.id === idCookbook) {
+          book.recipesList = [...book.recipesList, recipeToAdd];
+        }
+        return book;
+      });
+
+      console.log("saveRecipeFromFeedSuccess - newCookbooks: ", newCookbooks);
+
+      state.saved = {
+        ...state.saved,
+        totalCount: state.saved.totalCount + 1,
+        cookbooks: newCookbooks,
+      };
+    },
     loginRequest(state) {
       state.isLoading = true;
     },
     loginSuccess(state, action) {
-      console.log(
-        "loginSuccess in userSlice - action.payload: ",
-        action.payload
-      );
       const {
         isAuthenticated,
         isLoading,
@@ -68,7 +86,6 @@ const userSlice = createSlice({
       // state = { ...action.payload }; // this way will not work
     },
     loginError(state, action) {
-      console.log("loginError in userSlice - action: ", action);
       state.isLoading = false;
       state.isAuthenticated = false;
       state.error = action.payload;
@@ -77,39 +94,6 @@ const userSlice = createSlice({
       state.saved = null;
       state.following = null;
     },
-    // login(state, action) {
-    //   const loginInfo = action.payload;
-
-    //   // check username & password
-    //   const user = users_table.find((user) => {
-    //     if (
-    //       user.username === loginInfo.username &&
-    //       user.password === loginInfo.password
-    //     ) {
-    //       return user;
-    //     }
-    //   });
-
-    //   if (!user) {
-    //     state.error = "Wrong username or password";
-    //     return;
-    //   }
-
-    //   // get user kitchen sectors
-    //   const recipesSector = getKitchenSector(user.id, "recipes" === "saved");
-    //   const savedSector = getKitchenSector(user.id, "saved" === "saved");
-    //   const followingSector = getFollowingSector(user.id);
-
-    //   state.recipes = recipesSector;
-    //   state.saved = savedSector;
-    //   state.following = followingSector;
-
-    //   // authenticate
-    //   state.error = "";
-    //   state.isAuthenticated = true;
-    //   state.currentUser = user;
-    //   state.isLoading = false;
-    // },
     logout(state) {
       state.isAuthenticated = false;
       state.currentUser = {};

@@ -16,26 +16,41 @@ const feedsSlice = createSlice({
     feeds: feeds_table,
     isLoading: false,
     error: "",
+    message: "",
   },
-  reducer: {},
-  extraReducers: {
-    // [getAllFeeds.pending]: (state) => {
-    //   state.isLoading = true;
-    // },
-    // [getAllFeeds.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.error;
-    // },
-    // [getAllFeeds.fulfilled]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.currentUser = action.payload;
-    // },
+  reducers: {
+    saveRecipePending(state) {
+      state.isLoading = true;
+    },
+    saveRecipeSuccess(state, action) {
+      console.log(
+        "feedSlice - saveRecipeSuccess - action.payload:",
+        action.payload
+      );
+      const { message } = action.payload;
+      state.message = message;
+      state.error = "";
+      state.isLoading = false;
+    },
+    saveRecipeFailure(state, action) {
+      console.log(
+        "feedSlice - saveRecipeFailure - action.payload:",
+        action.payload
+      );
+      state.error = action.payload;
+      state.message = "";
+      state.isLoading = false;
+    },
   },
 });
 
 const feedsReducer = feedsSlice.reducer;
 
+// selectors
 export const selectFeeds = (state) => state.feeds.feeds;
+export const selectIsLoading = (state) => state.feeds.isLoading;
+export const selectError = (state) => state.feeds.error;
+export const selectMessage = (state) => state.feeds.message;
 
 export const feedsActions = feedsSlice.actions;
 

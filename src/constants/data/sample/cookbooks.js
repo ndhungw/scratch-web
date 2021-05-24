@@ -2,7 +2,7 @@ import { COOKBOOK_IMAGE_SOURCE } from "../../defaultValues";
 import { recipe_01, recipe_02, recipe_03 } from "./recipes";
 import { user_01, user_02, user_03 } from "./users";
 
-const cookbook_01 = {
+let cookbook_01 = {
   id: "cookbook_01",
   idUser: user_01.id, // FK
   name: "Western",
@@ -12,7 +12,7 @@ const cookbook_01 = {
   recipesList: [recipe_01, recipe_02, recipe_03],
 };
 
-const cookbook_02 = {
+let cookbook_02 = {
   id: "cookbook_02",
   idUser: user_01.id, // FK
   name: "Italian",
@@ -22,7 +22,7 @@ const cookbook_02 = {
   recipesList: [recipe_01, recipe_02],
 };
 
-const cookbook_03 = {
+let cookbook_03 = {
   id: "cookbook_03",
   idUser: user_01.id, // FK
   name: "Vietnamese",
@@ -32,7 +32,7 @@ const cookbook_03 = {
   recipesList: [recipe_01],
 };
 
-const cookbook_04 = {
+let cookbook_04 = {
   id: "cook_book04",
   idUser: user_01.id, // FK
   name: "Soups",
@@ -44,7 +44,7 @@ const cookbook_04 = {
 
 // user_02
 
-const cookbook_05 = {
+let cookbook_05 = {
   id: "cookbook_05",
   idUser: user_02.id, // FK
   name: "Chinese",
@@ -54,7 +54,7 @@ const cookbook_05 = {
   recipesList: [recipe_01, recipe_02],
 };
 
-const cookbook_06 = {
+let cookbook_06 = {
   id: "cook_book06",
   idUser: user_02.id, // FK
   name: "Spicy",
@@ -64,7 +64,7 @@ const cookbook_06 = {
   recipesList: [recipe_02, recipe_03],
 };
 
-const cookbook_07 = {
+let cookbook_07 = {
   id: "cookbook_07",
   idUser: user_03.id, // FK
   name: "Vietnamese",
@@ -73,7 +73,7 @@ const cookbook_07 = {
   isInSaved: true, // saved
 };
 
-const cookbook_08 = {
+let cookbook_08 = {
   id: "cook_book08",
   idUser: user_03.id, // FK
   name: "Soups",

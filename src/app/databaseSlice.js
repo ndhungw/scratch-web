@@ -21,13 +21,14 @@ const databaseSlice = createSlice({
   name: "database",
   initialState: initialState,
   reducers: {
-    // setUsers: (state, payload) => {},
-    // setCookbooks: (state, payload) => {},
-    // setRecipes: (state, payload) => {},
-    // setCookbookRecipe: (state, payload) => {},
-    // setFeeds: (state, payload) => {},
+    setCookbooks(state, action) {
+      const newCookbooks = action.payload;
+      console.log("newCookbooks in databaseSlice: ", newCookbooks);
+      state.cookbooks = newCookbooks;
+    },
     setCookbookRecipe: (state, action) => {
       const pair = action.payload;
+      console.log({ pair });
 
       state.cookbook_recipe = {
         ...state.cookbook_recipe,

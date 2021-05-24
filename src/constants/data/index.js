@@ -11,10 +11,10 @@ import { user_01, user_02, user_03 } from "./sample/users";
 import cookbook_recipe from "./sample/cookbook_recipe";
 import { FEED_01, FEED_02, FEED_03 } from "./sample/feeds";
 
-const users_table = [user_01, user_02, user_03];
+let users_table = [user_01, user_02, user_03];
 
 // cookbooks TABLE
-const cookbooks_table = [
+let cookbooks_table = [
   cookbook_01,
   cookbook_02,
   cookbook_03,
@@ -24,13 +24,13 @@ const cookbooks_table = [
 ];
 
 // recipes TABLE
-const recipes_table = [recipe_01, recipe_02, recipe_03];
+let recipes_table = [recipe_01, recipe_02, recipe_03];
 
 // cookbook_recipe
-const cookbook_recipe_table = cookbook_recipe;
+let cookbook_recipe_table = cookbook_recipe;
 
 // feeds TABLE
-const feeds_table = [FEED_01, FEED_02, FEED_03];
+let feeds_table = [FEED_01, FEED_02, FEED_03];
 
 export {
   users_table,

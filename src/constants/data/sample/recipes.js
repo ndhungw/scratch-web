@@ -14,7 +14,7 @@ import {
   ingredient_sample_06,
 } from "./ingredients";
 
-const recipe_01 = {
+let recipe_01 = {
   id: "recipe_01",
   name: "Recipe item 01", // title of feed
   imageSrcList: [RECIPE_ITEM_IMAGE_SOURCE], // imageSrcList of feed
@@ -30,7 +30,7 @@ const recipe_01 = {
   tags: TAGS_SAMPLE,
 };
 
-const recipe_02 = {
+let recipe_02 = {
   id: "recipe_02",
   name: "Recipe item 02", // title of feed
   imageSrcList: [RECIPE_ITEM_IMAGE_SOURCE], // imageSrcList of feed
@@ -47,7 +47,7 @@ const recipe_02 = {
   tags: TAGS_SAMPLE,
 };
 
-const recipe_03 = {
+let recipe_03 = {
   id: "recipe_03",
   name: "Recipe item 03", // title of feed
   imageSrcList: [RECIPE_ITEM_IMAGE_SOURCE], // imageSrcList of feed

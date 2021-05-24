@@ -1,4 +1,4 @@
-const user_01 = {
+let user_01 = {
   id: "user_01",
   username: "user001",
   password: "123123",
@@ -14,7 +14,7 @@ const user_01 = {
   notifyAboutNewFollower: true,
 };
 
-const user_02 = {
+let user_02 = {
   id: "user_02",
   username: "user002",
   password: "123123",
@@ -30,7 +30,7 @@ const user_02 = {
   notifyAboutNewFollower: true,
 };
 
-const user_03 = {
+let user_03 = {
   id: "user_03",
   username: "user003",
   password: "123123",
