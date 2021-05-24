@@ -1,4 +1,4 @@
-import { all, fork, take, takeEvery } from "redux-saga/effects";
+import { fork, takeEvery } from "redux-saga/effects";
 import { feedsActions } from "../../pages/main/Feed/feedsSlice";
 import { userActions } from "../userSlice";
 import { handleLoginRequest } from "./auth/login";

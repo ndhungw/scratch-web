@@ -27,13 +27,7 @@ import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
 import { useSelector, useDispatch } from "react-redux";
 
 import { withSnackbar } from "notistack";
-import {
-  feedsActions,
-  selectFeeds,
-  selectMessage,
-  selectError,
-  selectIsLoading,
-} from "./feedsSlice";
+import { selectFeeds, selectMessage, selectError } from "./feedsSlice";
 import { getRecipe } from "../../../api";
 import {
   selectCurrentUser,
@@ -54,7 +48,6 @@ function FeedPage({ enqueueSnackbar }) {
   // selectors
   const currentUser = useSelector(selectCurrentUser);
   const message = useSelector(selectMessage);
-  const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
   const recipesSector = useSelector(selectRecipesSector);
