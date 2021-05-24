@@ -91,6 +91,7 @@ function FeedPage({ enqueueSnackbar }) {
       return book;
     });
 
+    // save on database
     dispatch(
       databaseActions.setCookbookRecipe({
         idCookbook: idCookbook,
@@ -104,6 +105,7 @@ function FeedPage({ enqueueSnackbar }) {
       cookbooks: newCookbooks,
     };
 
+    // change user state slice
     dispatch(userActions.setSavedSector(newSavedSector));
 
     enqueueSnackbar("Saved successfully!", { variant: "success" });
@@ -112,16 +114,7 @@ function FeedPage({ enqueueSnackbar }) {
   return (
     <>
       <Grid container justify="center" spacing={0} className={classes.root}>
-        <Grid
-          item
-          xs={12}
-          style={{
-            position: "sticky",
-            top: 0,
-            zIndex: 10,
-            marginBottom: "1rem",
-          }}
-        >
+        <Grid item xs={12} className={classes.navBarSticky}>
           <NavigationDesktop />
         </Grid>
 
@@ -262,6 +255,12 @@ function FeedPage({ enqueueSnackbar }) {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: COLORS.WhiteSmoke,
+  },
+  navBarSticky: {
+    position: "sticky",
+    top: 0,
+    zIndex: 10,
+    marginBottom: "1rem",
   },
   profileStats: {
     marginBottom: "1.25rem",

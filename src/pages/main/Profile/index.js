@@ -113,7 +113,7 @@ const useStyles = makeStyles(() => ({
 
 const SECTORS = ["recipes", "saved", "following"];
 
-export default function ProfilePage() {
+function ProfilePage() {
   const currentUser = useSelector(selectCurrentUser);
   //
   const theme = useTheme();
@@ -294,3 +294,5 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+export default ProfilePage;

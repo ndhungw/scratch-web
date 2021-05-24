@@ -13,7 +13,10 @@ import {
   Link,
   Hidden,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import {
+  Redirect,
+  // useHistory
+} from "react-router-dom";
 
 // icons
 import { Visibility, VisibilityOff } from "@material-ui/icons";
@@ -27,7 +30,13 @@ import Logo from "../../../assets/icons/logo";
 import BACKGROUND_AUTHEN_IMAGE_SOURCE from "../../../assets/images/BG-Authen.png";
 import BIG_LOGO_IMAGE_SOURCE from "../../../assets/images/BigLogoImage.png";
 import { useDispatch, useSelector } from "react-redux";
-import { selectError, userActions } from "../../../app/userSlice";
+import {
+  selectCurrentUser,
+  selectError,
+  selectIsAuthenticated,
+  userActions,
+} from "../../../app/userSlice";
+import withAuthLoading from "../../../components/HOC/withAuthLoading";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -76,7 +85,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function LogInPage() {
+function LogInPage() {
+  const currentUser = useSelector(selectCurrentUser);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+
+  //
   const typoClasses = useTypographyStyles();
   const classes = useStyles();
   //
@@ -86,7 +99,7 @@ export default function LogInPage() {
   const error = useSelector(selectError);
 
   //
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
 
   const handleChangeUsername = (event) => {
@@ -103,15 +116,25 @@ export default function LogInPage() {
   };
 
   const handleLogin = () => {
+    // dispatch(
+    //   userActions.login({
+    //     username: username,
+    //     password: password,
+    //   })
+    // );
+    // dispatch(userActions.setIsLoading(false));
+
+    //--
     dispatch(
-      userActions.login({
-        username: username,
-        password: password,
-      })
+      userActions.loginRequest({ username: username, password: password })
     );
-    history.push("/");
-    dispatch(userActions.setIsLoading(false));
   };
+
+  if (isAuthenticated && currentUser.id) {
+    console.log("check currentUser.id");
+    return <Redirect to="/" />;
+  }
+  console.log(3);
 
   return (
     <Grid
@@ -217,3 +240,5 @@ export default function LogInPage() {
     </Grid>
   );
 }
+
+export default withAuthLoading(LogInPage);

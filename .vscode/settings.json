@@ -3,6 +3,7 @@
         "AUTHEN",
         "filereader",
         "hungnd",
+        "middlewares",
         "notistack",
         "persistor",
         "reduxjs",

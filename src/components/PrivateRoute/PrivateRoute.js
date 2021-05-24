@@ -4,6 +4,7 @@ import { selectIsAuthenticated } from "./../../app/userSlice";
 
 export default function PrivateRoute({ children, ...rest }) {
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  console.log({ isAuthenticated });
   // const location = useLocation();
 
   return (

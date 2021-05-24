@@ -1,11 +1,14 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getFeeds } from "../../../api";
+import {
+  // createAsyncThunk,
+  createSlice,
+} from "@reduxjs/toolkit";
+// import { getFeeds } from "../../../api";
 import { feeds_table } from "../../../constants/data/index";
 
-export const getAllFeeds = createAsyncThunk("feeds/getAllFeeds", async () => {
-  const feeds = await getFeeds();
-  return feeds;
-});
+// export const getAllFeeds = createAsyncThunk("feeds/getAllFeeds", async () => {
+//   const feeds = await getFeeds();
+//   return feeds;
+// });
 
 const feedsSlice = createSlice({
   name: "feeds",
@@ -16,17 +19,17 @@ const feedsSlice = createSlice({
   },
   reducer: {},
   extraReducers: {
-    [getAllFeeds.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [getAllFeeds.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.error;
-    },
-    [getAllFeeds.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.currentUser = action.payload;
-    },
+    // [getAllFeeds.pending]: (state) => {
+    //   state.isLoading = true;
+    // },
+    // [getAllFeeds.rejected]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.error;
+    // },
+    // [getAllFeeds.fulfilled]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.currentUser = action.payload;
+    // },
   },
 });
 
