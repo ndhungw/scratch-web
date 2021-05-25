@@ -1,14 +1,5 @@
-import {
-  // createAsyncThunk,
-  createSlice,
-} from "@reduxjs/toolkit";
-// import { getFeeds } from "../../../api";
+import { createSlice } from "@reduxjs/toolkit";
 import { feeds_table } from "../../../constants/data/index";
-
-// export const getAllFeeds = createAsyncThunk("feeds/getAllFeeds", async () => {
-//   const feeds = await getFeeds();
-//   return feeds;
-// });
 
 const feedsSlice = createSlice({
   name: "feeds",
@@ -19,24 +10,22 @@ const feedsSlice = createSlice({
     message: "",
   },
   reducers: {
+    clearSnackbarInfo(state) {
+      state.error = "";
+      state.message = "";
+      state.isLoading = false;
+    },
+    //
     saveRecipePending(state) {
       state.isLoading = true;
     },
     saveRecipeSuccess(state, action) {
-      console.log(
-        "feedSlice - saveRecipeSuccess - action.payload:",
-        action.payload
-      );
       const { message } = action.payload;
       state.message = message;
       state.error = "";
       state.isLoading = false;
     },
     saveRecipeFailure(state, action) {
-      console.log(
-        "feedSlice - saveRecipeFailure - action.payload:",
-        action.payload
-      );
       state.error = action.payload;
       state.message = "";
       state.isLoading = false;

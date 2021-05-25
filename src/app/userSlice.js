@@ -46,16 +46,16 @@ const userSlice = createSlice({
     },
     saveRecipeFromFeedSuccess(state, action) {
       const { idCookbook, recipeToAdd } = action.payload;
-      console.log({ action });
 
       const newCookbooks = state.saved.cookbooks.map((book) => {
         if (book.id === idCookbook) {
-          book.recipesList = [...book.recipesList, recipeToAdd];
+          const newRecipesList = [...book.recipesList, recipeToAdd];
+
+          book.recipesCount = book.recipesCount + 1;
+          book.recipesList = newRecipesList;
         }
         return book;
       });
-
-      console.log("saveRecipeFromFeedSuccess - newCookbooks: ", newCookbooks);
 
       state.saved = {
         ...state.saved,

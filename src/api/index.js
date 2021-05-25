@@ -1,6 +1,8 @@
+import store from "./../app/store";
+import { databaseActions } from "../app/databaseSlice";
 import {
   cookbooks_table,
-  cookbook_recipe_table,
+  // cookbook_recipe_table,
   feeds_table,
   recipes_table,
   users_table,
@@ -233,33 +235,18 @@ export const getRecipe = (idRecipe) => {
   return found;
 };
 
-export const isExistRecipe = (idRecipe, idCookbook) => {
-  // check if the recipe exists in that cookbook
-  const existedPair = cookbook_recipe_table.find(
-    (pair) => pair.idRecipe === idRecipe && pair.idCookbook === idCookbook
-  );
-
-  if (existedPair) {
-    return true;
-  }
-  return false;
-};
-
-// import store from "./../app/store";
-
-// khong check duoc data ben databaseSlice cho truong hop du lieu bi trung
 export const saveRecipe = (idFeed, idCookbook) => {
-  console.log("API called savedRecipe - idFeed: ", idFeed);
-  console.log("API called savedRecipe - idCookbook: ", idCookbook);
-
   const promise = new Promise((resolve, reject) => {
-    const feedToSave = feeds_table.filter((feed) => feed.id === idFeed)[0];
+    const currentFeeds = store.getState().database.feeds;
+    const feedToSave = currentFeeds.filter((feed) => feed.id === idFeed)[0];
 
-    // lay state trong reducer thong qua store
-    // const feedToSave = store.getState().database.feeds
+    const recipeToAdd = store
+      .getState()
+      .database.recipes.filter(
+        (recipe) => recipe.id === feedToSave.idRecipe
+      )[0];
 
-    const recipeToAdd = getRecipe(feedToSave.idRecipe);
-
+    // check if recipe data is valid
     if (!recipeToAdd) {
       return setTimeout(
         () =>
@@ -270,11 +257,11 @@ export const saveRecipe = (idFeed, idCookbook) => {
       );
     }
 
-    const cookbookWillAddTo = cookbooks_table.find(
-      (book) => book.id === idCookbook
-    );
+    const cookbookWillAddTo = store
+      .getState()
+      .database.cookbooks.find((book) => book.id === idCookbook);
 
-    const existedRecipe = cookbookWillAddTo.recipesList.find(
+    const existedRecipe = cookbookWillAddTo?.recipesList.find(
       (recipe) => recipe.id === recipeToAdd.id
     );
 
@@ -289,9 +276,7 @@ export const saveRecipe = (idFeed, idCookbook) => {
     }
 
     // add the recipe to specified cook book by idCookbook
-    // cannot add here, just make data to attach to response
-    // in order to put action in saga -> database slice will change :)
-    const newCookbooks = cookbooks_table.map((book) => {
+    const newCookbooks = store.getState().database.cookbooks.map((book) => {
       if (book.id === idCookbook) {
         const newBook = {
           ...book,
@@ -302,25 +287,8 @@ export const saveRecipe = (idFeed, idCookbook) => {
       }
       return book;
     });
-    // cookbooks_table = [...newCookbooks];
 
-    // cookbooks_table.map((book) => {
-    //   if (book.id === idCookbook) {
-    //     book.recipesList = [...book.recipesList, recipeToAdd];
-    //   }
-    // });
-
-    // add new mapping record to cookbook_recipe_table
-    // cannot add here, attach to response in order to put action in saga -> database slice will change :)
-    const newPair = { idCookbook, idRecipe: recipeToAdd.id };
-
-    // cookbook_recipe_table.push(newPair);
-
-    // // prepare newCookbook = cookbook has id=idCookbook but has this recipe
-    // const newCookbook = {
-    //   ...cookbookWillAddTo,
-    //   recipesList: [...cookbookWillAddTo.recipesList, recipeToAdd]
-    // }
+    store.dispatch(databaseActions.setCookbooks(newCookbooks));
 
     setTimeout(() => {
       resolve({
@@ -328,7 +296,6 @@ export const saveRecipe = (idFeed, idCookbook) => {
         error: "",
         recipeToAdd: recipeToAdd,
         idCookbook: idCookbook,
-        newPair,
         newCookbooks,
       });
     }, TIME_TO_WAIT);

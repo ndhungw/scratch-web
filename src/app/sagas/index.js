@@ -9,8 +9,6 @@ function* watchAuthActions() {
 }
 
 function* watchFeedActions() {
-  yield console.log("watching feed actions");
-
   yield takeEvery(
     feedsActions.saveRecipePending,
     handleSaveRecipeFromFeedRequest
