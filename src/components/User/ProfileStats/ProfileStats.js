@@ -144,7 +144,7 @@ export default function ProfileStats({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 300,
+    // maxWidth: 300,
     borderRadius: 8,
     padding: "0.5rem",
     [theme.breakpoints.down("lg")]: {

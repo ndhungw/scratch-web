@@ -27,17 +27,20 @@ import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
 import { useSelector, useDispatch } from "react-redux";
 
 import { withSnackbar } from "notistack";
-import { selectFeeds, selectMessage, selectError } from "./feedsSlice";
-import { getRecipe } from "../../../api";
+import {
+  selectFeeds,
+  selectMessage,
+  selectError,
+  feedsActions,
+} from "./feedsSlice";
+
 import {
   selectCurrentUser,
   selectRecipesSector,
   selectSavedSector,
   selectFollowingSector,
-  userActions,
 } from "../../../app/userSlice";
 
-import { databaseActions } from "../../../app/databaseSlice";
 import { useEffect } from "react";
 
 function FeedPage({ enqueueSnackbar }) {
@@ -74,60 +77,60 @@ function FeedPage({ enqueueSnackbar }) {
   }, [error, message]);
 
   const handleSave = async (idFeed, idCookbook) => {
-    const feedToSave = allFeeds.filter((feed) => feed.id === idFeed)[0];
+    // const feedToSave = allFeeds.filter((feed) => feed.id === idFeed)[0];
 
-    const recipeData = getRecipe(feedToSave.idRecipe);
+    // const recipeData = getRecipe(feedToSave.idRecipe);
 
-    const cookbookToChange = savedSector.cookbooks.filter(
-      (book) => book.id === idCookbook
-    )[0];
+    // const cookbookToChange = savedSector.cookbooks.filter(
+    //   (book) => book.id === idCookbook
+    // )[0];
 
-    const existedRecipe = cookbookToChange.recipesList.find(
-      (recipe) => recipe.id === feedToSave.idRecipe
-    );
+    // const existedRecipe = cookbookToChange.recipesList.find(
+    //   (recipe) => recipe.id === feedToSave.idRecipe
+    // );
 
-    if (existedRecipe) {
-      enqueueSnackbar("This recipe was already saved in that cook book !", {
-        variant: "warning",
-      });
-      return;
-    }
+    // if (existedRecipe) {
+    //   enqueueSnackbar("This recipe was already saved in that cook book !", {
+    //     variant: "warning",
+    //   });
+    //   return;
+    // }
 
-    // prepare newCookbooks
-    const newCookbooks = savedSector.cookbooks.map((book) => {
-      if (book.id === idCookbook) {
-        const newBook = {
-          ...book,
-          recipesCount: book.recipesCount + 1,
-          recipesList: [...book.recipesList, recipeData],
-        };
-        return newBook;
-      }
-      return book;
-    });
+    // // prepare newCookbooks
+    // const newCookbooks = savedSector.cookbooks.map((book) => {
+    //   if (book.id === idCookbook) {
+    //     const newBook = {
+    //       ...book,
+    //       recipesCount: book.recipesCount + 1,
+    //       recipesList: [...book.recipesList, recipeData],
+    //     };
+    //     return newBook;
+    //   }
+    //   return book;
+    // });
 
-    // save on database
-    dispatch(
-      databaseActions.setCookbookRecipe({
-        idCookbook: idCookbook,
-        idRecipe: feedToSave.idRecipe,
-      })
-    );
+    // // save on database
+    // dispatch(
+    //   databaseActions.setCookbookRecipe({
+    //     idCookbook: idCookbook,
+    //     idRecipe: feedToSave.idRecipe,
+    //   })
+    // );
 
-    const newSavedSector = {
-      ...savedSector,
-      totalCount: savedSector.totalCount + 1,
-      cookbooks: newCookbooks,
-    };
+    // const newSavedSector = {
+    //   ...savedSector,
+    //   totalCount: savedSector.totalCount + 1,
+    //   cookbooks: newCookbooks,
+    // };
 
-    // change user state slice
-    dispatch(userActions.setSavedSector(newSavedSector));
+    // // change user state slice
+    // dispatch(userActions.setSavedSector(newSavedSector));
 
-    enqueueSnackbar("Saved successfully!", { variant: "success" });
+    // enqueueSnackbar("Saved successfully!", { variant: "success" });
 
     // ---
     // the way use saga: but cannot mutate the static database file
-    // dispatch(feedsActions.saveRecipePending({ idFeed, idCookbook }));
+    dispatch(feedsActions.saveRecipePending({ idFeed, idCookbook }));
   };
 
   return (

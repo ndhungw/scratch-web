@@ -245,6 +245,8 @@ export const isExistRecipe = (idRecipe, idCookbook) => {
   return false;
 };
 
+// import store from "./../app/store";
+
 // khong check duoc data ben databaseSlice cho truong hop du lieu bi trung
 export const saveRecipe = (idFeed, idCookbook) => {
   console.log("API called savedRecipe - idFeed: ", idFeed);
@@ -252,6 +254,9 @@ export const saveRecipe = (idFeed, idCookbook) => {
 
   const promise = new Promise((resolve, reject) => {
     const feedToSave = feeds_table.filter((feed) => feed.id === idFeed)[0];
+
+    // lay state trong reducer thong qua store
+    // const feedToSave = store.getState().database.feeds
 
     const recipeToAdd = getRecipe(feedToSave.idRecipe);
 
