@@ -75,6 +75,7 @@ export default function ImageGallery() {
   const classes = styles();
   const preventDefault = (event) => event.preventDefault();
 
+  ///commit
   return (
     <div>
       <GridList cols={3} className={classes.gridGallery}>
