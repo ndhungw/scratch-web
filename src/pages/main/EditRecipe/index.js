@@ -15,9 +15,9 @@ export default function EditRecipe() {
           <NavigationDesktop />
         </Grid>
         <Grid item xs={12} spacing={3} className={classes.main}>
-          <Grid item lg={3} md={12} className={classes.gallery}>
+          <Grid item lg={3} md={6} sm={6} className={classes.gallery}>
             <ImageGallery />
-            <Button variant="contained" className={classes.btnupload}>
+            <Button variant="contained" className={classes.btnUpload}>
               Upload Images
             </Button>
           </Grid>
@@ -37,7 +37,7 @@ const styles = makeStyles(() => ({
   main: {
     margin: "50px",
   },
-  btnupload: {
+  btnUpload: {
     border: "2px dashed #979797",
     width: "100%",
     marginTop: "10px",

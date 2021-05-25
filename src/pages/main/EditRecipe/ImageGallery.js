@@ -77,11 +77,11 @@ export default function ImageGallery() {
 
   return (
     <div>
-      <GridList cols={3} className={classes.gridgallery}>
+      <GridList cols={3} className={classes.gridGallery}>
         {data.map((items) => (
           <GridListTile
             key={items.id}
-            className={classes.imggallery}
+            className={classes.imgGallery}
             cols={items.cols || 1}
           >
             <img className={classes.img} src={items.img} alt={items.title} />
@@ -100,18 +100,23 @@ export default function ImageGallery() {
 }
 
 const styles = makeStyles(() => ({
-  imggallery: {
+  imgGallery: {
     height: "100%!important",
+    overflow: "unset",
     "&:last-child img": {
       opacity: "50%",
     },
+  },
+  img: {
+    top: "unset",
+    position: "unset",
+    transform: "unset",
   },
   linkGallery: {
     color: "#000",
     position: "absolute",
     zIndex: 1,
     top: 0,
-    left: 0,
     width: "100%",
     height: "100%",
     display: "flex",
