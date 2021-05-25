@@ -58,38 +58,6 @@ function App() {
   // redux-persist
   let persistor = persistStore(store);
 
-  const directions = [
-    {
-      id: "d1",
-      text: "cooking spray",
-      avatarSrc: "", //
-      userId: "user_01", //
-    },
-    {
-      id: "d2",
-      text: "1/2 cup whole milk",
-      avatarSrc: "", //
-      userId: "user_01", //
-    },
-    {
-      id: "d3",
-      text: "2 large eggs1 tablespoon maple syrup",
-      avatarSrc: "", //
-      userId: "user_01", //
-    },
-    {
-      id: "d4",
-      text: "1/2 teaspoon vanilla extract 1/2 teaspoon vanilla extract 1/2 teaspoon vanilla extract",
-      avatarSrc: "", //
-      userId: "user_01", //
-    },
-    {
-      id: "d5",
-      text: "1 pinch salt",
-      avatarSrc: "", //
-      userId: "user_01", //
-    },
-  ];
   return (
     <>
       <Provider store={store}>
@@ -106,7 +74,7 @@ function App() {
                   </Route>
 
                   <Route path={"/edit-recipe"}>
-                    <EditRecipePage directions={directions} />
+                    <EditRecipePage />
                   </Route>
 
                   {/* Private Routes */}

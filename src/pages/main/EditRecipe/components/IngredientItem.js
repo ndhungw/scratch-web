@@ -1,18 +1,10 @@
 import React, { useState } from "react";
 
-import {
-  Avatar,
-  FormControl,
-  IconButton,
-  Input,
-  InputAdornment,
-  makeStyles,
-} from "@material-ui/core";
+import { Avatar, makeStyles } from "@material-ui/core";
 
-import EditIcon from "../../../../assets/icons/edit";
-import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
 import COLORS from "../../../../constants/colors";
 import classNames from "classnames";
+import EditableText from "./EditableText";
 
 const useStyles = makeStyles((theme) => ({
   ingredientRow: {
@@ -38,59 +30,16 @@ export default function IngredientItem({
   style,
 }) {
   const classes = useStyles();
-  const typoClasses = useTypographyStyles();
   const [text, setText] = useState(initialText || "");
-  const [isEditing, setIsEditing] = useState(false);
 
   const handleChangeText = (e) => {
-    if (isEditing) {
-      setText(e.target.value);
-    }
-  };
-
-  const handleClickEdit = () => {
-    setIsEditing(true);
-  };
-
-  const handleBlur = () => {
-    setIsEditing(false);
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+    setText(e.target.value);
   };
 
   return (
     <div className={classNames(classes.ingredientRow, className)} style={style}>
       <Avatar src={avatarSrc || ""} className={classes.avatar} />
-
-      <FormControl fullWidth>
-        <Input
-          className={typoClasses.body}
-          value={text}
-          onChange={handleChangeText}
-          onBlur={handleBlur}
-          disableUnderline={!isEditing}
-          multiline
-          disabled={!isEditing}
-          classes={{
-            disabled: classes.normalColorText,
-          }}
-          endAdornment={
-            !isEditing && (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={handleClickEdit}
-                  onMouseDown={handleMouseDownPassword}
-                  disabled={isEditing}
-                >
-                  <EditIcon />
-                </IconButton>
-              </InputAdornment>
-            )
-          }
-        />
-      </FormControl>
+      <EditableText text={text} handleChangeText={handleChangeText} />
     </div>
   );
 }

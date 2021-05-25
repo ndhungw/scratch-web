@@ -1,94 +1,44 @@
-import {
-  Button,
-  ButtonBase,
-  CssBaseline,
-  Grid,
-  Paper,
-  Typography,
-} from "@material-ui/core";
-import classNames from "classnames";
+import { CssBaseline, Grid } from "@material-ui/core";
 import React from "react";
-import EditIcon from "../../../assets/icons/edit";
-import SeparatorLine from "../../../components/SeparatorLine/SeparatorLine";
 
-import { makeStyles } from "@material-ui/core";
-import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
-import PlusIcon from "../../../assets/icons/plus";
-import IngredientItem from "./components/IngredientItem";
+import InstructionCard from "./components/InstructionCard";
+import IngredientsCard from "./components/IngredientsCard";
+import NavigationDesktop from "../../../components/Navigation/NavigationDesktop";
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  head: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+const directions = [
+  {
+    id: "d1",
+    text: "cooking spray",
+    avatarSrc: "", //
+    userId: "user_01", //
   },
-  buttonEditMode: {
-    margin: "0 20px",
-    opacity: 0.8,
-    "&:hover": {
-      opacity: 1,
-    },
+  {
+    id: "d2",
+    text: "1/2 cup whole milk",
+    avatarSrc: "", //
+    userId: "user_01", //
   },
-  rightFirstSection: {
-    padding: theme.spacing(2),
+  {
+    id: "d3",
+    text: "2 large eggs1 tablespoon maple syrup",
+    avatarSrc: "", //
+    userId: "user_01", //
   },
-  separatorLine: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+  {
+    id: "d4",
+    text: "1/2 teaspoon vanilla extract 1/2 teaspoon vanilla extract 1/2 teaspoon vanilla extract",
+    avatarSrc: "", //
+    userId: "user_01", //
   },
-  ingredientsContainer: {
-    marginTop: theme.spacing(1),
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+  {
+    id: "d5",
+    text: "1 pinch salt",
+    avatarSrc: "", //
+    userId: "user_01", //
   },
-  ingredientRow: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "46%",
-    marginBottom: theme.spacing(1),
-  },
-  ingredientLeft: {
-    display: "flex",
-    alignItems: "center",
-  },
-  avatar: {
-    marginRight: theme.spacing(1),
-  },
-  buttonAddIngredient: {
-    opacity: 0.8,
-    borderStyle: "dashed",
-    borderWidth: 1,
-    width: "100%",
-    justifyContent: "flex-start",
-    padding: "0.5rem",
-    "&:hover": {
-      opacity: 1,
-    },
-  },
-  halfWidth: {
-    maxWidth: "50%",
-  },
-  flexWrapFlexEnd: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "flex-end",
-  },
+];
 
-  marginRight1: {
-    marginRight: theme.spacing(1),
-  },
-  defaultBorder: {
-    borderRadius: theme.spacing(1),
-  },
-}));
-
-const EditRecipePage = ({ directions }) => {
-  const classes = useStyles();
-  const typoClasses = useTypographyStyles();
-
+const EditRecipePage = () => {
   return (
     <>
       <CssBaseline />
@@ -96,20 +46,23 @@ const EditRecipePage = ({ directions }) => {
         container
         style={{ backgroundColor: "yellowgreen", height: "100vh" }}
         justify="center"
+        spacing={2}
       >
+        <Grid item xs={12}>
+          <NavigationDesktop />
+        </Grid>
         {/* wrapper */}
         <Grid
           item
           xs={11}
           container
           justify="center"
-          // spacing={2}
+          spacing={2}
           style={{ backgroundColor: "violet" }}
         >
           <Grid
             item
             xs={3}
-            xl={3}
             container
             direction="column"
             style={{ backgroundColor: "aqua" }}
@@ -118,87 +71,24 @@ const EditRecipePage = ({ directions }) => {
               Item left
             </Grid>
           </Grid>
+
+          {/* Items right container */}
           <Grid
             item
             xs={9}
-            xl={9}
             container
             direction="column"
+            spacing={2}
             style={{ backgroundColor: "grey" }}
           >
             <Grid item style={{ backgroundColor: "red" }}>
-              <Paper
-                elevation={0}
-                className={classNames(
-                  classes.rightFirstSection,
-                  classes.defaultBorder
-                )}
-              >
-                <div className={classes.head}>
-                  <div className={classes.halfWidth}>
-                    <Typography className={classNames(typoClasses.h3)}>
-                      {"Sautéed Orange & Mustard Bruschetta"}
-                    </Typography>
-                  </div>
-
-                  <div className={classes.flexWrapFlexEnd}>
-                    <ButtonBase
-                      className={classNames(
-                        classes.buttonEditMode,
-                        classes.defaultBorder
-                      )}
-                    >
-                      <EditIcon className={classes.marginRight1} />
-                      <Typography className={typoClasses.button}>
-                        {"Edit Mode"}
-                      </Typography>
-                    </ButtonBase>
-                    <Button
-                      className={classes.defaultBorder}
-                      variant="outlined"
-                      color="primary"
-                    >
-                      {"Save Changes"}
-                    </Button>
-                  </div>
-                </div>
-
-                <SeparatorLine className={classes.separatorLine} />
-
-                <Typography className={typoClasses.h5}>
-                  {"Ingredients"}
-                </Typography>
-
-                <div className={classes.ingredientsContainer}>
-                  {directions &&
-                    directions.map((direction, index) => (
-                      <IngredientItem
-                        key={directions?.id || index}
-                        className={classes.ingredientRow}
-                        initialText={direction.text}
-                        avatarSrc={direction.avatarSrc}
-                        userId={direction.userId}
-                      />
-                    ))}
-
-                  <div className={classes.ingredientRow}>
-                    <ButtonBase
-                      className={classNames(
-                        classes.buttonAddIngredient,
-                        classes.defaultBorder
-                      )}
-                    >
-                      <PlusIcon className={classes.marginRight1} />
-                      <Typography className={typoClasses.lead}>
-                        {"Add Ingredient"}
-                      </Typography>
-                    </ButtonBase>
-                  </div>
-                </div>
-              </Paper>
+              {/* Ingredients section */}
+              <IngredientsCard directions={directions} />
             </Grid>
-            <Grid item style={{ backgroundColor: "red" }}>
-              {"How to cook"}
+
+            {/* How to cook section*/}
+            <Grid item style={{ backgroundColor: "green" }}>
+              <InstructionCard />
             </Grid>
           </Grid>
         </Grid>
