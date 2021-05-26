@@ -1,11 +1,19 @@
-import { ButtonBase, GridList, GridListTile, Paper } from "@material-ui/core";
+import {
+  ButtonBase,
+  GridList,
+  GridListTile,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
+import PlusIcon from "../../../assets/icons/plus";
 
 import image from "../../../assets/images/ImgGallery.png";
 
 import image_sm from "../../../assets/images/ImgGallery_sm.png";
+import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
 import COLORS from "../../../constants/colors";
-import ButtonAdd from "./components/ButtonAdd";
+import DashedButton from "./components/DashedButton";
 
 const data = [
   {
@@ -74,6 +82,7 @@ const data = [
 ];
 export default function ImageGallery() {
   const classes = styles();
+  const typoClasses = useTypographyStyles();
   const preventDefault = (event) => event.preventDefault();
 
   return (
@@ -87,7 +96,6 @@ export default function ImageGallery() {
           >
             <img className={classes.img} src={items.img} alt={items.title} />
             <ButtonBase
-              href="#"
               onClick={preventDefault}
               className={classes.linkGallery}
             >
@@ -96,7 +104,12 @@ export default function ImageGallery() {
           </GridListTile>
         ))}
       </GridList>
-      <ButtonAdd text={"Upload Images"} />
+      <DashedButton
+        startComponent={<PlusIcon />}
+        className={classes.buttonUpload}
+      >
+        <Typography className={typoClasses.lead}>{"Upload Images"}</Typography>
+      </DashedButton>
     </Paper>
   );
 }
@@ -137,5 +150,8 @@ const styles = makeStyles(() => ({
     "&:hover": {
       textDecoration: "none",
     },
+  },
+  buttonUpload: {
+    marginTop: 16,
   },
 }));

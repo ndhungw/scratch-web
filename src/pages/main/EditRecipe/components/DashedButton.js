@@ -1,13 +1,12 @@
-import { ButtonBase, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import classNames from "classnames";
 import React from "react";
-import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
 
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   buttonAddIngredient: {
-    opacity: 0.5,
+    opacity: 0.7,
     borderRadius: theme.spacing(1),
     borderStyle: "dashed",
     borderWidth: 1,
@@ -17,34 +16,41 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       opacity: 1,
     },
+    textTransform: "none",
   },
   icon: {
     marginRight: theme.spacing(1),
   },
+  textField: {
+    flexGrow: 1,
+  },
 }));
-export default function ButtonAdd({
-  text,
+
+export default function DashedButton({
   handleClick,
   startComponent,
   endComponent,
+  children,
+  className,
+  ...rest
 }) {
-  const typoClasses = useTypographyStyles();
   const classes = useStyles();
 
   return (
-    <ButtonBase
+    <Button
       onClick={handleClick}
-      className={classNames(classes.buttonAddIngredient, classes.defaultBorder)}
+      className={classNames(
+        classes.buttonAddIngredient,
+        classes.defaultBorder,
+        className
+      )}
+      variant="outlined"
+      fullWidth
+      startIcon={startComponent}
+      endIcon={endComponent}
+      {...rest}
     >
-      {startComponent}
-      <Typography
-        align="left"
-        style={{ flexGrow: 1 }}
-        className={typoClasses.lead}
-      >
-        {text || "Add"}
-      </Typography>
-      {endComponent}
-    </ButtonBase>
+      {children}
+    </Button>
   );
 }
