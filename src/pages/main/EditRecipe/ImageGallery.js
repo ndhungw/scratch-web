@@ -1,10 +1,11 @@
-import { GridList, GridListTile, Link } from "@material-ui/core";
+import { GridList, GridListTile, Link, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import * as React from "react";
 
 import image from "../../../assets/images/ImgGallery.png";
 
 import image_sm from "../../../assets/images/ImgGallery_sm.png";
+import COLORS from "../../../constants/colors";
+import ButtonAdd from "./components/ButtonAdd";
 
 const data = [
   {
@@ -76,8 +77,12 @@ export default function ImageGallery() {
   const preventDefault = (event) => event.preventDefault();
 
   return (
-    <div>
-      <GridList cols={3} className={classes.gridGallery}>
+    <Paper className={classes.root} elevation={0}>
+      <GridList
+        cols={3}
+        className={classes.gridList}
+        // spacing={24}
+      >
         {data.map((items) => (
           <GridListTile
             key={items.id}
@@ -95,22 +100,31 @@ export default function ImageGallery() {
           </GridListTile>
         ))}
       </GridList>
-    </div>
+      <ButtonAdd text={"Upload Images"} />
+    </Paper>
   );
 }
 
 const styles = makeStyles(() => ({
+  root: {
+    padding: 16,
+    borderRadius: 8,
+  },
+  gridList: {
+    backgroundColor: COLORS.White,
+  },
   imgGallery: {
     height: "100%!important",
     overflow: "unset",
     "&:last-child img": {
-      opacity: "50%",
+      opacity: 0.3,
     },
   },
   img: {
     top: "unset",
     position: "unset",
     transform: "unset",
+    width: "100%",
   },
   linkGallery: {
     color: "#000",
