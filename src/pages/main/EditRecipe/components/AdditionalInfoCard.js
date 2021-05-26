@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     marginBottom: theme.spacing(2),
     alignItems: "center",
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
   },
   label: {
     marginRight: theme.spacing(2),
