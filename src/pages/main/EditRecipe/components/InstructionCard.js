@@ -28,8 +28,8 @@ const InstructionCard = () => {
   const classes = useStyles();
   return (
     <Grid container className={classes.root} justify="center">
-      <Grid item container spacing={2}>
-        <Grid item className={classes.directions} xs={10} sm={12} md={6}>
+      <Grid item container spacing={2} justify="center">
+        <Grid item className={classes.directions} xs={12} sm={12} md={6}>
           <Card className={classes.directionCard}>
             <CardContent>
               <div className={classes.title}>

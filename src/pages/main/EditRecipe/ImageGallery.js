@@ -2,6 +2,7 @@ import {
   ButtonBase,
   GridList,
   GridListTile,
+  Hidden,
   Paper,
   Typography,
 } from "@material-ui/core";
@@ -73,6 +74,10 @@ export default function ImageGallery() {
 
   return (
     <Paper className={classes.root} elevation={0}>
+      <Hidden mdUp>
+        <Typography className={typoClasses.h3}>{"Gallery"}</Typography>
+      </Hidden>
+
       <GridList cols={3} className={classes.gridList} cellHeight="auto">
         {data.map((items) => (
           <GridListTile
