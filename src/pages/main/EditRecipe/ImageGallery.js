@@ -12,8 +12,6 @@ const data = [
     img: image,
     title: "Gallery1",
     featured: true,
-    row: 2,
-    cols: 3,
     imageCount: "",
   },
   {
@@ -21,8 +19,6 @@ const data = [
     img: image_sm,
     title: "Gallery2",
     featured: false,
-    row: 1,
-    cols: 1,
     imageCount: "",
   },
   {
@@ -30,8 +26,6 @@ const data = [
     img: image_sm,
     title: "Gallery3",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -39,8 +33,6 @@ const data = [
     img: image_sm,
     title: "Gallery4",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -48,8 +40,6 @@ const data = [
     img: image_sm,
     title: "Gallery5",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -57,8 +47,6 @@ const data = [
     img: image_sm,
     title: "Gallery6",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -66,8 +54,6 @@ const data = [
     img: image_sm,
     title: "Gallery7",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "12+",
   },
 ];
@@ -78,12 +64,13 @@ export default function ImageGallery() {
   ///commit
   return (
     <div>
-      <GridList cols={3} className={classes.gridGallery}>
+      <GridList cols={3} className={classes.gridGallery} spacing={1}>
         {data.map((items) => (
           <GridListTile
             key={items.id}
             className={classes.imgGallery}
-            cols={items.cols || 1}
+            cols={items.featured ? 3 : 1}
+            rows={items.featured ? 2 : 1}
           >
             <img className={classes.img} src={items.img} alt={items.title} />
             <Link
@@ -104,6 +91,7 @@ const styles = makeStyles(() => ({
   imgGallery: {
     height: "100%!important",
     overflow: "unset",
+    textAlign: "center",
     "&:last-child img": {
       opacity: "50%",
     },
