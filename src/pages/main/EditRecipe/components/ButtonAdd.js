@@ -1,7 +1,6 @@
 import { ButtonBase, Typography } from "@material-ui/core";
 import classNames from "classnames";
 import React from "react";
-import PlusIcon from "../../../../assets/icons/plus";
 import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
 
 import { makeStyles } from "@material-ui/core";
