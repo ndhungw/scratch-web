@@ -56,10 +56,6 @@ export default function EditableText({
     setIsEditing(true);
   };
 
-  const handleBlur = () => {
-    setIsEditing(false);
-  };
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -89,8 +85,6 @@ export default function EditableText({
           label={formik.errors.text}
           className={typoClasses.body}
           value={formik.values.text}
-          // onChange={handleChangeText}
-          // onBlur={handleBlur}
           onChange={formik.handleChange}
           onBlur={formik.handleSubmit}
           disableUnderline={!isEditing}
