@@ -32,8 +32,8 @@ export default function IngredientItem({
   const classes = useStyles();
   const [text, setText] = useState(initialText || "");
 
-  const handleChangeText = (e) => {
-    setText(e.target.value);
+  const handleChangeText = (value) => {
+    setText(value);
   };
 
   return (
