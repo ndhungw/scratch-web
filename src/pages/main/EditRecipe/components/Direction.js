@@ -29,6 +29,7 @@ const Direction = ({ order, content }) => {
             <EditableText
               text={newContent}
               handleChangeText={handleChangeText}
+              deleteMode={true}
             />
           ) : (
             <>{newContent}</>
@@ -54,9 +55,12 @@ const useStyles = makeStyles(() => ({
   listItem: {
     paddingRight: 0,
     paddingLeft: 0,
+    alignItems: "flex-start",
+    marginTop: 2,
   },
   listItemText: {
     color: COLORS.Grey,
+    margin: 0,
   },
 }));
 

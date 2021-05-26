@@ -10,6 +10,7 @@ import {
 
 import EditIcon from "../../../../assets/icons/edit";
 import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import COLORS from "../../../../constants/colors";
 import classNames from "classnames";
 
@@ -31,11 +32,14 @@ const useStyles = makeStyles(() => ({
 /**
  * isAdornmentAtStart=true
  * => the icon/icon-button will be placed at top of multiline text
+ * deleteMode=true
+ * => Show delete button
  */
 export default function EditableText({
   text,
   handleChangeText,
   isAdornmentAtStart,
+  deleteMode,
   ...rest
 }) {
   const classes = useStyles();
@@ -55,7 +59,7 @@ export default function EditableText({
   };
 
   return (
-    <FormControl fullWidth {...rest}>
+    <FormControl required={true} fullWidth {...rest}>
       <div className={classes.formElementsWrapper}>
         <Input
           className={typoClasses.body}
@@ -78,6 +82,11 @@ export default function EditableText({
               [classes.inputAdornmentAtStart]: isAdornmentAtStart,
             })}
           >
+            {deleteMode ? (
+              <IconButton>
+                <DeleteOutlineIcon color="secondary" />
+              </IconButton>
+            ) : null}
             <IconButton
               onClick={handleClickEdit}
               onMouseDown={handleMouseDownPassword}
