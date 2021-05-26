@@ -73,7 +73,6 @@ export default function ImageGallery() {
 
   ///commit
   return (
-
     <Paper className={classes.root} elevation={0}>
       <GridList cols={3} className={classes.gridList} cellHeight="auto">
         {data.map((items) => (
