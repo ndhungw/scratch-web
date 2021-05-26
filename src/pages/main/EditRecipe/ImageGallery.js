@@ -1,4 +1,4 @@
-import { GridList, GridListTile, Link, Paper } from "@material-ui/core";
+import { ButtonBase, GridList, GridListTile, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 
 import image from "../../../assets/images/ImgGallery.png";
@@ -78,11 +78,7 @@ export default function ImageGallery() {
 
   return (
     <Paper className={classes.root} elevation={0}>
-      <GridList
-        cols={3}
-        className={classes.gridList}
-        // spacing={24}
-      >
+      <GridList cols={3} className={classes.gridList} cellHeight="auto">
         {data.map((items) => (
           <GridListTile
             key={items.id}
@@ -90,13 +86,13 @@ export default function ImageGallery() {
             cols={items.cols || 1}
           >
             <img className={classes.img} src={items.img} alt={items.title} />
-            <Link
+            <ButtonBase
               href="#"
               onClick={preventDefault}
               className={classes.linkGallery}
             >
               {items.imageCount}
-            </Link>
+            </ButtonBase>
           </GridListTile>
         ))}
       </GridList>
@@ -114,7 +110,6 @@ const styles = makeStyles(() => ({
     backgroundColor: COLORS.White,
   },
   imgGallery: {
-    height: "100%!important",
     overflow: "unset",
     "&:last-child img": {
       opacity: 0.3,
