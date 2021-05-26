@@ -21,8 +21,6 @@ const data = [
     img: image,
     title: "Gallery1",
     featured: true,
-    row: 2,
-    cols: 3,
     imageCount: "",
   },
   {
@@ -30,8 +28,6 @@ const data = [
     img: image_sm,
     title: "Gallery2",
     featured: false,
-    row: 1,
-    cols: 1,
     imageCount: "",
   },
   {
@@ -39,8 +35,6 @@ const data = [
     img: image_sm,
     title: "Gallery3",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -48,8 +42,6 @@ const data = [
     img: image_sm,
     title: "Gallery4",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -57,8 +49,6 @@ const data = [
     img: image_sm,
     title: "Gallery5",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -66,8 +56,6 @@ const data = [
     img: image_sm,
     title: "Gallery6",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -75,8 +63,6 @@ const data = [
     img: image_sm,
     title: "Gallery7",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "12+",
   },
 ];
@@ -85,14 +71,17 @@ export default function ImageGallery() {
   const typoClasses = useTypographyStyles();
   const preventDefault = (event) => event.preventDefault();
 
+  ///commit
   return (
+
     <Paper className={classes.root} elevation={0}>
       <GridList cols={3} className={classes.gridList} cellHeight="auto">
         {data.map((items) => (
           <GridListTile
             key={items.id}
             className={classes.imgGallery}
-            cols={items.cols || 1}
+            cols={items.featured ? 3 : 1}
+            rows={items.featured ? 2 : 1}
           >
             <img className={classes.img} src={items.img} alt={items.title} />
             <ButtonBase
@@ -124,6 +113,7 @@ const styles = makeStyles(() => ({
   },
   imgGallery: {
     overflow: "unset",
+    textAlign: "center",
     "&:last-child img": {
       opacity: 0.3,
     },
