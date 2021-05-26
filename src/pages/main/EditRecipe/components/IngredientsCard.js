@@ -7,7 +7,7 @@ import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
 import EditIcon from "../../../../assets/icons/edit";
 import SeparatorLine from "../../../../components/SeparatorLine/SeparatorLine";
 import IngredientItem from "./IngredientItem";
-import PlusIcon from "../../../../assets/icons/plus";
+import ButtonAdd from "./ButtonAdd";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -137,17 +137,7 @@ export default function IngredientsCard({ directions, className }) {
           ))}
 
         <div className={classes.ingredientRow}>
-          <ButtonBase
-            className={classNames(
-              classes.buttonAddIngredient,
-              classes.defaultBorder
-            )}
-          >
-            <PlusIcon className={classes.marginRight1} />
-            <Typography className={typoClasses.lead}>
-              {"Add Ingredient"}
-            </Typography>
-          </ButtonBase>
+          <ButtonAdd text={"Add Ingredient"} />
         </div>
       </div>
     </Paper>
