@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   buttonAddIngredient: {
-    opacity: 0.8,
+    opacity: 0.5,
     borderRadius: theme.spacing(1),
     borderStyle: "dashed",
     borderWidth: 1,
@@ -23,7 +23,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
 }));
-export default function ButtonAdd({ text, handleClick }) {
+export default function ButtonAdd({
+  text,
+  handleClick,
+  startComponent,
+  endComponent,
+}) {
   const typoClasses = useTypographyStyles();
   const classes = useStyles();
 
@@ -32,8 +37,15 @@ export default function ButtonAdd({ text, handleClick }) {
       onClick={handleClick}
       className={classNames(classes.buttonAddIngredient, classes.defaultBorder)}
     >
-      <PlusIcon className={classes.icon} />
-      <Typography className={typoClasses.lead}>{text || "Add"}</Typography>
+      {startComponent}
+      <Typography
+        align="left"
+        style={{ flexGrow: 1 }}
+        className={typoClasses.lead}
+      >
+        {text || "Add"}
+      </Typography>
+      {endComponent}
     </ButtonBase>
   );
 }
