@@ -77,7 +77,7 @@ const EditRecipePage = () => {
             lg={3}
             container
             // direction="column"
-            style={{ backgroundColor: "aqua" }}
+            // style={{ backgroundColor: "aqua" }}
           >
             <Hidden smDown>
               <Grid
