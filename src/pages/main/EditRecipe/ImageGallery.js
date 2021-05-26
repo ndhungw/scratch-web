@@ -71,7 +71,6 @@ export default function ImageGallery() {
   const typoClasses = useTypographyStyles();
   const preventDefault = (event) => event.preventDefault();
 
-  ///commit
   return (
     <Paper className={classes.root} elevation={0}>
       <GridList cols={3} className={classes.gridList} cellHeight="auto">
