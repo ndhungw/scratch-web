@@ -26,87 +26,89 @@ const InstructionCard = () => {
   const typoClasses = useTypographyStyles();
   const classes = useStyles();
   return (
-    <Grid container className={classes.root} spacing={1} justify="center">
-      <Grid item className={classes.directions} xs={10} sm={12} md={6}>
-        <Card className={classes.directionCard}>
-          <CardContent>
-            <div className={classes.title}>
-              <Typography className={typoClasses.h5}>How to cook</Typography>
+    <Grid container className={classes.root} justify="center">
+      <Grid item container spacing={2}>
+        <Grid item className={classes.directions} xs={10} sm={12} md={6}>
+          <Card className={classes.directionCard}>
+            <CardContent>
+              <div className={classes.title}>
+                <Typography className={typoClasses.h5}>How to cook</Typography>
+              </div>
+              <List>
+                {steps.map((step, index) => {
+                  return (
+                    <Direction
+                      key={index}
+                      order={index + 1}
+                      content={step.content}
+                    />
+                  );
+                })}
+                <Button
+                  className={classes.addButton}
+                  fullWidth
+                  variant="outlined"
+                  startIcon={<AddIcon fontSize="inherit" />}
+                >
+                  Add Directions
+                </Button>
+              </List>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={10} sm={12} md={6}>
+          <Paper className={classes.media} elevation={0}>
+            <div className={classes.mediaContainer}>
+              <img src={INSTRUCTION_VIDEO_SOURCE} className={classes.video} />
+              <div className={classes.mediaControl}>
+                <TextField
+                  className={classes.mediaNameEdit}
+                  inputProps={{
+                    style: {
+                      padding: 5,
+                    },
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <CreateIcon
+                          style={{ color: COLORS.White }}
+                          fontSize={"small"}
+                        />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant={"outlined"}
+                  size={"small"}
+                ></TextField>
+                <Button className={classes.deleteButton} size={"small"}>
+                  <DeleteOutlineIcon fontSize={"small"} />
+                </Button>
+              </div>
+              <IconButton className={classes.playButton}>
+                <PlayArrowIcon
+                  fontSize={"large"}
+                  style={{ color: COLORS.White }}
+                />
+              </IconButton>
             </div>
-            <List>
-              {steps.map((step, index) => {
-                return (
-                  <Direction
-                    key={index}
-                    order={index + 1}
-                    content={step.content}
-                  />
-                );
-              })}
-              <Button
-                className={classes.addButton}
-                fullWidth
-                variant="outlined"
-                startIcon={<AddIcon fontSize="inherit" />}
-              >
-                Add Directions
-              </Button>
-            </List>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xs={10} sm={12} md={6}>
-        <Paper className={classes.media} elevation={0}>
-          <div className={classes.mediaContainer}>
-            <img src={INSTRUCTION_VIDEO_SOURCE} className={classes.video} />
-            <div className={classes.mediaControl}>
-              <TextField
-                className={classes.mediaNameEdit}
-                inputProps={{
-                  style: {
-                    padding: 5,
-                  },
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <CreateIcon
-                        style={{ color: COLORS.White }}
-                        fontSize={"small"}
-                      />
-                    </InputAdornment>
-                  ),
-                }}
-                variant={"outlined"}
-                size={"small"}
-              ></TextField>
-              <Button className={classes.deleteButton} size={"small"}>
-                <DeleteOutlineIcon fontSize={"small"} />
-              </Button>
-            </div>
-            <IconButton className={classes.playButton}>
-              <PlayArrowIcon
-                fontSize={"large"}
-                style={{ color: COLORS.White }}
-              />
-            </IconButton>
-          </div>
-          <Button
-            className={classes.uploadButton}
-            fullWidth
-            variant="outlined"
-            startIcon={
-              <>
-                <PublishIcon fontSize="inherit" />
-              </>
-            }
-          >
-            <div className={classes.mediaDetails}>
-              <Typography>The Making of Waffle.mp4</Typography>
-              <Typography>36 Mb</Typography>
-            </div>
-          </Button>
-        </Paper>
+            <Button
+              className={classes.uploadButton}
+              fullWidth
+              variant="outlined"
+              startIcon={
+                <>
+                  <PublishIcon fontSize="inherit" />
+                </>
+              }
+            >
+              <div className={classes.mediaDetails}>
+                <Typography>The Making of Waffle.mp4</Typography>
+                <Typography>36 Mb</Typography>
+              </div>
+            </Button>
+          </Paper>
+        </Grid>
       </Grid>
     </Grid>
   );
@@ -114,14 +116,14 @@ const InstructionCard = () => {
 
 const useStyles = makeStyles(() => ({
   root: {
-    maxWidth: 955,
+    // maxWidth: 955,
+    flexGrow: 1,
     backgroundColor: COLORS.White,
     flexDirection: "row",
     borderRadius: "8px",
+    padding: 16,
   },
-  directions: {
-    padding: 20,
-  },
+  directions: {},
   directionCard: {
     border: "none",
     boxShadow: "none",
