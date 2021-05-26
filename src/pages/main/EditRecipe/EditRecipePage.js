@@ -90,12 +90,12 @@ const EditRecipePage = () => {
             direction="column"
             // style={{ backgroundColor: "grey" }}
           >
+            {/* Ingredients section */}
             <Grid
               item
               className={classes.ingredientSection}
               // style={{ backgroundColor: "red" }}
             >
-              {/* Ingredients section */}
               <IngredientsCard directions={directions} />
             </Grid>
 
