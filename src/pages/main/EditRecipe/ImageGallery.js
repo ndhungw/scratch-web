@@ -1,10 +1,19 @@
-import { GridList, GridListTile, Link } from "@material-ui/core";
+import {
+  ButtonBase,
+  GridList,
+  GridListTile,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import * as React from "react";
+import PlusIcon from "../../../assets/icons/plus";
 
 import image from "../../../assets/images/ImgGallery.png";
 
 import image_sm from "../../../assets/images/ImgGallery_sm.png";
+import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
+import COLORS from "../../../constants/colors";
+import DashedButton from "./components/DashedButton";
 
 const data = [
   {
@@ -59,12 +68,14 @@ const data = [
 ];
 export default function ImageGallery() {
   const classes = styles();
+  const typoClasses = useTypographyStyles();
   const preventDefault = (event) => event.preventDefault();
 
   ///commit
   return (
-    <div>
-      <GridList cols={3} className={classes.gridGallery} spacing={1}>
+
+    <Paper className={classes.root} elevation={0}>
+      <GridList cols={3} className={classes.gridList} cellHeight="auto">
         {data.map((items) => (
           <GridListTile
             key={items.id}
@@ -73,33 +84,45 @@ export default function ImageGallery() {
             rows={items.featured ? 2 : 1}
           >
             <img className={classes.img} src={items.img} alt={items.title} />
-            <Link
-              href="#"
+            <ButtonBase
               onClick={preventDefault}
               className={classes.linkGallery}
             >
               {items.imageCount}
-            </Link>
+            </ButtonBase>
           </GridListTile>
         ))}
       </GridList>
-    </div>
+      <DashedButton
+        startComponent={<PlusIcon />}
+        className={classes.buttonUpload}
+      >
+        <Typography className={typoClasses.lead}>{"Upload Images"}</Typography>
+      </DashedButton>
+    </Paper>
   );
 }
 
 const styles = makeStyles(() => ({
+  root: {
+    padding: 16,
+    borderRadius: 8,
+  },
+  gridList: {
+    backgroundColor: COLORS.White,
+  },
   imgGallery: {
-    height: "100%!important",
     overflow: "unset",
     textAlign: "center",
     "&:last-child img": {
-      opacity: "50%",
+      opacity: 0.3,
     },
   },
   img: {
     top: "unset",
     position: "unset",
     transform: "unset",
+    width: "100%",
   },
   linkGallery: {
     color: "#000",
@@ -117,5 +140,8 @@ const styles = makeStyles(() => ({
     "&:hover": {
       textDecoration: "none",
     },
+  },
+  buttonUpload: {
+    marginTop: 16,
   },
 }));

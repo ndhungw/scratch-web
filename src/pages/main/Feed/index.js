@@ -55,81 +55,27 @@ function FeedPage({ enqueueSnackbar }) {
 
   const recipesSector = useSelector(selectRecipesSector);
   const savedSector = useSelector(selectSavedSector);
-  console.log("savedSector.cookbooks", savedSector.cookbooks);
   const followingSector = useSelector(selectFollowingSector);
   // feeds
-  // const FEED_LIST = FEED_SAMPLE_LIST;
   const allFeeds = useSelector(selectFeeds);
 
-  // saved cook books of user
-  // const savedCookbooks = savedSector.cookbooks;
-
   useEffect(() => {
-    console.log("effect!!!");
     if (error) {
-      console.log("error in effect");
       enqueueSnackbar(error, { variant: "warning" });
     }
     if (message) {
-      console.log("message in effect:", message);
       enqueueSnackbar(message, { variant: "success" });
     }
+    return function cleanup() {
+      // dispatch(feedsActions.setError(""));
+      // dispatch(feedsActions.setMessage(""));
+      // dispatch 2 actions will trigger re-render 2 times and one of them will still remain old value
+
+      dispatch(feedsActions.clearSnackbarInfo());
+    };
   }, [error, message]);
 
   const handleSave = async (idFeed, idCookbook) => {
-    // const feedToSave = allFeeds.filter((feed) => feed.id === idFeed)[0];
-
-    // const recipeData = getRecipe(feedToSave.idRecipe);
-
-    // const cookbookToChange = savedSector.cookbooks.filter(
-    //   (book) => book.id === idCookbook
-    // )[0];
-
-    // const existedRecipe = cookbookToChange.recipesList.find(
-    //   (recipe) => recipe.id === feedToSave.idRecipe
-    // );
-
-    // if (existedRecipe) {
-    //   enqueueSnackbar("This recipe was already saved in that cook book !", {
-    //     variant: "warning",
-    //   });
-    //   return;
-    // }
-
-    // // prepare newCookbooks
-    // const newCookbooks = savedSector.cookbooks.map((book) => {
-    //   if (book.id === idCookbook) {
-    //     const newBook = {
-    //       ...book,
-    //       recipesCount: book.recipesCount + 1,
-    //       recipesList: [...book.recipesList, recipeData],
-    //     };
-    //     return newBook;
-    //   }
-    //   return book;
-    // });
-
-    // // save on database
-    // dispatch(
-    //   databaseActions.setCookbookRecipe({
-    //     idCookbook: idCookbook,
-    //     idRecipe: feedToSave.idRecipe,
-    //   })
-    // );
-
-    // const newSavedSector = {
-    //   ...savedSector,
-    //   totalCount: savedSector.totalCount + 1,
-    //   cookbooks: newCookbooks,
-    // };
-
-    // // change user state slice
-    // dispatch(userActions.setSavedSector(newSavedSector));
-
-    // enqueueSnackbar("Saved successfully!", { variant: "success" });
-
-    // ---
-    // the way use saga: but cannot mutate the static database file
     dispatch(feedsActions.saveRecipePending({ idFeed, idCookbook }));
   };
 

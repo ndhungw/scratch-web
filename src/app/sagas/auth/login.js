@@ -16,7 +16,6 @@ export function* handleLoginRequest(action) {
 
     // get kitchen data (call fake API)
     const kitchenData = yield call(getKitchenData, user.id);
-    console.log({ kitchenData });
 
     yield put(
       userActions.loginSuccess({

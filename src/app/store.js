@@ -23,9 +23,6 @@ const store = configureStore({
     user: userPersistedReducer,
     feeds: feedsReducer,
   },
-  // middleware: getDefaultMiddleware({
-  //   serializableCheck: false,
-  // }),
   middleware: [
     ...getDefaultMiddleware({
       serializableCheck: {
