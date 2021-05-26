@@ -73,7 +73,6 @@ export default function ImageGallery() {
 
   ///commit
   return (
-
     <Paper className={classes.root} elevation={0}>
       <GridList cols={3} className={classes.gridList} cellHeight="auto">
         {data.map((items) => (
@@ -93,12 +92,23 @@ export default function ImageGallery() {
           </GridListTile>
         ))}
       </GridList>
-      <DashedButton
-        startComponent={<PlusIcon />}
-        className={classes.buttonUpload}
-      >
-        <Typography className={typoClasses.lead}>{"Upload Images"}</Typography>
-      </DashedButton>
+      <label htmlFor="contained-button-file">
+        <input
+          style={{ display: "none" }}
+          id="contained-button-file"
+          type="file"
+          accept="img/*"
+        />
+        <DashedButton
+          component="span"
+          aria-label="add"
+          variant="extended"
+          startComponent={<PlusIcon />}
+          className={classes.buttonUpload}
+        >
+          <Typography className={typoClasses.lead}>{"Upload Image"}</Typography>
+        </DashedButton>
+      </label>
     </Paper>
   );
 }
