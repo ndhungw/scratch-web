@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     width: "46%",
     marginBottom: theme.spacing(1),
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
   },
   ingredientLeft: {
     display: "flex",
@@ -62,8 +65,14 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     },
   },
-  halfWidth: {
+  title: {
     maxWidth: "50%",
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "70%",
+    },
+    [theme.breakpoints.down(400)]: {
+      maxWidth: "50%",
+    },
   },
   flexWrapFlexEnd: {
     display: "flex",
@@ -93,7 +102,7 @@ export default function IngredientsCard({ directions, className }) {
       )}
     >
       <div className={classes.head}>
-        <div className={classes.halfWidth}>
+        <div className={classes.title}>
           <Typography className={classNames(typoClasses.h3)}>
             {"Sautéed Orange & Mustard Bruschetta"}
           </Typography>
