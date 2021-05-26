@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
     width: "45%",
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "baseline",
     marginBottom: theme.spacing(2),
+    alignItems: "center",
   },
   label: {
     marginRight: theme.spacing(2),
