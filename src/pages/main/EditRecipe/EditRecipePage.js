@@ -1,9 +1,12 @@
 import { CssBaseline, Grid } from "@material-ui/core";
 import React from "react";
+import { makeStyles } from "@material-ui/core";
 
 import InstructionCard from "./components/InstructionCard";
 import IngredientsCard from "./components/IngredientsCard";
 import NavigationDesktop from "../../../components/Navigation/NavigationDesktop";
+import ImageGallery from "./ImageGallery";
+import COLORS from "../../../constants/colors";
 
 const directions = [
   {
@@ -39,18 +42,20 @@ const directions = [
 ];
 
 const EditRecipePage = () => {
+  const classes = useStyles();
+
   return (
-    <>
+    <div className={classes.root}>
       <CssBaseline />
-      <Grid
-        container
-        style={{ backgroundColor: "yellowgreen", height: "100vh" }}
-        justify="center"
-        spacing={2}
-      >
-        <Grid item xs={12}>
+      <Grid container justify="center" spacing={4}>
+        <Grid
+          item
+          xs={12}
+          // style={{ backgroundColor: "yellow" }}
+        >
           <NavigationDesktop />
         </Grid>
+
         {/* wrapper */}
         <Grid
           item
@@ -58,17 +63,21 @@ const EditRecipePage = () => {
           container
           justify="center"
           spacing={2}
-          style={{ backgroundColor: "violet" }}
+          // style={{ backgroundColor: "violet" }}
         >
+          {/* Items left container */}
           <Grid
             item
             xs={3}
             container
             direction="column"
-            style={{ backgroundColor: "aqua" }}
+            // style={{ backgroundColor: "aqua" }}
           >
-            <Grid item style={{ backgroundColor: "blue" }}>
-              Item left
+            <Grid
+              item
+              // style={{ backgroundColor: "blue" }}
+            >
+              <ImageGallery />
             </Grid>
           </Grid>
 
@@ -77,24 +86,41 @@ const EditRecipePage = () => {
             item
             xs={9}
             container
+            // spacing={4}
             direction="column"
-            spacing={2}
-            style={{ backgroundColor: "grey" }}
+            // style={{ backgroundColor: "grey" }}
           >
-            <Grid item style={{ backgroundColor: "red" }}>
+            <Grid
+              item
+              className={classes.ingredientSection}
+              // style={{ backgroundColor: "red" }}
+            >
               {/* Ingredients section */}
               <IngredientsCard directions={directions} />
             </Grid>
 
             {/* How to cook section*/}
-            <Grid item style={{ backgroundColor: "green" }}>
+            <Grid
+              item
+              // style={{ backgroundColor: "green" }}
+            >
               <InstructionCard />
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 };
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "100vh",
+    backgroundColor: COLORS.WhiteSmoke,
+  },
+  ingredientSection: {
+    marginBottom: theme.spacing(4),
+  },
+}));
 
 export default EditRecipePage;
