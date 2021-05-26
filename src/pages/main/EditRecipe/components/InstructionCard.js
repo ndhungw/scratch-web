@@ -21,6 +21,7 @@ import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
 import COLORS from "../../../../constants/colors";
 import Direction from "./Direction";
 import { INSTRUCTION_VIDEO_SOURCE } from "../../../../constants/defaultValues";
+import DashedButton from "./DashedButton";
 
 const InstructionCard = () => {
   const typoClasses = useTypographyStyles();
@@ -44,14 +45,22 @@ const InstructionCard = () => {
                     />
                   );
                 })}
-                <Button
+                {/* <Button
                   className={classes.addButton}
                   fullWidth
                   variant="outlined"
                   startIcon={<AddIcon fontSize="inherit" />}
                 >
                   Add Directions
-                </Button>
+                </Button> */}
+                <DashedButton
+                  className={classes.addButton}
+                  startIcon={<AddIcon fontSize="inherit" />}
+                >
+                  <Typography className={typoClasses.lead}>
+                    {"Add Directions"}
+                  </Typography>
+                </DashedButton>
               </List>
             </CardContent>
           </Card>
@@ -92,7 +101,7 @@ const InstructionCard = () => {
                 />
               </IconButton>
             </div>
-            <Button
+            {/* <Button
               className={classes.uploadButton}
               fullWidth
               variant="outlined"
@@ -106,7 +115,13 @@ const InstructionCard = () => {
                 <Typography>The Making of Waffle.mp4</Typography>
                 <Typography>36 Mb</Typography>
               </div>
-            </Button>
+            </Button> */}
+            <DashedButton startComponent={<PublishIcon fontSize="inherit" />}>
+              <div className={classes.mediaDetails}>
+                <Typography>The Making of Waffle.mp4</Typography>
+                <Typography>36 Mb</Typography>
+              </div>
+            </DashedButton>
           </Paper>
         </Grid>
       </Grid>
@@ -141,7 +156,7 @@ const useStyles = makeStyles(() => ({
     paddingTop: 15,
     paddingBottom: 13,
     justifyContent: "flex-start",
-    color: COLORS.Grey,
+    // color: COLORS.Grey,
   },
   uploadButton: {
     width: "100%",

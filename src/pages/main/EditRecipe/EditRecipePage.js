@@ -7,6 +7,7 @@ import IngredientsCard from "./components/IngredientsCard";
 import NavigationDesktop from "../../../components/Navigation/NavigationDesktop";
 import ImageGallery from "./ImageGallery";
 import COLORS from "../../../constants/colors";
+import AdditionalInfoCard from "./components/AdditionalInfoCard";
 
 const directions = [
   {
@@ -90,21 +91,32 @@ const EditRecipePage = () => {
             direction="column"
             // style={{ backgroundColor: "grey" }}
           >
+            {/* Ingredients section */}
             <Grid
               item
               className={classes.ingredientSection}
               // style={{ backgroundColor: "red" }}
             >
-              {/* Ingredients section */}
               <IngredientsCard directions={directions} />
             </Grid>
 
             {/* How to cook section*/}
             <Grid
               item
-              // style={{ backgroundColor: "green" }}
+              style={{
+                // backgroundColor: "green",
+                marginBottom: 48,
+              }}
             >
               <InstructionCard />
+            </Grid>
+
+            {/* Additional Info section*/}
+            <Grid
+              item
+              // style={{ backgroundColor: "violet" }}
+            >
+              <AdditionalInfoCard />
             </Grid>
           </Grid>
         </Grid>
@@ -115,7 +127,8 @@ const EditRecipePage = () => {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh",
+    // height: "100vh",
+    flexGrow: 1,
     backgroundColor: COLORS.WhiteSmoke,
   },
   ingredientSection: {

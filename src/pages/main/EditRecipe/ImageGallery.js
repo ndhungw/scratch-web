@@ -1,11 +1,19 @@
-import { GridList, GridListTile, Link, Paper } from "@material-ui/core";
+import {
+  ButtonBase,
+  GridList,
+  GridListTile,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
+import PlusIcon from "../../../assets/icons/plus";
 
 import image from "../../../assets/images/ImgGallery.png";
 
 import image_sm from "../../../assets/images/ImgGallery_sm.png";
+import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
 import COLORS from "../../../constants/colors";
-import ButtonAdd from "./components/ButtonAdd";
+import DashedButton from "./components/DashedButton";
 
 const data = [
   {
@@ -13,8 +21,6 @@ const data = [
     img: image,
     title: "Gallery1",
     featured: true,
-    row: 2,
-    cols: 3,
     imageCount: "",
   },
   {
@@ -22,8 +28,6 @@ const data = [
     img: image_sm,
     title: "Gallery2",
     featured: false,
-    row: 1,
-    cols: 1,
     imageCount: "",
   },
   {
@@ -31,8 +35,6 @@ const data = [
     img: image_sm,
     title: "Gallery3",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -40,8 +42,6 @@ const data = [
     img: image_sm,
     title: "Gallery4",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -49,8 +49,6 @@ const data = [
     img: image_sm,
     title: "Gallery5",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -58,8 +56,6 @@ const data = [
     img: image_sm,
     title: "Gallery6",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "",
   },
   {
@@ -67,40 +63,40 @@ const data = [
     img: image_sm,
     title: "Gallery7",
     featured: false,
-    cols: 1,
-    row: 1,
     imageCount: "12+",
   },
 ];
 export default function ImageGallery() {
   const classes = styles();
+  const typoClasses = useTypographyStyles();
   const preventDefault = (event) => event.preventDefault();
 
   return (
     <Paper className={classes.root} elevation={0}>
-      <GridList
-        cols={3}
-        className={classes.gridList}
-        // spacing={24}
-      >
+      <GridList cols={3} className={classes.gridList} cellHeight="auto">
         {data.map((items) => (
           <GridListTile
             key={items.id}
             className={classes.imgGallery}
-            cols={items.cols || 1}
+            cols={items.featured ? 3 : 1}
+            rows={items.featured ? 2 : 1}
           >
             <img className={classes.img} src={items.img} alt={items.title} />
-            <Link
-              href="#"
+            <ButtonBase
               onClick={preventDefault}
               className={classes.linkGallery}
             >
               {items.imageCount}
-            </Link>
+            </ButtonBase>
           </GridListTile>
         ))}
       </GridList>
-      <ButtonAdd text={"Upload Images"} />
+      <DashedButton
+        startComponent={<PlusIcon />}
+        className={classes.buttonUpload}
+      >
+        <Typography className={typoClasses.lead}>{"Upload Images"}</Typography>
+      </DashedButton>
     </Paper>
   );
 }
@@ -114,8 +110,8 @@ const styles = makeStyles(() => ({
     backgroundColor: COLORS.White,
   },
   imgGallery: {
-    height: "100%!important",
     overflow: "unset",
+    textAlign: "center",
     "&:last-child img": {
       opacity: 0.3,
     },
@@ -142,5 +138,8 @@ const styles = makeStyles(() => ({
     "&:hover": {
       textDecoration: "none",
     },
+  },
+  buttonUpload: {
+    marginTop: 16,
   },
 }));

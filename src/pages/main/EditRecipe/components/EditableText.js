@@ -36,6 +36,7 @@ export default function EditableText({
   text,
   handleChangeText,
   isAdornmentAtStart,
+  ...rest
 }) {
   const classes = useStyles();
   const typoClasses = useTypographyStyles();
@@ -54,7 +55,7 @@ export default function EditableText({
   };
 
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth {...rest}>
       <div className={classes.formElementsWrapper}>
         <Input
           className={typoClasses.body}
@@ -67,6 +68,7 @@ export default function EditableText({
           classes={{
             disabled: classes.normalColorText,
           }}
+          fullWidth
         />
 
         {!isEditing && (
