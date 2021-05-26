@@ -12,8 +12,8 @@ const Direction = ({ order, content }) => {
   const classes = useStyles();
   const [newContent, setNewContent] = useState(content);
   const [isEditing, setIsEditing] = useState(false);
-  const handleChangeText = (e) => {
-    setNewContent(e.target.value);
+  const handleChangeText = (value) => {
+    setNewContent(value);
   };
   return (
     <>
