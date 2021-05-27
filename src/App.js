@@ -26,7 +26,7 @@ import SignUpPage from "./pages/auth/SignUp";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import EditProfilePage from "./pages/main/EditProfile/EditProfile";
-import EditRecipePage from "./pages/main/EditRecipe/EditRecipePage";
+import EditRecipePage from "./pages/main/EditRecipe";
 
 function App() {
   let theme = createMuiTheme({
