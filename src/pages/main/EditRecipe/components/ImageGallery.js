@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ButtonBase,
   GridList,
@@ -7,15 +8,14 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import PlusIcon from "../../../assets/icons/plus";
 
-import image from "../../../assets/images/ImgGallery.png";
+import PlusIcon from "../../../../assets/icons/plus";
+import image from "../../../../assets/images/ImgGallery.png";
 
-import image_sm from "../../../assets/images/ImgGallery_sm.png";
-import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
-import COLORS from "../../../constants/colors";
-import DashedButton from "./components/DashedButton";
-import { useState } from "react";
+import image_sm from "../../../../assets/images/ImgGallery_sm.png";
+import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
+import COLORS from "../../../../constants/colors";
+import DashedButton from "./DashedButton";
 
 let data = [
   {
