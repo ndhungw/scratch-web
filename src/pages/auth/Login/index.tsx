@@ -13,6 +13,7 @@ import {
   Link,
   Hidden,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import {
   Redirect,
   // useHistory
@@ -98,8 +99,6 @@ function LogInPage() {
   const [password, setPassword] = useState("");
   const error = useSelector(selectError);
 
-  //
-  // const history = useHistory();
   const dispatch = useDispatch();
 
   const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -118,15 +117,6 @@ function LogInPage() {
   };
 
   const handleLogin = () => {
-    // dispatch(
-    //   userActions.login({
-    //     username: username,
-    //     password: password,
-    //   })
-    // );
-    // dispatch(userActions.setIsLoading(false));
-
-    //--
     dispatch(
       userActions.loginRequest({ username: username, password: password })
     );
@@ -189,7 +179,8 @@ function LogInPage() {
               {"Please login to continue"}
             </Typography>
 
-            {error && <div>{error}</div>}
+            {/* {error && <div>{error}</div>} */}
+            {error && <Alert severity="error">{error}</Alert>}
 
             <TextField
               label="Username"
@@ -197,8 +188,9 @@ function LogInPage() {
               onChange={handleChangeUsername}
               fullWidth
               className={classes.textField}
+              required
             />
-            <FormControl fullWidth className={classes.textField}>
+            <FormControl fullWidth className={classes.textField} required>
               <InputLabel>Password</InputLabel>
               <Input
                 type={showPassword ? "text" : "password"}
