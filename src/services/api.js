@@ -1,5 +1,4 @@
 import store from "../redux/store";
-import { databaseActions } from "../redux/slices/databaseSlice";
 import {
   cookbooks_table,
   // cookbook_recipe_table,
@@ -287,8 +286,6 @@ export const saveRecipe = (idFeed, idCookbook) => {
       }
       return book;
     });
-
-    store.dispatch(databaseActions.setCookbooks(newCookbooks));
 
     setTimeout(() => {
       resolve({
