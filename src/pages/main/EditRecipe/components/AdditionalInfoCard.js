@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Typography } from "@material-ui/core";
 import classNames from "classnames";
@@ -18,8 +19,11 @@ const useStyles = makeStyles((theme) => ({
     width: "45%",
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "baseline",
     marginBottom: theme.spacing(2),
+    alignItems: "center",
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
   },
   label: {
     marginRight: theme.spacing(2),
