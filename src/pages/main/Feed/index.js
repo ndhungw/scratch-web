@@ -12,7 +12,7 @@ import classNames from "classnames";
 // components
 import NavigationDesktop from "../../../components/Navigation/NavigationDesktop";
 import CardBase from "../../../components/Card/CardBase";
-import ProfileStats from "../../../components/User/ProfileStats/ProfileStats";
+import ProfileStats from "../../../components/ProfileStats/ProfileStats";
 
 // local components
 import FeedCard from "./components/FeedCard";

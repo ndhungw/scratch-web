@@ -26,7 +26,7 @@ import LogOutIcon from "../../../assets/icons/logout";
 import NavigationDesktop from "../../../components/Navigation/NavigationDesktop";
 import CardRecipe from "../../../components/Card/RecipeCard";
 import SimpleCard from "../../../components/Card/SimpleCard";
-import ProfileStats from "../../../components/User/ProfileStats/ProfileStats";
+import ProfileStats from "../../../components/ProfileStats/ProfileStats";
 
 // constants
 import COLORS from "../../../constants/colors";

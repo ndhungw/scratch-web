@@ -14,10 +14,7 @@ import {
 import classNames from "classnames";
 
 // selectors
-import {
-  selectCurrentUser,
-  userActions,
-} from "../../../redux/slices/userSlice";
+import { selectCurrentUser, userActions } from "../../redux/slices/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {},

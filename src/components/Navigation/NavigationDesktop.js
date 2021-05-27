@@ -19,7 +19,7 @@ import MessageIcon from "../../assets/icons/message";
 
 // components
 import SearchBar from "../Search/SearchBar";
-import UserMenu from "../User/UserMenu/UserMenu";
+import UserMenu from "./UserMenu";
 
 // constants
 import COLORS from "../../constants/colors";

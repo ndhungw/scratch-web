@@ -2,12 +2,12 @@ import { Avatar, Box, ButtonBase, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 
-import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
-import DotIcon from "../../../assets/icons/dot";
+import useTypographyStyles from "../../assets/styles/useTypographyStyles";
+import DotIcon from "../../assets/icons/dot";
 
-import { simplify, capitalizeFirstLetter } from "../../../utils";
-import COLORS from "../../../constants/colors";
-import SeparatorLine from "../../SeparatorLine/SeparatorLine";
+import { simplify, capitalizeFirstLetter } from "../../utils";
+import COLORS from "../../constants/colors";
+import SeparatorLine from "../SeparatorLine/SeparatorLine";
 
 export default function ProfileStats({
   user,

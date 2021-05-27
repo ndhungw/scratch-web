@@ -27,8 +27,8 @@ import COLORS from "../../../constants/colors";
 import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
 import classNames from "classnames";
 import Logo from "../../../assets/icons/logo";
-import BACKGROUND_AUTHEN_IMAGE_SOURCE from "../../../assets/images/BG-Authen.png";
-import BIG_LOGO_IMAGE_SOURCE from "../../../assets/images/BigLogoImage.png";
+import BACKGROUND_AUTHEN_IMAGE_SOURCE from "../../../assets/images/auth/BG-Authen.png";
+import BIG_LOGO_IMAGE_SOURCE from "../../../assets/images/auth/BigLogoImage.png";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentUser,
@@ -36,7 +36,7 @@ import {
   selectIsAuthenticated,
   userActions,
 } from "../../../redux/slices/userSlice";
-import withAuthLoading from "../../../components/HOC/withAuthLoading";
+import withAuthLoading from "../../../components/HOCs/withAuthLoading";
 
 const useStyles = makeStyles(() => ({
   root: {
