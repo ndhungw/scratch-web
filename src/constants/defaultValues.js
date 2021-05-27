@@ -4,7 +4,7 @@ import Video from "../assets/images/Video.png";
 import BackgroundImage from "../assets/images/bg-profile.png";
 import CookBook from "../assets/images/CookBookImg.png";
 import RecipeImage from "../assets/images/RecipeImage.png";
-
+import InstructionVideo from "../assets/images/howtoVideo.png";
 const BACKGROUND_IMAGE_SOURCE = BackgroundImage;
 const COOKBOOK_IMAGE_SOURCE = CookBook;
 const RECIPE_ITEM_IMAGE_SOURCE = RecipeImage;
@@ -32,7 +32,7 @@ const USER_FOLLOWERS_COUNT = 142;
 
 //
 const VIDEO_IMAGE_SOURCE = Video;
-
+const INSTRUCTION_VIDEO_SOURCE = InstructionVideo;
 // recipe
 const NUTRITION_FACTS_SAMPLE = [
   "222 calories",
@@ -91,4 +91,5 @@ export {
   FEED_DESCRIPTION,
   FEED_LIKES_COUNT,
   FEED_COMMENTS_COUNT,
+  INSTRUCTION_VIDEO_SOURCE,
 };

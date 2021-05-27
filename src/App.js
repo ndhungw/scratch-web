@@ -25,7 +25,8 @@ import SignUpPage from "./pages/auth/SignUp";
 // redux-persist things
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
-import EditProfilePage from "./pages/main/EditProfile/EditProfile";
+import EditRecipePage from "./pages/main/EditRecipe";
+import EditProfilePage from "./pages/main/EditProfile";
 
 function App() {
   let theme = createMuiTheme({
@@ -70,6 +71,10 @@ function App() {
                   </Route>
                   <Route path={"/login"}>
                     <LogInPage />
+                  </Route>
+
+                  <Route path={"/edit-recipe"}>
+                    <EditRecipePage />
                   </Route>
 
                   {/* Private Routes */}
