@@ -21,12 +21,12 @@ import ProfilePage from "./pages/main/Profile";
 import FeedPage from "./pages/main/Feed";
 import LogInPage from "./pages/auth/Login";
 import SignUpPage from "./pages/auth/SignUp";
+import EditProfilePage from "./pages/main/EditProfile/EditProfile";
+import EditRecipePage from "./pages/main/EditRecipe";
 
 // redux-persist things
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
-import EditProfilePage from "./pages/main/EditProfile/EditProfile";
-import EditRecipePage from "./pages/main/EditRecipe/EditRecipePage";
 
 function App() {
   let theme = createMuiTheme({
