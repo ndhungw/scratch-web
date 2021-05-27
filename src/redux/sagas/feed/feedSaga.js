@@ -3,10 +3,10 @@ import {
   put,
   // , select
 } from "redux-saga/effects"; // select = selector
-import { saveRecipe } from "../../../api";
-import { feedsActions } from "../../../pages/main/Feed/feedsSlice";
-import { databaseActions } from "../../databaseSlice";
-import { userActions } from "../../userSlice";
+import { saveRecipe } from "../../../services/api";
+import { feedsActions } from "../../slices/feed/feedSlice";
+import { databaseActions } from "../../slices/databaseSlice";
+import { userActions } from "../../../redux/slices/userSlice";
 
 export function* handleSaveRecipeFromFeedRequest(action) {
   try {

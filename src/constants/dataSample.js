@@ -1,11 +1,4 @@
 import {
-  RECIPE_TITLE,
-  RECIPE_DESCRIPTION,
-  RECIPE_AUTHOR_NAME,
-  RECIPE_IMAGE_SOURCE,
-  RECIPE_CREATED_AT,
-  RECIPE_LIKES_COUNT,
-  RECIPE_COMMENTS_COUNT,
   USER_ID,
   USER_AVATAR_SOURCE,
   USER_USERNAME,
@@ -21,16 +14,6 @@ import {
 } from "./defaultValues";
 
 // RECIPE
-const RECIPE_SAMPLE = {
-  title: RECIPE_TITLE,
-  description: RECIPE_DESCRIPTION,
-  authorName: RECIPE_AUTHOR_NAME,
-  imageSrc: RECIPE_IMAGE_SOURCE,
-  createdAt: RECIPE_CREATED_AT,
-  likesCount: RECIPE_LIKES_COUNT,
-  commentsCount: RECIPE_COMMENTS_COUNT,
-};
-
 const ingredient_sample_01 = {
   id: "ingredients_01",
   name: "Potato",
@@ -81,50 +64,6 @@ const recipe_03 = {
   nutritionFacts: "Nutrition facts here",
   tags: ["Hello", "Goodbye"],
 };
-
-const FEED_SAMPLE_01 = {
-  id: "feed_01",
-  title: `${RECIPE_TITLE}_01`,
-  description: RECIPE_DESCRIPTION, // only feed has this
-  imageSrc: RECIPE_IMAGE_SOURCE,
-  authorName: RECIPE_AUTHOR_NAME,
-  authorAvatarSrc: USER_AVATAR_SOURCE,
-  createdAt: RECIPE_CREATED_AT,
-  likesCount: RECIPE_LIKES_COUNT,
-  commentsCount: RECIPE_COMMENTS_COUNT,
-  // recipe data
-  recipeData: recipe_01,
-};
-
-const FEED_SAMPLE_02 = {
-  id: "feed_02",
-  title: `${RECIPE_TITLE}_02`,
-  description: RECIPE_DESCRIPTION, // only feed has this
-  imageSrc: RECIPE_IMAGE_SOURCE,
-  authorName: RECIPE_AUTHOR_NAME,
-  authorAvatarSrc: USER_AVATAR_SOURCE,
-  createdAt: RECIPE_CREATED_AT,
-  likesCount: RECIPE_LIKES_COUNT,
-  commentsCount: RECIPE_COMMENTS_COUNT,
-  // recipe data
-  recipeData: recipe_02,
-};
-
-const FEED_SAMPLE_03 = {
-  id: "feed_03",
-  title: `${RECIPE_TITLE}_03`,
-  description: RECIPE_DESCRIPTION, // only feed has this
-  imageSrc: RECIPE_IMAGE_SOURCE,
-  authorName: RECIPE_AUTHOR_NAME,
-  authorAvatarSrc: USER_AVATAR_SOURCE,
-  createdAt: RECIPE_CREATED_AT,
-  likesCount: RECIPE_LIKES_COUNT,
-  commentsCount: RECIPE_COMMENTS_COUNT,
-  // recipe data
-  recipeData: recipe_03,
-};
-
-const FEED_SAMPLE_LIST = [FEED_SAMPLE_01, FEED_SAMPLE_02, FEED_SAMPLE_03];
 
 const USER_COOK_BOOKS = [
   {
@@ -196,12 +135,4 @@ const TOP_5_RECIPES = [
   "Cinnamon and Lime Toffee",
 ];
 
-const SECTOR_NAMES = ["recipes", "saved", "following"];
-
-export {
-  RECIPE_SAMPLE,
-  USER_SAMPLE,
-  TOP_5_RECIPES,
-  FEED_SAMPLE_LIST,
-  SECTOR_NAMES,
-};
+export { USER_SAMPLE, TOP_5_RECIPES };

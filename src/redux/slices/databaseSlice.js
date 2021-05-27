@@ -6,7 +6,7 @@ import {
   cookbooks_table,
   recipes_table,
   feeds_table,
-} from "../constants/data/index";
+} from "../../constants/data";
 
 const initialState = {
   users: users_table,

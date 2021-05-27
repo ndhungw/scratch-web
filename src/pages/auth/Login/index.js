@@ -35,7 +35,7 @@ import {
   selectError,
   selectIsAuthenticated,
   userActions,
-} from "../../../app/userSlice";
+} from "../../../redux/slices/userSlice";
 import withAuthLoading from "../../../components/HOC/withAuthLoading";
 
 const useStyles = makeStyles(() => ({

@@ -2,7 +2,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import SimpleBackdrop from "../BackDrop/SimpleBackDrop";
-import { selectIsLoading } from "../../app/userSlice";
+import { selectIsLoading } from "../../redux/slices/userSlice";
 
 function withAuthLoading(Component) {
   return React.memo((props) => {

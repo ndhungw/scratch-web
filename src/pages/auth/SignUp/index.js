@@ -4,7 +4,7 @@ import { Redirect } from "react-router";
 import {
   selectCurrentUser,
   selectIsAuthenticated,
-} from "../../../app/userSlice";
+} from "../../../redux/slices/userSlice";
 
 export default function SignUpPage() {
   const currentUser = useSelector(selectCurrentUser);

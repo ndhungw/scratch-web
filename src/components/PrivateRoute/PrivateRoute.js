@@ -1,6 +1,6 @@
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectIsAuthenticated } from "./../../app/userSlice";
+import { selectIsAuthenticated } from "./../../redux/slices/userSlice";
 
 export default function PrivateRoute({ children, ...rest }) {
   const isAuthenticated = useSelector(selectIsAuthenticated);

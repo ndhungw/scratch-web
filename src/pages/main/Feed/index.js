@@ -18,7 +18,7 @@ import ProfileStats from "../../../components/User/ProfileStats/ProfileStats";
 import FeedCard from "./components/FeedCard";
 
 // constants
-import { TOP_5_RECIPES, USER_SAMPLE } from "../../../constants/data";
+import { TOP_5_RECIPES, USER_SAMPLE } from "../../../constants/dataSample";
 import { VIDEO_IMAGE_SOURCE } from "../../../constants/defaultValues";
 import COLORS from "../../../constants/colors";
 
@@ -32,14 +32,14 @@ import {
   selectMessage,
   selectError,
   feedsActions,
-} from "./feedsSlice";
+} from "../../../redux/slices/feed/feedSlice";
 
 import {
   selectCurrentUser,
   selectRecipesSector,
   selectSavedSector,
   selectFollowingSector,
-} from "../../../app/userSlice";
+} from "../../../redux/slices/userSlice";
 
 import { useEffect } from "react";
 

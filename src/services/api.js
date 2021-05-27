@@ -1,12 +1,12 @@
-import store from "./../app/store";
-import { databaseActions } from "../app/databaseSlice";
+import store from "../redux/store";
+import { databaseActions } from "../redux/slices/databaseSlice";
 import {
   cookbooks_table,
   // cookbook_recipe_table,
   feeds_table,
   recipes_table,
   users_table,
-} from "../constants/data/index";
+} from "../constants/data";
 
 const TIME_TO_WAIT = 500;
 

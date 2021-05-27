@@ -1,8 +1,8 @@
 import { fork, takeEvery } from "redux-saga/effects";
-import { feedsActions } from "../../pages/main/Feed/feedsSlice";
-import { userActions } from "../userSlice";
-import { handleLoginRequest } from "./auth/login";
-import { handleSaveRecipeFromFeedRequest } from "./main/feed";
+import { feedsActions } from "../slices/feed/feedSlice";
+import { userActions } from "../slices/userSlice";
+import { handleLoginRequest } from "./../sagas/auth/loginSaga";
+import { handleSaveRecipeFromFeedRequest } from "../sagas/feed/feedSaga";
 
 function* watchAuthActions() {
   yield takeEvery(userActions.loginRequest, handleLoginRequest);

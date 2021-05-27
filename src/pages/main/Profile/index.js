@@ -40,7 +40,7 @@ import {
   selectFollowingSector,
   selectRecipesSector,
   selectSavedSector,
-} from "../../../app/userSlice";
+} from "../../../redux/slices/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: { backgroundColor: COLORS.WhiteSmoke },

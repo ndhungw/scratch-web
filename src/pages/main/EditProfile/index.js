@@ -14,7 +14,10 @@ import classNames from "classnames";
 import COLORS from "../../../constants/colors";
 import { useDispatch, useSelector } from "react-redux";
 import NavigationDesktop from "../../../components/Navigation/NavigationDesktop";
-import { selectCurrentUser, userActions } from "../../../app/userSlice";
+import {
+  selectCurrentUser,
+  userActions,
+} from "../../../redux/slices/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {},

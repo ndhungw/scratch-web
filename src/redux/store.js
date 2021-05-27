@@ -1,10 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { getDefaultMiddleware } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import feedsReducer from "../pages/main/Feed/feedsSlice";
-import databasePersistedReducer from "./databaseSlice";
-import userPersistedReducer from "./userSlice";
-import rootSaga from "./sagas/index";
 import {
   FLUSH,
   REHYDRATE,
@@ -13,6 +9,11 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+
+import rootSaga from "./sagas";
+import databasePersistedReducer from "./slices/databaseSlice";
+import userPersistedReducer from "./slices/userSlice";
+import feedsReducer from "./slices/feed/feedSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];

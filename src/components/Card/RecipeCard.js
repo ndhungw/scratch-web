@@ -1,6 +1,5 @@
 import { Button, Paper, Typography } from "@material-ui/core";
 import React from "react";
-import { RECIPE_SAMPLE } from "../../constants/data";
 import useTypographyStyles from "../../assets/styles/useTypographyStyles";
 
 import { makeStyles } from "@material-ui/core";
@@ -49,11 +48,7 @@ export default function RecipeCard({
       className={classNames(classes.root, className)}
       {...rest}
     >
-      <img
-        src={imageSrc || RECIPE_SAMPLE.imageSrc}
-        alt={title || "no alt"}
-        className={classes.image}
-      />
+      <img src={imageSrc} alt={title || "no alt"} className={classes.image} />
       <div className={classes.content}>
         <Typography className={typoClasses.cardItem}>
           {title || "Cooked Coconut Mussels"}

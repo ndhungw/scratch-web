@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { feeds_table } from "../../../constants/data/index";
+import { feeds_table } from "../../../constants/data";
 
 const feedsSlice = createSlice({
   name: "feeds",

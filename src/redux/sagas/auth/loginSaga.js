@@ -1,6 +1,6 @@
 import { call, put } from "redux-saga/effects";
-import { userActions } from "../../userSlice";
-import { getKitchenData, getUser } from "../../../api";
+import { getKitchenData, getUser } from "../../../services/api";
+import { userActions } from "../../slices/userSlice";
 
 export function* handleLoginRequest(action) {
   const { username, password } = action.payload;

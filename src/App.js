@@ -10,7 +10,7 @@ import { SnackbarProvider } from "notistack";
 import COLORS from "./constants/colors";
 
 // store
-import store from "./app/store";
+import store from "./redux/store";
 import { Provider } from "react-redux";
 
 // components
