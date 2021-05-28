@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-import { Typography } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import classNames from "classnames";
 
-import { makeStyles } from "@material-ui/core";
 import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
+
+// components
 import CardBase from "../../../../components/Card/CardBase";
 import EditableText from "./EditableText";
 

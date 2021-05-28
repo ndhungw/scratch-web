@@ -1,4 +1,7 @@
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  makeStyles,
   Avatar,
   Button,
   ButtonBase,
@@ -7,13 +10,14 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect, useRef, useState } from "react";
-import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
-import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
+
+import useTypographyStyles from "../../../assets/styles/useTypographyStyles";
+
 import COLORS from "../../../constants/colors";
-import { useDispatch, useSelector } from "react-redux";
+
 import NavigationDesktop from "../../../components/Navigation/NavigationDesktop";
+
 import {
   selectCurrentUser,
   userActions,

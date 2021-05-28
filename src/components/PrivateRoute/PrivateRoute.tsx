@@ -1,7 +1,7 @@
+import { ReactNode } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsAuthenticated } from "../../redux/slices/userSlice";
-import { ReactNode } from "react";
 
 type PrivateRouteProps = {
   children: ReactNode;

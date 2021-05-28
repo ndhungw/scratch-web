@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
   Box,
   ButtonBase,
@@ -10,7 +11,6 @@ import {
   useTheme,
 } from "@material-ui/core";
 import classNames from "classnames";
-import { NavLink } from "react-router-dom";
 
 // icons
 import Logo from "../../assets/icons/logo";

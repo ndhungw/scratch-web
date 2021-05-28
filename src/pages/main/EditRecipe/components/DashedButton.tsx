@@ -1,8 +1,6 @@
-import { Button } from "@material-ui/core";
+import { ReactNode } from "react";
 import classNames from "classnames";
-import React, { ReactNode } from "react";
-
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   buttonAddIngredient: {

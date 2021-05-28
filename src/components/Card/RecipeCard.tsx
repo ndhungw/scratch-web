@@ -1,10 +1,7 @@
-import { Button, Paper, Typography } from "@material-ui/core";
-import React from "react";
-import useTypographyStyles from "../../assets/styles/useTypographyStyles";
-
-import { makeStyles } from "@material-ui/core";
-import DotIcon from "../../assets/icons/dot";
+import { makeStyles, Button, Paper, Typography } from "@material-ui/core";
 import classNames from "classnames";
+import DotIcon from "../../assets/icons/dot";
+import useTypographyStyles from "../../assets/styles/useTypographyStyles";
 import { IngredientType } from "../../ts/types";
 
 const useStyles = makeStyles(() => ({

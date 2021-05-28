@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import classNames from "classnames";
 
 import { Avatar, makeStyles } from "@material-ui/core";
 
 import COLORS from "../../../../constants/colors";
-import classNames from "classnames";
+
 import EditableText from "./EditableText";
 
 const useStyles = makeStyles((theme) => ({

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
 import {
   FormControl,
   IconButton,
@@ -7,12 +6,15 @@ import {
   InputAdornment,
   makeStyles,
 } from "@material-ui/core";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+
+import classNames from "classnames";
 
 import EditIcon from "../../../../assets/icons/edit";
+
 import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+
 import COLORS from "../../../../constants/colors";
-import classNames from "classnames";
 
 const useStyles = makeStyles(() => ({
   normalColorText: {
@@ -34,7 +36,7 @@ type EditableTextProps = {
   // eslint-disable-next-line no-unused-vars
   handleChangeText?: (event: any) => void;
   isAdornmentAtStart?: boolean;
-  deleteMode?: any;
+  deleteMode?: boolean;
   [key: string]: any;
 };
 

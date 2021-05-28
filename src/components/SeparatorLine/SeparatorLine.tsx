@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
+
 import COLORS from "../../constants/colors";
 
 function SeparatorLine({ className }: { className: string }) {

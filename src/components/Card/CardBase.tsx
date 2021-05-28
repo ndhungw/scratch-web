@@ -1,8 +1,7 @@
-import { Box, Paper, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
+import { ReactNode } from "react";
+import { makeStyles, Box, Paper, Typography } from "@material-ui/core";
 import useTypographyStyles from "../../assets/styles/useTypographyStyles";
 import classNames from "classnames";
-import { ReactNode } from "react";
 
 type CardBaseProps = {
   title: string;

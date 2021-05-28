@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   makeStyles,
   Button,
@@ -12,6 +12,8 @@ import {
   IconButton,
   Typography,
 } from "@material-ui/core";
+
+import classNames from "classnames";
 
 // icons
 import DotIcon from "../../../../assets/icons/dot";
@@ -29,9 +31,11 @@ import {
   RECIPE_COMMENTS_COUNT,
 } from "../../../../constants/defaultValues";
 import COLORS from "../../../../constants/colors";
-import classNames from "classnames";
-import { simplify } from "../../../../utils";
+
 import SimpleDialog from "./SimpleDialog";
+
+import { simplify } from "../../../../utils";
+import { CookbookType, RecipeType } from "../../../../ts/types";
 
 type FeedCardProps = {
   id: string;
@@ -43,10 +47,10 @@ type FeedCardProps = {
   createdAt: string;
   likesCount: number;
   commentsCount: number;
-  recipeDta?: any;
+  recipeDta?: RecipeType;
   // eslint-disable-next-line no-unused-vars
   handleSave: (idFeed: string, idCookbook: string) => void;
-  savedCookbooks: any;
+  savedCookbooks: CookbookType[];
   className?: string;
   [key: string]: any;
 };

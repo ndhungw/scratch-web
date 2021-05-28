@@ -1,18 +1,29 @@
-import { Avatar, Box, ButtonBase, Paper, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
+import {
+  makeStyles,
+  Avatar,
+  Box,
+  ButtonBase,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import classNames from "classnames";
 
+import COLORS from "../../constants/colors";
+
 import useTypographyStyles from "../../assets/styles/useTypographyStyles";
+
 import DotIcon from "../../assets/icons/dot";
 
-import { simplify, capitalizeFirstLetter } from "../../utils";
-import COLORS from "../../constants/colors";
 import SeparatorLine from "../SeparatorLine/SeparatorLine";
 
+import { simplify, capitalizeFirstLetter } from "../../utils";
+
+import { KitchenSectorType, UserInfoType } from "../../ts/types";
+
 type ProfileStatsProps = {
-  user: any;
-  recipesSector: any;
-  savedSector: any;
+  user: UserInfoType;
+  recipesSector: KitchenSectorType;
+  savedSector: KitchenSectorType;
   followingSector: any;
   selectedSector?: string;
   // eslint-disable-next-line no-unused-vars

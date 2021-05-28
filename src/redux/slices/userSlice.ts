@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootStateOrAny } from "react-redux";
+
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
+
 import { PERSISTED_USER_KEY } from "../../constants/key";
+
 import { KitchenSectorType, UserInfoType } from "../../ts/types";
 
 type userSliceObj = {

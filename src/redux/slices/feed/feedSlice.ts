@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { feeds_table } from "../../../constants/data";
+
 import { FeedType } from "../../../ts/types";
 
 const feedsSlice = createSlice({

@@ -7,15 +7,17 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
+
 import classNames from "classnames";
-import React from "react";
 
 import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
 
+// icons
 import PlusIcon from "../../../../assets/icons/plus";
 import CloseIcon from "../../../../assets/icons/close";
 
 import COLORS from "../../../../constants/colors";
+
 import { CookbookType } from "../../../../ts/types";
 
 type SimpleDialogProps = {

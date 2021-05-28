@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Card,
@@ -11,17 +12,24 @@ import {
   InputAdornment,
   IconButton,
 } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+
+// icons
 import PublishIcon from "@material-ui/icons/Publish";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import AddIcon from "@material-ui/icons/Add";
 import CreateIcon from "@material-ui/icons/Create";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import React from "react";
+
 import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
+
+// constants
 import COLORS from "../../../../constants/colors";
-import Direction from "./Direction";
 import { INSTRUCTION_VIDEO_SOURCE } from "../../../../constants/defaultValues";
+
+// components
+import Direction from "./Direction";
 import DashedButton from "./DashedButton";
+
 import { DirectionType } from "../../../../ts/types";
 
 const InstructionCard = ({ directions }: { directions: DirectionType[] }) => {

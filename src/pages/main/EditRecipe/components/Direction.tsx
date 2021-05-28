@@ -1,11 +1,13 @@
+import { useState } from "react";
 import {
   ListItem,
   ListItemText,
   ListItemIcon,
   makeStyles,
 } from "@material-ui/core";
-import { useState } from "react";
+
 import COLORS from "../../../../constants/colors";
+
 import EditableText from "./EditableText";
 
 type DirectionProps = {

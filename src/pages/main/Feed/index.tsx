@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   makeStyles,
   Avatar,
@@ -41,7 +42,6 @@ import {
   selectFollowingSector,
 } from "../../../redux/slices/userSlice";
 
-import { useEffect } from "react";
 import { FeedType } from "../../../ts/types";
 
 function FeedPage({ enqueueSnackbar }: any) {

@@ -1,18 +1,24 @@
-import { CssBaseline, Grid, Hidden } from "@material-ui/core";
-import React from "react";
-import { makeStyles } from "@material-ui/core";
-
-import InstructionCard from "./components/InstructionCard";
-import IngredientsCard from "./components/IngredientsCard";
-import NavigationDesktop from "../../../components/Navigation/NavigationDesktop";
-import ImageGallery from "./components/ImageGallery";
-import COLORS from "../../../constants/colors";
-import AdditionalInfoCard from "./components/AdditionalInfoCard";
-import { NUTRITION_FACTS_SAMPLE } from "../../../constants/defaultValues";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { RecipeType } from "../../../ts/types";
+
+import { makeStyles, CssBaseline, Grid, Hidden } from "@material-ui/core";
+
+// common component
+import NavigationDesktop from "../../../components/Navigation/NavigationDesktop";
+
+// components
+import ImageGallery from "./components/ImageGallery";
+import IngredientsCard from "./components/IngredientsCard";
+import InstructionCard from "./components/InstructionCard";
+import AdditionalInfoCard from "./components/AdditionalInfoCard";
+
+// constants
+import COLORS from "../../../constants/colors";
+import { NUTRITION_FACTS_SAMPLE } from "../../../constants/defaultValues";
+
 import { selectRecipes } from "../../../redux/slices/databaseSlice";
+
+import { RecipeType } from "../../../ts/types";
 
 const EditRecipePage = () => {
   const classes = useStyles();

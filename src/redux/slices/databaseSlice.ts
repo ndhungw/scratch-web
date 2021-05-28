@@ -7,7 +7,7 @@ import {
   recipes_table,
   feeds_table,
 } from "../../constants/data";
-import { CookbookType, FeedType, RecipeType } from "../../ts/types";
+import { RootState } from "../store";
 
 const initialState = {
   users: users_table,
@@ -28,15 +28,10 @@ const databaseSlice = createSlice({
 });
 
 // selectors
-export const selectUsers = (state: { database: { users: any } }) =>
-  state.database.users;
-export const selectCookbooks = (state: {
-  database: { cookbooks: CookbookType[] };
-}) => state.database.cookbooks;
-export const selectRecipes = (state: { database: { recipes: RecipeType[] } }) =>
-  state.database.recipes;
-export const selectFeeds = (state: { database: { feeds: FeedType[] } }) =>
-  state.database.feeds;
+export const selectUsers = (state: RootState) => state.database.users;
+export const selectCookbooks = (state: RootState) => state.database.cookbooks;
+export const selectRecipes = (state: RootState) => state.database.recipes;
+export const selectFeeds = (state: RootState) => state.database.feeds;
 
 export const databaseActions = databaseSlice.actions;
 

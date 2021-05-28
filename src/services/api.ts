@@ -1,11 +1,12 @@
 import store from "../redux/store";
+
 import {
   cookbooks_table,
-  // cookbook_recipe_table,
   feeds_table,
   recipes_table,
   users_table,
 } from "../constants/data";
+
 import { CookbookType } from "../ts/types";
 
 const TIME_TO_WAIT = 500;

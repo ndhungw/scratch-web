@@ -1,14 +1,22 @@
-import React from "react";
-import { Button, ButtonBase, Paper, Typography } from "@material-ui/core";
+import {
+  makeStyles,
+  Button,
+  ButtonBase,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import classNames from "classnames";
 
-import { makeStyles } from "@material-ui/core";
 import useTypographyStyles from "../../../../assets/styles/useTypographyStyles";
+
 import EditIcon from "../../../../assets/icons/edit";
+import PlusIcon from "../../../../assets/icons/plus";
+
 import SeparatorLine from "../../../../components/SeparatorLine/SeparatorLine";
+
 import IngredientItem from "./IngredientItem";
 import DashedButton from "./DashedButton";
-import PlusIcon from "../../../../assets/icons/plus";
+
 import { IngredientType } from "../../../../ts/types";
 
 const useStyles = makeStyles((theme) => ({

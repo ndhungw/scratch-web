@@ -1,4 +1,3 @@
-import React from "react";
 import {
   ButtonBase,
   ClickAwayListener,
@@ -10,6 +9,7 @@ import {
   useTheme,
 } from "@material-ui/core";
 import classNames from "classnames";
+
 import SearchIcon from "../../assets/icons/search";
 import FilterIcon from "../../assets/icons/filter";
 
